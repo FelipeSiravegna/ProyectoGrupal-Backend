@@ -21,11 +21,11 @@ module.exports = (sequelize) =>{
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            lenguege:{
+            language:{
                 type: DataTypes.STRING,
             },
-            realesedDate:{
-                type: DataTypes.DATEONLY
+            releaseDate:{
+                type: DataTypes.STRING
             },
 
             length:{
