@@ -21,11 +21,15 @@ module.exports = (sequelize) =>{
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            idiom:{
+            lenguege:{
                 type: DataTypes.STRING,
             },
+            realesedDate:{
+                type: DataTypes.DATEONLY
+            },
+
             length:{
-                type: DataTypes.TIME
+                type: DataTypes.INTEGER
             },
             rating:{
                 type: DataTypes.FLOAT
