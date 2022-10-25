@@ -25,7 +25,7 @@ module.exports = (sequelize) =>{
                 type: DataTypes.STRING,
             },
             realesedDate:{
-                type: DataTypes.DATEONLY
+                type: DataTypes.STRING
             },
 
             length:{
