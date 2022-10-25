@@ -38,7 +38,7 @@ module.exports = (sequelize) =>{
                 type: DataTypes.STRING
             },
             saves:{
-                type: DataTypes.NUMBER
+                type: DataTypes.INTEGER
             }
 
         })
