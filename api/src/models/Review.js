@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       likes: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER
       }
     },
     {
