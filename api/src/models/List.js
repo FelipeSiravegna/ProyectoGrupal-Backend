@@ -13,7 +13,6 @@ module.exports = (sequelize) => {
         },
         moviesIdList:{
             type:DataTypes.ARRAY(DataTypes.INTEGER),
-            defaultValue: false,
             validate:{
                 isInt:true
             }

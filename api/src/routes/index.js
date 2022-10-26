@@ -7,7 +7,7 @@ const usersRoute = require("./GET/users");
 
 // Configurar los routers
 // router.use('/user', userRoute);
-router.use("/users", usersRoute);
+router.use('/userr', usersRoute);
 
 
 module.exports = router;
