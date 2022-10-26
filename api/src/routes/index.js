@@ -1,8 +1,13 @@
+// Importar todos los routers
 const { Router } = require("express");
-//Importar las routes
-
 const router = Router();
+// const userRoute = require('./POST/user');
+const usersRoute = require("./GET/users");
 
-//router.use('/route', archivo route)
+
+// Configurar los routers
+// router.use('/user', userRoute);
+router.use("/users", usersRoute);
+
 
 module.exports = router;
