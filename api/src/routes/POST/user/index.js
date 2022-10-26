@@ -1,34 +1,37 @@
 const  { Router } = require("express");
-const { getUser } = require("../../controllers/POST/user");
-const { createUser } = require("../../controllers/POST/user");
+const { getUserByNameOrEmail, getUserByEmail, getUserByUsername } = require("../../../controllers/GET/users");
+const { createUser, isValidUsername, isValidEmail, isValidPassword,  } = require("../../../controllers/POST/user");
 const router = Router();
 
 
 router.post("/",async( req, res )=>{
     try {
         const { username, email, password }=req.body;
-        const existent = getUser( username, email );
-        switch( username, email, password ){
-            case !username: {
-                res.status(400).json({success:false, message:"username is needed."});
-                break;
-            }
-            case !email: {
-                res.status(400).json({success:false, message:"email is needed."});
-                break;
-            }
-            case !password: {
-                res.status(400).json({success:false, message:"password is needed."});
-                break;
-            }
-            case existent: {
-                res.status(409).json({success:false, message:`email or username are already in use by another user.`});
-                break;
-            }
-            default:{
-                await createUser( username, email, password );
-                res.status(200).json({success:true, message:`User ${username} created successfully.`});
-            }
+        const existingUsername = await getUserByUsername( username );
+        const existingEmail = await getUserByEmail( email );
+        const validateUser = function(username, email, password){
+            const validation1=isValidUsername(username);
+            if(validation1)return validation1;
+            const validation2=isValidEmail(email);
+            if(validation2)return validation2;
+            const validation3=isValidPassword(password);
+            if(validation3)return validation3;
+            console.log("llegó al final");
+        }(username, email, password);
+        // console.log(existingEmail,existingUsername, validateUser);
+        // res.send("meh")
+        if(validateUser){
+            res.status(400).json(validateUser);
+        }
+        else if(existingUsername) {
+            res.status(409).json({success:false, message:`username already in use by another user.`});
+        }
+        else if(existingEmail){
+            res.status(409).json({success:false, message:`email already in use by another user.`});
+        }
+        else{
+            await createUser( username, email, password );
+            res.status(200).json({success:true, message:`User ${username} created successfully.`})
         }
     } catch(error) {
         console.log(error);
@@ -36,5 +39,6 @@ router.post("/",async( req, res )=>{
         console.log(error.message);
     }
 });
+
 
 module.exports = router;

@@ -7,8 +7,7 @@ module.exports = (sequelize) => {
             unique:true,
             allowNull: false,
             validate:{
-                len:[3, 20],
-                isAlphaisAlphanumeric:true,
+                len:[1, 20],
             }
         },
         email:{
@@ -26,12 +25,11 @@ module.exports = (sequelize) => {
                 len:[8,15],
                 is: function(value){
                     const regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-                    if(!regExp.test(value))throw new Error("The password must contain:\r8-15 characters\rOne or multiple numbers and a special characters (@, $, !, %, *, ?, &)\rAt least a capital letter");
+                    if(!regExp.test(value))throw new Error("The password must contain: 8-15 characters, one or multiple numbers and special characters (@, $, !, %, *, ?, &), at least a capital letter");
                 }
             }
         },
-
-        playLists:{
+        lists:{
             type: DataTypes.ARRAY(DataTypes.INTEGER),
             validate:{
                 isInt:true

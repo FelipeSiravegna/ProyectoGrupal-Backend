@@ -7,9 +7,7 @@ const { getUsers } = require("../../../controllers/GET/users");
 
 router.get("/", async (req, res) => {
     try {
-        console.log("route getUsers")
         const users = await getUsers();
-        console.log("users: ", users);
         if(users&&users.length){
             res.status(200).json(users);
         }else{
@@ -21,6 +19,8 @@ router.get("/", async (req, res) => {
         console.log(error.message);
     }
 });
+
+router.get("/getApiMovies")
 
 
 module.exports = router;
