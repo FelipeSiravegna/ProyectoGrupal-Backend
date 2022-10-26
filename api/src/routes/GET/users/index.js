@@ -8,7 +8,7 @@ const { getUsers } = require("../../../controllers/GET/users");
 router.get("/", async (req, res) => {
     try {
         console.log("route getUsers")
-        const users = getUsers();
+        const users = await getUsers();
         console.log("users: ", users);
         if(users&&users.length){
             res.status(200).json(users);

@@ -9,14 +9,14 @@ const getUserById = async(userId)=>{
     return user;
 }
 
-// const getUserByNameOrEmail = async (username, email)=>{
-//     const user = await User.findOne({
-//         where:{
-//             [Op.or]:[ { username:username }, {email:email} ]
-//         }
-//     });
-//     return user;
-// }
+const getUserByNameOrEmail = async (username, email)=>{
+    const user = await User.findOne({
+        where:{
+            [Op.or]:[ { username:username }, {email:email} ]
+        }
+    });
+    return user;
+}
 
 const getUsers = async()=>{
     console.log("Controller getUsers")
@@ -33,7 +33,7 @@ const getUsers = async()=>{
 
 module.exports={
     getUserById,
-    // getUserByNameOrEmail,
+    getUserByNameOrEmail,
     getUsers,
 
 }
