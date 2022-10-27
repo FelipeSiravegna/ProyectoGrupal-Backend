@@ -4,8 +4,7 @@ module.exports = (sequilize) =>{
   sequilize.define("genre",
     {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: UUIDV4,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
       },
