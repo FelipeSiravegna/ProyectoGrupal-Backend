@@ -1,10 +1,11 @@
 const  { Router } = require("express");
-const router = Router();
 const { getUsers } = require("../../../controllers/GET/users");
+const router = Router();
 
 
 router.get("/", async (req, res) => {
     try {
+        console.log("GET-->users")
         const users = await getUsers();
         if(users&&users.length){
             res.status(200).json(users);

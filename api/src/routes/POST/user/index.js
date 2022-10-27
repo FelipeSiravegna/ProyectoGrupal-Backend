@@ -6,6 +6,7 @@ const router = Router();
 
 router.post("/",async( req, res )=>{
     try {
+        console.log("POST-->user");
         const { username, email, password }=req.body;
         const existingUsername = await getUserByUsername( username );
         const existingEmail = await getUserByEmail( email );
@@ -16,7 +17,6 @@ router.post("/",async( req, res )=>{
             if(validation2)return validation2;
             const validation3=isValidPassword(password);
             if(validation3)return validation3;
-            console.log("llegó al final");
         }(username, email, password);
         // console.log(existingEmail,existingUsername, validateUser);
         // res.send("meh")

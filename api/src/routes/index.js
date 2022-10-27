@@ -1,13 +1,14 @@
 // Importar todos los routers
 const { Router } = require("express");
 const router = Router();
-const userRoute = require('./POST/user');
-const usersRoute = require("./GET/users");
+const postUserRoute = require('./POST/user');
+const putUserRoute = require("./PUT/user");
+const getUsersRoute = require("./GET/users");
 
 
 // Configurar los routers
-router.use('/user', userRoute);
-router.use('/users', usersRoute);
+router.use('/user', postUserRoute, putUserRoute, async()=>console.log(putUserRoute));
+router.use('/getusers', getUsersRoute);
 
 
 module.exports = router;

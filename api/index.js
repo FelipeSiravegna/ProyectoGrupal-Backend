@@ -5,6 +5,8 @@ const { conn, User } = require('./src/db');
 conn.sync({ force: true }).then(() => {
   server.listen(3001, async () => {
     await User.create({username:"Usuario", email:"example@example.com", password:"passWord$2"});
+    await User.create({username:"Usuario2", email:"example2@example.com", password:"passWord$2"});
+    await User.create({username:"Usuario3", email:"example@example3.com", password:"passWord$2"});
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
