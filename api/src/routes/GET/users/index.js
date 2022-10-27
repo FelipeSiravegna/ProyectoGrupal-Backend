@@ -3,8 +3,6 @@ const router = Router();
 const { getUsers } = require("../../../controllers/GET/users");
 
 
-
-
 router.get("/", async (req, res) => {
     try {
         const users = await getUsers();
@@ -20,7 +18,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/getApiMovies")
 
 
 module.exports = router;

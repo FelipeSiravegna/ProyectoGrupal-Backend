@@ -11,6 +11,7 @@ const getUserById = async(userId)=>{
     return user;
 }
 
+////////Chequear//////////////
 const getUserByNameOrEmail = async (username, email)=>{
     const user = await User.findOne({
         where:{
@@ -19,6 +20,7 @@ const getUserByNameOrEmail = async (username, email)=>{
     });
     return user;
 }
+/////////////////////////////
 
 const getUserByUsername = async (username)=>{
     const user = await User.findOne({
