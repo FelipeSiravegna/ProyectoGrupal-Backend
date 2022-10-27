@@ -43,6 +43,5 @@ module.exports = (sequelize) =>{
             saves:{
                 type: DataTypes.INTEGER
             }
-
         })
 };
