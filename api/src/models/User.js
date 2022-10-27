@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define('user', {
-        name: { 
+        username: { 
             type: DataTypes.STRING,
             unique:true,
             allowNull: false,
@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
                 isAlphaisAlphanumeric:true,
             }
         },
-        mail:{
+        email:{
             type:DataTypes.STRING,
             allowNull:false,
             unique:true,
