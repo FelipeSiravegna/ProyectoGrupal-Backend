@@ -3,6 +3,7 @@ const router = Router();
 const {getMovieFromDB, getMovieFromAPI} = require("../../../controllers/GET/MovieDetail");
 const { getImageFromAPI } = require("../../../controllers/GET/Image");
 const { getTrailerFromAPI } = require("../../../controllers/GET/Video");
+const { getCredits } = require('../../../controllers/GET/Credits');
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
@@ -20,6 +21,8 @@ router.get("/:id", async (req, res) => {
 
         const trailerURL = await getTrailerFromAPI(id, movieAPI.original_language);
 
+        const castInfo = await getCredits(id);
+
         const movieDetails = {
           id: movieAPI.id,
           apiID: movieAPI.apiID,
@@ -31,6 +34,7 @@ router.get("/:id", async (req, res) => {
           length: movieAPI.runtime,
           rating: movieAPI.vote_average,
           trailer: trailerURL,
+          fullCast: castInfo,
           saves: 0,
         };
 
