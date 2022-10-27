@@ -8,6 +8,7 @@ module.exports = (sequelize) => {
             allowNull: false,
             validate:{
                 len:[1, 20],
+                isAlphanumeric:true,
             }
         },
         email:{
@@ -29,7 +30,7 @@ module.exports = (sequelize) => {
                 }
             }
         },
-        lists:{
+        playLists:{
             type: DataTypes.ARRAY(DataTypes.INTEGER),
             validate:{
                 isInt:true
