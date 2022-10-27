@@ -11,11 +11,11 @@ module.exports = (sequelize) => {
         validate: {
           len: [0, 30],
         },
-      },
-      moviesIdList: {
-        type: DataTypes.ARRAY(DataTypes.INTEGER),
-        validate: {
-          isInt: true,
+        moviesIdList:{
+            type:DataTypes.ARRAY(DataTypes.INTEGER),
+            validate:{
+                isInt:true
+            }
         },
       },
       description: {
