@@ -12,6 +12,7 @@ router.get("/:id", async (req, res) => {
     if (!movieDB) {
       const movieAPI = await getMovieFromAPI(id);
 
+      //CREAR MOVIE EN LA DB
       if (!movieAPI) {
         res.status(404).json({ error: "Movie not found!" });
       } else {
@@ -21,6 +22,7 @@ router.get("/:id", async (req, res) => {
 
         const movieDetails = {
           id: movieAPI.id,
+          apiID: movieAPI.apiID,
           name: movieAPI.title,
           description: movieAPI.overview,
           image: posterURL,
