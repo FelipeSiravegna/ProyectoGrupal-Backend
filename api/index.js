@@ -33,6 +33,17 @@ const findOrCreateMovies = async () => {
   })
 }
 
+const setRelation = () =>{
+  movieList.forEach(async(movie)=>{
+    const count = await Genre.findAndCountAll()
+    const relevant = await Genre.findAll({where:{id:movie.genres}})
+    const DB_Movie = await Movies.findOne({where:{name:movie.name}})
+    if (DB_Movie){
+      const relation = await DB_Movie.setGenres(relevant)
+    }
+  })
+}
+
 const findOrCreateUser = async () => {
   User.findOrCreate({
     where: {username:"Usuario1", email:"example@example.com", password:"passWord$2"}
@@ -41,9 +52,10 @@ const findOrCreateUser = async () => {
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(3001, async () => {
+    checkGenresInDB();
     findOrCreateUser();
     findOrCreateMovies();
-    checkGenresInDB();
+    setRelation();
     console.log(movieList.length);
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
