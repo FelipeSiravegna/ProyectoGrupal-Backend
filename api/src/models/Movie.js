@@ -9,6 +9,9 @@ module.exports = (sequelize) =>{
                 allowNull: false,
                 primaryKey: true
             },
+            apiID:{
+                type: DataTypes.INTEGER,
+            },
             name:{
                 type: DataTypes.STRING,
                 allowNull: false
@@ -40,6 +43,5 @@ module.exports = (sequelize) =>{
             saves:{
                 type: DataTypes.INTEGER
             }
-
         })
 };

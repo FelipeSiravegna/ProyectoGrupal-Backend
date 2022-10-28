@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
             unique:true,
             allowNull: false,
             validate:{
-                len:[1, 20],
+                len:[3, 20],
                 isAlphanumeric:true,
             }
         },
