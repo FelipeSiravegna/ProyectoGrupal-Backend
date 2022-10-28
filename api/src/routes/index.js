@@ -10,4 +10,5 @@ router.use('/movies/popular',getMoviesPopular)
 router.use('/movies/search',searchMovies)
 router.use('/detail', getMovieDetail);
 
+
 module.exports = router;
