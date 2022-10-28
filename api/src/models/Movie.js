@@ -9,9 +9,6 @@ module.exports = (sequelize) =>{
                 allowNull: false,
                 primaryKey: true
             },
-            apiID:{
-                type: DataTypes.INTEGER,
-            },
             name:{
                 type: DataTypes.STRING,
                 allowNull: false
@@ -40,8 +37,14 @@ module.exports = (sequelize) =>{
             trailer:{
                 type: DataTypes.STRING
             },
+            popularity: {
+                type: DataTypes.FLOAT
+            },
             saves:{
                 type: DataTypes.INTEGER
             }
+        },
+        {
+            timestamps: false
         })
 };
