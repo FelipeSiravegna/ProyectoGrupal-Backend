@@ -16,6 +16,7 @@ module.exports = (sequelize) => {
             allowNull:false,
             unique:true,
             validate:{
+                len:[7, 30],
                 isEmail:true
             }
         },
@@ -23,7 +24,7 @@ module.exports = (sequelize) => {
             type:DataTypes.STRING,
             allowNull:false,
             validate:{
-                len:[8,15],
+                len:[8,30],
                 is: function(value){
                     const regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
                     if(!regExp.test(value))throw new Error("The password must contain: 8-15 characters, one or multiple numbers and special characters (@, $, !, %, *, ?, &), at least a capital letter");
