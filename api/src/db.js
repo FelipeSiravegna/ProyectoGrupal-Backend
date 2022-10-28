@@ -36,6 +36,9 @@ const { User, List, Actor, Genre, Movies  } = sequelize.models;
 User.belongsToMany(List, {through: "user_list", timestamps:false});
 List.belongsToMany(User, {through: "user_list", timestamps:false});
 
+Movies.belongsToMany(Genre,{through:"movie_genres",timestamps:false})
+Genre.belongsToMany(Movies,{through:"movie_genres",timestamps:false})
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');

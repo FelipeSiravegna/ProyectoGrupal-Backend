@@ -1,19 +1,15 @@
 const axios = require('axios');
-const {Movies} = require('../../../db.js');
+const {Movies,Genre} = require('../../../db.js');
 const {API_KEY} = process.env
 const {Op} = require('sequelize')
 
 
 const searchDB = async (name) =>{
-    const filtredMovies = await Movies.findAll({where:{name:{ [Op.substring]: name }}})
+    //const objeto = [name:{ [Op.substring]: name ]
+    const filtredMovies = await Movies.findAll({where:{name:{ [Op.substring]:name }},include:Genre})
     return filtredMovies
 }
 
-const searchApi = async (name) =>{
-    const apiMovies = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${name}&api_key=${API_KEY}&page=1`)
-    const searchedMovies= apiMovies.data.results.map((i)=>{
-        return {id:i.id,name:i.title,image:`https: //image.tmdb.org/t/p/w600_and_h900_bestv2${i.poster_path}`,description:i.overview }})
-    return searchedMovies
-}
 
-module.exports={searchDB,searchApi}
+
+module.exports={searchDB}
