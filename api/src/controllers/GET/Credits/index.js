@@ -1,4 +1,4 @@
-const movieList = require('../../../../../MOVIES.json');
+const movieList = require('../../../../MOVIES.json');
 
 const getCredits = async (movieName, movieDescription) => {
     const movie = movieList.find(

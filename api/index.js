@@ -2,7 +2,7 @@ const server = require('./src/app');
 const { conn, User, Genre, Movies } = require('./src/db');
 const {API_KEY} = process.env;
 const axios = require('axios');
-const movieList = require('../MOVIES.json');
+const movieList = require('./MOVIES.json');
 
 const checkGenresInDB = async () => {
   const genresAPI = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`)
