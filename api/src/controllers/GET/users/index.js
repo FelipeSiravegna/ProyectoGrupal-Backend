@@ -47,13 +47,20 @@ const getUsers = async()=>{
     return users;
 }
 
+const getBannedUsers = async ()=> await User.findAll({
+    where:{
+        banned:true
+    }
+});
 
 
 module.exports={
+    getUserByPk,
     getUserById,
     getUsers,
     getUserByUsername,
     getUserByEmail,
     getUserByPassword,
+    getBannedUsers,
     
 }
