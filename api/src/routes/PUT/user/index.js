@@ -3,18 +3,19 @@ const { getUserByPk } = require("../../../controllers/GET/users");
 const { checkNewUsername, checkNewEmail, checkNewPassword } = require("../../../controllers/PUT/user");
 const router = Router();
 
-let updatedData = {};
-
-router.put("/update/:userId", async (req, res) => {
+router.put("/:userId", async (req, res) => {
     try {
         const { userId } = req.params;
         const { username, email, password } = req.body;
-
         const currentUserData = await getUserByPk(userId);
+        if(!currentUserData){
+            res.status(404).json({status:404, message:"This user doesn't exist"});
+            return;
+        }
         const updateProps = [];
         const errors = [];
         if(password) {
-            const validatePassword = await checkNewPassword(currentUserData.id, password);
+            const validatePassword = checkNewPassword(currentUserData.password, password);
             if(!validatePassword){
                 updateProps.push("password");
                 currentUserData.password = password;
