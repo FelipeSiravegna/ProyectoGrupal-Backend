@@ -11,6 +11,7 @@ router.get("/:userId", async (req, res) => {
             res.status(200).json(user);
         }else{
             res.status(404).json({error:"This user doesn't exist"});
+            return;
         }
     } catch(error) {
         console.log(error);
