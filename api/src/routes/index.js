@@ -1,6 +1,7 @@
+// Import routes
 const { Router } = require("express");
-//Importar las routes
-//MOVEIS
+const router = Router();
+//MOVIES
 const getMoviesPopular = require('./GET/movies/popular.js')
 const searchMovies = require('./GET/movies/search')
 const getMovieDetail = require('./GET/MovieDetail/index');
@@ -10,10 +11,9 @@ const comingSoon = require('../routes/GET/ComingSoon');
 const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
-
-const router = Router();
-//router.use('/route', archivo route)
-//MOVEIS
+const deleteUser = require("./DELETE/user");
+//start building route trees
+//MOVIES
 router.use('/movies/popular',getMoviesPopular)
 router.use('/movies/search',searchMovies)
 router.use('/detail', getMovieDetail);
@@ -21,6 +21,6 @@ router.use('/createMovie', createMovie);
 router.use('/comingSoon', comingSoon);
 //USERS
 router.use("/users", getUsers);
-router.use("/user", postUser, putUser)
+router.use("/user", postUser, putUser, deleteUser);
 
 module.exports = router;
