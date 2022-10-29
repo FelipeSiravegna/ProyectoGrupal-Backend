@@ -1,5 +1,5 @@
 const  { Router } = require("express");
-const { getUserByNameOrEmail, getUserByEmail, getUserByUsername } = require("../../../controllers/GET/users");
+const { getUserByEmail, getUserByUsername } = require("../../../controllers/GET/users");
 const { createUser, isValidUsername, isValidEmail, isValidPassword,  } = require("../../../controllers/POST/user");
 const router = Router();
 
@@ -16,27 +16,25 @@ router.post("/",async( req, res )=>{
             if(validation2)return validation2;
             const validation3=isValidPassword(password);
             if(validation3)return validation3;
-            console.log("llegó al final");
         }(username, email, password);
-        // console.log(existingEmail,existingUsername, validateUser);
-        // res.send("meh")
         if(validateUser){
             res.status(400).json(validateUser);
         }
         else if(existingUsername) {
-            res.status(409).json({success:false, message:`username already in use by another user.`});
+            res.status(403).json({status:403, message:`username already in use by another user.`});
         }
         else if(existingEmail){
-            res.status(409).json({success:false, message:`email already in use by another user.`});
+            res.status(403).json({status:403, message:`email already in use by another user.`});
         }
         else{
             await createUser( username, email, password );
-            res.status(200).json({success:true, message:`User ${username} created successfully.`})
+            res.status(200).json({status:200, message:`User ${username} created successfully.`})
         }
     } catch(error) {
         console.log(error);
         console.log("______________________");
         console.log(error.message);
+        res.status(500).json({status:500, message:"There was an error while trying to create the user"});
     }
 });
 
