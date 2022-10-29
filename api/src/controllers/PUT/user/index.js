@@ -1,31 +1,24 @@
-let updatedData = {};
-const { getUserById, getUserByUsername, getUserByEmail, getUserByPassword } = require("../../GET/users");
-
-// const updateUser = async(userId, newUserData)=>{
-//     //newUserData is an object with the data the user wants to update and its values
-//     const currentUserData = await getUserById(userId);
-//     const { username, email, password } = newUserData;
-//     return {status:200, message:`${updateProps.join(", ")} updated`};
-// }
+const { getUserByUsername, getUserByEmail } = require("../../GET/users");
 
 const checkNewUsername = async(currentUsername, newUsername)=>{
     const existingUsername = await getUserByUsername(newUsername);
     if (newUsername==="") {
         return {status:400,  message:"username is needed."};
     }
-    else if(currentUsername.length>20||newUsername.length<1){
-        return {status:400,  message:"username must containt between 1 and 20 characters."};
-    }
     else if(newUsername.split("").includes(" ")){
         return {status:400,  message:"username can't containt spaces."};
     }
-    // else if(currentUsername===newUsername){
-    //     return {status:403,  message:"username is equal to the current one."};
-    // }
+    else if(currentUsername===newUsername){
+        return {status:403,  message:"username is equal to the current one."};
+    }
+    else if(!(currentUsername.length>1&&newUsername.length<20)){
+        return {status:400,  message:"username must containt between 1 and 20 characters."};
+    }
     else if (existingUsername){
-        return {status:403, message:"this username belongs to another user or it's equal to the current one."};
+        return {status:403, message:"this username belongs to another user."};
     }
     else{
+        console.log("username aproved");
         updatedData.username=newUsername;
     }
 }
@@ -35,19 +28,24 @@ const checkNewEmail = async ( currentEmail, newEmail )=>{
     if(newEmail==="") {
         return {status:400, message:"email is needed."};
     }
-    // else if (currentEmail===newEmail){
-    //     return {status:403, message:"email is equal to the current one."};
-    // }
+    else if (currentEmail===newEmail){
+        return {status:403, message:"email is equal to the current one."};
+    }
+    else if(!(newEmail.length>1 && newEmail.length<30)){
+        return {status:400,  message:"email must containt between 1 and 30 characters."};
+    }
     else if(existingEmail){
-        return {status:403, message:"this email is used by another user or is equal to the current one."};
+        return {status:403, message:"this email is used by another user."};
     }
     else{
+        console.log("email aproved");
         updatedData.email=newEmail;
     }
 }
 
-const checkNewPassword = async ( currentPassword,  newPassword)=>{
+const checkNewPassword = ( currentPassword,  newPassword)=>{
     const validPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    console.log(`current password:${currentPassword} | new password:${newPassword}`);
     if(newPassword==="") {
         return {status:400, message:"password is needed."};
     }
@@ -61,6 +59,7 @@ const checkNewPassword = async ( currentPassword,  newPassword)=>{
         return {status:403, message:"password is equal to the current one."};
     }
     else{
+        console.log("password aproved");
         updatedData.password=newPassword;
     }
 }
@@ -69,10 +68,8 @@ const checkNewPassword = async ( currentPassword,  newPassword)=>{
 
 
 module.exports = {
-    // updateUser,
     checkNewUsername,
     checkNewEmail,
     checkNewPassword,
-    // updatedData,
 
 }
