@@ -2,7 +2,7 @@ const  { Router } = require("express");
 const { getUserByPk } = require("../../../controllers/GET/users");
 const router = Router();
 
-router.delete("/delete/:userId", async (req, res) => {
+router.delete("/:userId", async (req, res) => {
     try {
         const {userId}=req.params;
         const user = getUserByPk(userId);
@@ -15,7 +15,7 @@ router.delete("/delete/:userId", async (req, res) => {
         console.log(error);
         console.log("______________________");
         console.log("                ERROR: "+error.message);
-        res.status(500).json({success:false, message:"There was an error while trying to update the username."});
+        res.status(500).json({success:false, message:"There was an error while trying to delete the user."});
     }
 });
 
