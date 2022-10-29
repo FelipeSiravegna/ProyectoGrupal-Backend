@@ -8,6 +8,7 @@ router.delete("/:userId", async (req, res) => {
         const user = await getUserByPk(userId);
         if(!user){
             res.status(400).json({status:400, message:"This user doesn't exist"});
+            return;
         }
         await user.destroy();
         res.status(200).json({status:200, message:`User ${user.username} deleted`});
