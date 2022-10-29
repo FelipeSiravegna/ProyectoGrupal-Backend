@@ -56,7 +56,6 @@ conn.sync({ force: true }).then(() => {
     findOrCreateUser();
     findOrCreateMovies();
     setRelation();
-    console.log(movieList.length);
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
