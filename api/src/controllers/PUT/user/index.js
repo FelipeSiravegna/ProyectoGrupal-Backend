@@ -19,7 +19,6 @@ const checkNewUsername = async(currentUsername, newUsername)=>{
     }
     else{
         console.log("username aproved");
-        updatedData.username=newUsername;
     }
 }
 
@@ -39,7 +38,6 @@ const checkNewEmail = async ( currentEmail, newEmail )=>{
     }
     else{
         console.log("email aproved");
-        updatedData.email=newEmail;
     }
 }
 
@@ -60,7 +58,6 @@ const checkNewPassword = ( currentPassword,  newPassword)=>{
     }
     else{
         console.log("password aproved");
-        updatedData.password=newPassword;
     }
 }
 
