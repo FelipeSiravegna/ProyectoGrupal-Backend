@@ -1,7 +1,6 @@
 const { Router } = require("express");
 const router = Router();
 const {getComingSoonMovies} = require('../../../controllers/GET/ComingSoon');
-const axios = require('axios');
 
 router.get('/', async (req, res) => {
     try{
