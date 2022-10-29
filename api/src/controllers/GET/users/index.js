@@ -1,5 +1,6 @@
 const { User } = require('../../../db');
 
+const getUserByPk = async(pk)=>await User.findByPk(pk);
 
 const getUserById = async(userId)=>{
     const user = await User.findOne({
@@ -46,13 +47,20 @@ const getUsers = async()=>{
     return users;
 }
 
+const getBannedUsers = async ()=> await User.findAll({
+    where:{
+        banned:true
+    }
+});
 
 
 module.exports={
+    getUserByPk,
     getUserById,
     getUsers,
     getUserByUsername,
     getUserByEmail,
     getUserByPassword,
+    getBannedUsers,
     
 }

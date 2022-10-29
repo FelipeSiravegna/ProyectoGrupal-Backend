@@ -4,6 +4,7 @@ const router = Router();
 const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
+const deleteUser = require("./DELETE/user");
 
 // const getMoviesPopular = require('./GET/movies/popular.js')
 // const searchMovies = require('./GET/movies/search')
@@ -11,7 +12,7 @@ const putUser = require("./PUT/user");
 
 // Configurar los routers
 router.use("/users", getUsers);
-router.use("/user", postUser, putUser)
+router.use("/user", postUser, putUser, deleteUser);
 // router.use('/get', getUsers);
 // router.use('/create', postUserRoute);
 // router.use('/update', putUserRoute);
