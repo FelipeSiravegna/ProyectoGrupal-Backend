@@ -1,6 +1,6 @@
 const { User } = require('../../../db');
-const { Op } = require('sequelize');
 
+const getUserByPk = async(pk)=>await User.findByPk(pk);
 
 const getUserById = async(userId)=>{
     const user = await User.findOne({
@@ -10,17 +10,6 @@ const getUserById = async(userId)=>{
     });
     return user;
 }
-
-////////Chequear//////////////
-const getUserByNameOrEmail = async (username, email)=>{
-    const user = await User.findOne({
-        where:{
-            [Op.or]:[ { username:username }, {email:email} ]
-        }
-    });
-    return user;
-}
-/////////////////////////////
 
 const getUserByUsername = async (username)=>{
     const user = await User.findOne({
@@ -40,6 +29,15 @@ const getUserByEmail = async (email)=>{
     return user;
 }
 
+const getUserByPassword = async (password)=>{
+    const user = await User.findOne({
+        where:{
+            password:password
+        }
+    });
+    return user;
+}
+
 const getUsers = async()=>{
     const users = await User.findAll({
         where:{
@@ -53,9 +51,9 @@ const getUsers = async()=>{
 
 module.exports={
     getUserById,
-    getUserByNameOrEmail,
     getUsers,
     getUserByUsername,
     getUserByEmail,
-
+    getUserByPassword,
+    
 }
