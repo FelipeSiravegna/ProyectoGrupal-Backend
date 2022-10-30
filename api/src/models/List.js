@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
         moviesIdList:{
             type:DataTypes.ARRAY(DataTypes.INTEGER),
             validate:{
-                isInt:true
+                isUUID:4
             }
         },
         description:{
