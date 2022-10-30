@@ -1,5 +1,5 @@
 const  { Router } = require("express");
-const {Movies, Genre} = require('../../../db');
+const {Movie, Genre} = require('../../../db');
 const router = Router();
 const {validateRating, validateLength, validateReleaseDate} = require('../../../controllers/POST/Movie');
 
@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
         } else if(valReleaseDate === false){
             res.status(404).json({error: "Release date is invalid"});
         } else {
-            let newMovie = await Movies.create({
+            let newMovie = await Movie.create({
                 name: name,
                 description: description,
                 image: image,

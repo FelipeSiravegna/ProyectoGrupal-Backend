@@ -1,10 +1,10 @@
-const { Movies } = require('../../../db');
+const { Movie } = require('../../../db');
 const {getCredits} = require('../Credits');
 const {getGenres} = require('../Genres');
 
 const getMovieFromDB = async (movieId) => {
   
-  const movie = await Movies.findOne({
+  const movie = await Movie.findOne({
     where: {id: movieId}
   });
     
