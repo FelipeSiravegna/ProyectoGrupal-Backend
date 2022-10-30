@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
             unique:true,
             allowNull: false,
             validate:{
-                len:[0,30]
+                len:[1,15]
             }
         },
         moviesIdList:{
