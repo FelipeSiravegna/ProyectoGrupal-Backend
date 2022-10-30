@@ -12,7 +12,12 @@ router.put("/", async (req, res)=>{
         console.log(error);
         console.log("______________________");
         console.log("                ERROR: "+error.message);
-        res.status(500).json({status:500, message:"There was an error while trying to bann the user."});
+        if(action!=="bann"){
+            res.status(500).json({status:500, message:"There was an error while trying to unbann the user."});
+        }else{
+            res.status(500).json({status:500, message:"There was an error while trying to bann the user."});
+        }
+        
     }
 });
 
