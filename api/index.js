@@ -1,5 +1,5 @@
 const server = require('./src/app');
-const { conn, User, Genre, Movies } = require('./src/db');
+const { conn, User, Genre, Movies, Actor, Director } = require('./src/db');
 const {API_KEY} = process.env;
 const axios = require('axios');
 const movieList = require('./MOVIES.json');
@@ -30,6 +30,20 @@ const findOrCreateMovies = async () => {
         saves: movie.saves
       }
     })
+
+    Director.findOrCreate({
+      where: {
+        name: movie.fullCast.director.name
+      }
+    })
+
+    movie.fullCast.cast.forEach((act) => {
+      Actor.findOrCreate({
+        where: {
+          name: act.name
+        }
+      })
+    })
   })
 }
 
@@ -56,7 +70,6 @@ conn.sync({ force: true }).then(() => {
     findOrCreateUser();
     findOrCreateMovies();
     setRelation();
-    console.log(movieList.length);
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
