@@ -37,9 +37,14 @@ module.exports = (sequelize) =>{
             trailer:{
                 type: DataTypes.STRING
             },
+            popularity: {
+                type: DataTypes.FLOAT
+            },
             saves:{
                 type: DataTypes.INTEGER
             }
-
+        },
+        {
+            timestamps: false
         })
 };

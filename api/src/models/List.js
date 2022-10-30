@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-
     sequelize.define('list', {
         name: { 
             type: DataTypes.STRING,
@@ -13,7 +12,6 @@ module.exports = (sequelize) => {
         },
         moviesIdList:{
             type:DataTypes.ARRAY(DataTypes.INTEGER),
-            defaultValue: false,
             validate:{
                 isInt:true
             }
