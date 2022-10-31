@@ -1,16 +1,16 @@
 const  { Router } = require("express");
-const { getUserByPk } = require("../../../controllers/GET/users");
+const { getAllUserInfo } = require("../../../controllers/GET/users");
 const router = Router();
 
 router.get("/user/:userId", async (req, res) => {
     try {
         const {userId}=req.params;
-        const user = await getUserByPk(userId);
+        const user = await getAllUserInfo(userId);
         if(user){
             res.status(200).json(user);
             return;
         }else{
-            res.status(404).json({status:404, message:"This user doesn't exist"});
+            res.status(404).json({error:"This user doesn't exist"});
             return;
         }
     } catch(error) {

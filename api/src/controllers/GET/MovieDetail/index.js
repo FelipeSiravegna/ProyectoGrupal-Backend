@@ -1,38 +1,20 @@
-const { Movies } = require('../../../db');
-const {getCredits} = require('../Credits');
-const {getGenres} = require('../Genres');
+const { getMovieFromDB } = require('../MovieDetailFromDB');
+const {getMovieFromAPI} = require('../MovieDetailFromAPI');
 
-const getMovieFromDB = async (movieId) => {
-  
-  const movie = await Movies.findOne({
-    where: {id: movieId}
-  });
-    
-  if(!movie){
-    return undefined;
-  } else {
+const getMovieDetail = async (movieId) => {
+    let movie = null;
 
-    const fullCast = await getCredits(movie.name, movie.description);
-    const genres = await getGenres(movie.name, movie.description);
+    if(movieId.includes('-')){
+        const movieDetails = await getMovieFromDB(movieId);
 
-    const movieDetails = {
-      id: movie.id,
-      name: movie.name,
-      description: movie.description,
-      image: movie.image,
-      popularity: movie.popularity,
-      language: movie.original_language,
-      releaseDate: movie.releaseDate,
-      length: movie.length,
-      rating: movie.rating,
-      trailer: movie.trailer,
-      fullCast: fullCast,
-      genres: genres,
-      saves: movie.saves,
-    };
+        movie = movieDetails;
+    } else {
+        const movieDetails = await getMovieFromAPI(movieId);
 
-    return movieDetails;
-  }
-};
+        movie = movieDetails;
+    }
 
-module.exports = { getMovieFromDB };
+    return movie;
+}
+
+module.exports = {getMovieDetail}

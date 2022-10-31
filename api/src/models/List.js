@@ -12,20 +12,15 @@ module.exports = (sequelize) => {
         },
         moviesIdList:{
             type:DataTypes.ARRAY(DataTypes.INTEGER),
+            defaultValue:[],
             validate:{
-                isInt:true
+                
             }
         },
         description:{
             type: DataTypes.STRING,
             validate:{
                 len:[0,500]
-            }
-        },
-        ownerUserId:{
-            type:DataTypes.INTEGER,
-            validate:{
-                isInt:true
             }
         },
         banned:{
