@@ -1,10 +1,12 @@
-//const  API_KEY  = process.env.API_KEY;
-const axios = require('axios');
-const {Movie} = require('../../../db.js');
+const {Movies} = require('../../../db.js');
 const sequelize = require('sequelize')
 
-const DB_Movies = async () => {
-    const movies = await Movie.findAll({order:[['rating','DESC']]})
+const DB_Movies = async (page=0) => {
+    const movies = await Movies.findAndCountAll({
+        limit:10,
+        offset:page,
+        order:[['rating','DESC']]})
+
     return movies
 }
 
