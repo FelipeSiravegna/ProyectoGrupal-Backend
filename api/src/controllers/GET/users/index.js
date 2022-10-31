@@ -1,6 +1,15 @@
-const { User } = require('../../../db');
+const { User, List, Movies } = require('../../../db');
 
 const getUserByPk = async(pk)=>await User.findByPk(pk);
+
+const getUserByPkInclude = async(userId, modelName)=>{
+    const user = await User.findByPk(userId, {
+        include:{
+            modelName
+        }
+    });
+    return user;
+}
 
 const getUserById = async(userId)=>{
     const user = await User.findOne({
@@ -53,14 +62,28 @@ const getBannedUsers = async ()=> await User.findAll({
     }
 });
 
+const getAllUserInfo = async (userId)=>{
+    const userData = await User.findByPk(userId, {
+        include:{
+            model:List,
+            include:{
+                model:Movies
+            }
+        }
+    });
+    return userData;
+}
+
 
 module.exports={
     getUserByPk,
+    getUserByPkInclude,
     getUserById,
     getUsers,
     getUserByUsername,
     getUserByEmail,
     getUserByPassword,
     getBannedUsers,
+    getAllUserInfo,
     
 }
