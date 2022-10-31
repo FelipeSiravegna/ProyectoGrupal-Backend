@@ -16,6 +16,7 @@ const searchDB = async (name="",actor=[],director=[],genres=[],page=0) =>{
             {model:Director ,as : "director" }],
         distinct:true
         })        
+
     return filtredMovies
 }
 

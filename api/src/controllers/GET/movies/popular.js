@@ -6,6 +6,7 @@ const DB_Movies = async (page=0) => {
         limit:10,
         offset:page,
         order:[['rating','DESC']]})
+
     return movies
 }
 
