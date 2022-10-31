@@ -1,4 +1,3 @@
-
 const {Movies} = require('../../../db.js');
 const sequelize = require('sequelize')
 
