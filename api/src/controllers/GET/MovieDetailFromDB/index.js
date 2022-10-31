@@ -1,6 +1,6 @@
 const { Movie } = require('../../../db');
 const {getCredits} = require('../Credits');
-const {getGenres} = require('../Genres');
+const {getGenresInfo} = require('../Genres');
 
 const getMovieFromDB = async (movieId) => {
   
@@ -13,7 +13,7 @@ const getMovieFromDB = async (movieId) => {
   } else {
 
     const fullCast = await getCredits(movie.name, movie.description);
-    const genres = await getGenres(movie.name, movie.description);
+    const genres = await getGenresInfo(movie.name, movie.description);
 
     const movieDetails = {
       id: movie.id,
