@@ -1,10 +1,9 @@
-const {Movies,Genre,Actor,Director} = require('../../../db.js');
+const {Movie,Genre,Actor,Director} = require('../../../db.js');
 const {Op} = require('sequelize')
-
 
 const searchDB = async (name="",actor=[],director=[],genres=[],page=0) =>{
     console.log('name:',name,'actor:',actor,'director:',director,'genres:',genres,'page:',page)
-    const filtredMovies = await Movies.findAndCountAll(
+    const filtredMovies = await Movie.findAndCountAll(
         {limit:10,
         offset:page,
         where:{
@@ -19,7 +18,5 @@ const searchDB = async (name="",actor=[],director=[],genres=[],page=0) =>{
 
     return filtredMovies
 }
-
-
 
 module.exports={searchDB}
