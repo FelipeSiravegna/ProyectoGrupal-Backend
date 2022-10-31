@@ -35,19 +35,19 @@ module.exports = (sequelize) => {
         playLists:{
             type: DataTypes.ARRAY(DataTypes.INTEGER),
             validate:{
-                isInt:true
+//                 isInt:true
             }
         },
         subscribedTo:{
             type: DataTypes.ARRAY(DataTypes.INTEGER),
             validate:{
-                isInt:true
+//                 isInt:true
             }
         },
         subscribers:{
             type: DataTypes.ARRAY(DataTypes.INTEGER),
             validate:{
-                isInt:true
+//                 isInt:true
             }
         },
         premium:{
