@@ -7,7 +7,16 @@ const getMovieFromAPI = async (movieId) => {
     const movieInfoAPI = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`);
     
         const movieInfo = movieInfoAPI.data;
-    
+
+        const genres = movieInfo.genres.map((genre) => {
+            const newGenre = {
+                id: genre.id,
+                name: genre.name
+            }
+
+            return newGenre;
+        })
+
         const movieDetails = {
             id: movieInfo.id,
             name: movieInfo.title,
@@ -19,6 +28,7 @@ const getMovieFromAPI = async (movieId) => {
             rating: movieInfo.vote_average,
             trailer: await getTrailer(movieInfo.id, movieInfo.original_language),
             popularity: movieInfo.popularity,
+            genres: genres,
             fullCast: await getCreditsFromAPI(movieInfo.id),
             saves: 0
         }
