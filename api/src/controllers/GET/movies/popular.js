@@ -1,8 +1,7 @@
-const {Movies} = require('../../../db.js');
-const sequelize = require('sequelize')
+const {Movie} = require('../../../db.js');
 
 const DB_Movies = async (page=0) => {
-    const movies = await Movies.findAndCountAll({
+    const movies = await Movie.findAndCountAll({
         limit:10,
         offset:page,
         order:[['rating','DESC']]})
@@ -11,4 +10,3 @@ const DB_Movies = async (page=0) => {
 }
 
 module.exports={DB_Movies}
-

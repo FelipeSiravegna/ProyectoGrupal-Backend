@@ -49,6 +49,10 @@ module.exports = (sequelize) => {
                 // isInt:true
             }
         },
+        isPremium:{
+            type:DataTypes.BOOLEAN,
+            defaultValue: false
+        },
         banned:{
             type:DataTypes.BOOLEAN,
         },
