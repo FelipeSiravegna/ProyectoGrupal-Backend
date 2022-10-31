@@ -1,6 +1,5 @@
 const { Movie } = require('../../../db');
 const {getCredits} = require('../Credits');
-const {getGenresInfo} = require('../Genres');
 
 const getMovieFromDB = async (movieId) => {
   
@@ -13,21 +12,29 @@ const getMovieFromDB = async (movieId) => {
   } else {
 
     const fullCast = await getCredits(movie.name, movie.description);
-    const genres = await getGenresInfo(movie.name, movie.description);
+    const genres = await movie.getGenres();
+
+    const genresInfo = genres.map((g) => {
+        const newGenre = {
+            id: g.id,
+            name: g.name
+        }
+        return newGenre;
+    })
 
     const movieDetails = {
       id: movie.id,
       name: movie.name,
       description: movie.description,
       image: movie.image,
-      popularity: movie.popularity,
-      language: movie.original_language,
+      language: movie.language,
       releaseDate: movie.releaseDate,
       length: movie.length,
       rating: movie.rating,
       trailer: movie.trailer,
+      popularity: movie.popularity,
+      genres: genresInfo,
       fullCast: fullCast,
-      genres: genres,
       saves: movie.saves,
     };
 
