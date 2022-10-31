@@ -50,6 +50,10 @@ module.exports = (sequelize) => {
                 isInt:true
             }
         },
+        premium:{
+            type:DataTypes.BOOLEAN,
+            defaultValue: false
+        },
         banned:{
             type:DataTypes.BOOLEAN,
         },
