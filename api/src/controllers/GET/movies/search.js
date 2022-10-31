@@ -1,12 +1,22 @@
-const axios = require('axios');
-const {Movie,Genre} = require('../../../db.js');
-const {API_KEY} = process.env
+const {Movies,Genre,Actor,Director} = require('../../../db.js');
 const {Op} = require('sequelize')
 
 
-const searchDB = async (name) =>{
-    //const objeto = [name:{ [Op.substring]: name ]
-    const filtredMovies = await Movie.findAll({where:{name:{ [Op.substring]:name }},include:Genre})
+const searchDB = async (name="",actor=[],director=[],genres=[],page=0) =>{
+    console.log('name:',name,'actor:',actor,'director:',director,'genres:',genres,'page:',page)
+    const filtredMovies = await Movies.findAndCountAll(
+        {limit:10,
+        offset:page,
+        where:{
+            name:{ [Op.iLike]:`%${name}%`},
+            //'$genres.id$':{ [Op.ne]: 28}            
+        },
+        include:[{model:Genre ,as : "genres", attributes: ["name","id"] , through: {attributes:[]}},
+            {model:Actor ,as : "actors" },
+            {model:Director ,as : "director" }],
+        distinct:true
+        })        
+
     return filtredMovies
 }
 
