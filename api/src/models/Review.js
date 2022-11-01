@@ -15,10 +15,13 @@ module.exports = (sequelize) => {
       },
       likes: {
         type: DataTypes.INTEGER
-      }
-    },
-    {
-      timeStamps: false,
+      },
+      active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
     }
-  )
+  },{
+    timeStamps: false,
+  }
+)
 };
