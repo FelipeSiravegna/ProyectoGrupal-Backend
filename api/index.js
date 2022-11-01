@@ -66,13 +66,14 @@ const findOrCreateUser = async () => {
     where: {username:"Usuario1", email:"example@example.com", password:"passWord$2"}
   })
 }
+
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(3001, async () => {
     console.log("Levantando servidor...");
     await checkGenresInDB();
     await findOrCreateUser();
-    // await findOrCreateMovies();
+    await findOrCreateMovies();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
