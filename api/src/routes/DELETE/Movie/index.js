@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const {deleteMovie} = require('../../../controllers/PUT/Movie');
+const {deleteMovie} = require('../../../controllers/DELETE/Movie');
 
 router.put('/:id', async (req, res) => {
     const {id} = req.params;

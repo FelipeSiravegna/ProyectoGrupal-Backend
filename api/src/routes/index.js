@@ -9,7 +9,7 @@ const createMovie = require('../routes/POST/Movie');
 const getGenres = require('./GET/basics/genres')
 const comingSoon = require('../routes/GET/ComingSoon');
 const nowPlaying = require('./GET/NowPlaying/');
-const deleteMovie = require('./PUT/Movie');
+const deleteMovie = require('./DELETE/Movie');
 //USERS
 const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
