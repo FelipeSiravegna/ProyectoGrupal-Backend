@@ -3,7 +3,7 @@ const router = Router();
 const {searchDB} = require('../../../controllers/GET/movies/search.js')
 
 router.get('/',async (req,res)=>{
-    const {name,actor,director,genres} = req.query
+    //const {name,actor,director,genres} = req.query
     let {page=1} = req.query
     if (page!=undefined) {page=(page-1)*10}
     try {
