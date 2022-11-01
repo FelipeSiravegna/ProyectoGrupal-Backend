@@ -11,6 +11,7 @@ const comingSoon = require('../routes/GET/ComingSoon');
 const nowPlaying = require('./GET/NowPlaying/');
 const deleteMovie = require('./DELETE/Movie');
 const deleteDirector = require('./DELETE/Director');
+const deleteActor = require('./DELETE/Actor');
 //USERS
 const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
@@ -28,6 +29,7 @@ router.use('/comingSoon', comingSoon);
 router.use('/nowPlaying', nowPlaying);
 router.use('/deleteMovie', deleteMovie);
 router.use('/deleteDirector', deleteDirector);
+router.use('/deleteActor', deleteActor);
 //USERS
 router.use("/users", getUsers);
 router.use("/user", postUser, putUser, deleteUser);
