@@ -12,8 +12,13 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-      }},{
-          timestamps:false
+      },
+      active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
       }
-    );
-  };
+    },{
+        timestamps:false
+    },
+  );
+};
