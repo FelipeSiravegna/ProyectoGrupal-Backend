@@ -32,6 +32,7 @@ const findOrCreateMovies = async () => {
       }
     })
 
+    //RELACION MOVIE - DIRECTOR
     newDirector = await Director.findOrCreate({
       where: {
         name: movieList[i].fullCast.director.name
@@ -40,6 +41,7 @@ const findOrCreateMovies = async () => {
     
     await newDirector[0].addMovie(newMovie[0]);
 
+    //RELACION ACTOR - MOVIE
     for(let j = 0; j < movieList[i].fullCast.cast.length; j++){
       let actorData = movieList[i].fullCast.cast[j]
       const newActor = await Actor.findOrCreate({
@@ -50,18 +52,13 @@ const findOrCreateMovies = async () => {
 
       await newActor[0].addMovie(newMovie[0]);
     }
-  }
-}
 
-const setRelation = () =>{
-  movieList.forEach(async(movie)=>{
-    const count = await Genre.findAndCountAll()
-    const relevant = await Genre.findAll({where:{id:movie.genres}})
-    const DB_Movie = await Movie.findOne({where:{name:movie.name}})
-    if (DB_Movie){
-      const relation = await DB_Movie.setGenres(relevant)
+    //RELACION MOVIE - GENRE
+    const genres = await Genre.findAll({where: {id: movieList[i].genres}});
+    for(let i = 0; i < genres.length; i++){
+      await genres[i].addMovie(newMovie[0]);
     }
-  })
+  }
 }
 
 const findOrCreateUser = async () => {
@@ -69,6 +66,7 @@ const findOrCreateUser = async () => {
     where: {username:"Usuario1", email:"example@example.com", password:"passWord$2"}
   })
 }
+
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(3001, async () => {
@@ -76,7 +74,6 @@ conn.sync({ force: true }).then(() => {
     await checkGenresInDB();
     await findOrCreateUser();
     await findOrCreateMovies();
-    setRelation();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
