@@ -1,12 +1,7 @@
 const {Movie, Director, Actor} = require('../../../db');
 
 const deleteMovie = async (movieId) => {
-    const movie = await Movie.findOne({
-        where: {
-            id: movieId,
-            active: true
-        }
-    })
+    const movie = await Movie.findByPk(movieId);
 
     if(!movie || movie.active === false){
         return false;

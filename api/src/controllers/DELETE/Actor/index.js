@@ -1,11 +1,7 @@
 const {Actor} = require('../../../db');
 
 const deleteActor = async (actorId) => {
-    const actor = await Actor.findOne({
-        where: {
-            id: actorId,
-        }
-    })
+    const actor = await Actor.findByPk(actorId);
 
     if(!actor || actor.active === false){
         return false;
