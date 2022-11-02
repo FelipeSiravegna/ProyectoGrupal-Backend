@@ -3,6 +3,7 @@ const { Router } = require("express");
 const router = Router();
 //MOVIES
 const getMoviesPopular = require('./GET/movies/popular.js')
+const getAllMovies = require('./GET/movies/allMovies')
 const searchMovies = require('./GET/movies/search')
 const getMovieDetail = require('./GET/MovieDetail/index');
 const createMovie = require('../routes/POST/Movie');
@@ -19,6 +20,7 @@ const deleteUser = require("./DELETE/user");
 
 //MOVIES
 router.use('/movies/popular',getMoviesPopular)
+router.use('/movies/all',getAllMovies)
 router.use('/movies/search',searchMovies)
 router.use('/detail', getMovieDetail);
 router.use('/createMovie', createMovie);
