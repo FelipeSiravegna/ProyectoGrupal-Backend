@@ -1,11 +1,7 @@
 const {Director} = require('../../../db');
 
 const deleteDirector = async (directorId) => {
-    const director = await Director.findOne({
-        where: {
-            id: directorId,
-        }
-    })
+    const director = await Director.findByPk(directorId);
 
     if(!director || director.active === false){
         return false;
