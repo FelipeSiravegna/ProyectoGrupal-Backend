@@ -10,13 +10,13 @@ module.exports = (sequelize) => {
                 len:[0,30]
             }
         },
-        moviesIdList:{
-            type:DataTypes.ARRAY(DataTypes.INTEGER),
-            defaultValue:[],
-            validate:{
+        // moviesIdList:{
+        //     type:DataTypes.ARRAY(DataTypes.INTEGER),
+        //     defaultValue:[],
+        //     validate:{
                 
-            }
-        },
+        //     }
+        // },
         description:{
             type: DataTypes.STRING,
             validate:{

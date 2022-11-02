@@ -45,11 +45,12 @@ module.exports = (sequelize) => {
         },
         subscribers:{
             type: DataTypes.ARRAY(DataTypes.INTEGER),
+            
             validate:{
                 // isInt:true
             }
         },
-        isPremium:{
+        premium:{
             type:DataTypes.BOOLEAN,
             defaultValue: false
         },

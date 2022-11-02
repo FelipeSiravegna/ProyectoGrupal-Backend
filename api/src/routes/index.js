@@ -14,8 +14,11 @@ const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
 const deleteUser = require("./DELETE/user");
-//start building route trees
+//LISTS
+const getListS = require("./GET/list");
+const updateListData = require("./PUT/list");
 
+//start building route trees
 //MOVIES
 router.use('/movies/popular',getMoviesPopular)
 router.use('/movies/search',searchMovies)
@@ -27,5 +30,12 @@ router.use('/nowPlaying', nowPlaying);
 //USERS
 router.use("/users", getUsers);
 router.use("/user", postUser, putUser, deleteUser);
+//LISTS
+router.use("/lists", getListS, updateListData);
+const { deleteMovieFromList } = require("../controllers/PUT/list");
+router.delete("/test", async(req,res)=>{
+    await deleteMovieFromList(1, 4);
+    res.send("test done");
+});
 
 module.exports = router;

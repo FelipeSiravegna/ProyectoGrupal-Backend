@@ -37,23 +37,23 @@ List.belongsTo(User);
 User.hasMany(List);
 
 
-// Movie.belongsToMany(Genre,{through:"movie_genres",timestamps:false})
-// Genre.belongsToMany(Movie,{through:"movie_genres",timestamps:false})
+Movie.belongsToMany(Genre,{through:"movie_genres",timestamps:false})
+Genre.belongsToMany(Movie,{through:"movie_genres",timestamps:false})
 
-// Actor.belongsToMany(Movie,{through:"actor_on_movies",timestamps:false})
-// Movie.belongsToMany(Actor,{through:"actor_on_movies",timestamps:false})
+Actor.belongsToMany(Movie,{through:"actor_on_movies",timestamps:false})
+Movie.belongsToMany(Actor,{through:"actor_on_movies",timestamps:false})
 
-// Director.hasMany(Movie)
-// Movie.belongsTo(Director)
+Director.hasMany(Movie)
+Movie.belongsTo(Director)
 
 List.belongsToMany(Movie,{through:"movies_on_list",timestamps:false})
 Movie.belongsToMany(List,{through:"movies_on_list",timestamps:false})
 
-// Movie.hasMany(Review)
-// Review.belongsTo(Movie)
+Movie.hasMany(Review)
+Review.belongsTo(Movie)
 
-// User.hasMany(Review)
-// Review.belongsTo(User)
+User.hasMany(Review)
+Review.belongsTo(User)
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

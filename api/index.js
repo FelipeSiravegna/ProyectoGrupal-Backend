@@ -68,26 +68,34 @@ const findOrCreateUser = async () => {
   const userExample = await User.findOrCreate({
     where: {username:"Usuario1", email:"example@example.com", password:"passWord$2"}
   });
-  const movies = await Movie.findAll();
-  console.log(movies);
-  const listExample = await List.findOrCreate({
-    where:{
-      name:"A marvellous list",
-    },
-    defaults:{
-      name:"A marvellous list",
-      description:"A descriptively descriptive description",
-      userId:userExample[0].id
-    }
-  });
-  console.log(insertMovie1)
-  await listExample[0].addMovie(movies[0]);
-  await listExample[0].addMovie(movies[1]);
-  await listExample[0].addMovie(movies[2]);
+  if(userExample[1]===true){
+    const movies = await Movie.findAll();
+    const listExample1 = await List.findOrCreate({
+      where:{
+        name:"A marvellous list",
+      },
+      defaults:{
+        name:"A marvellous list",
+        description:"A descriptively descriptive description",
+      }
+    });
+    const listExample2 = await List.findOrCreate({
+      where:{
+        name:"Another marvellous list",
+      },
+      defaults:{
+        name:"Another marvellous list",
+        description:"A description less descriptively descriptive ",
+      }
+    });
+    await listExample1[0].setUser(userExample[0]);
+    await listExample2[0].setUser(userExample[0]);
+    await listExample1[0].addMovies([ movies[0], movies[1], movies[2] ]);
+  }
 }
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(3001, async () => {
     console.log("Levantando servidor...");
     await checkGenresInDB();
