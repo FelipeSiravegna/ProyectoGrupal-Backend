@@ -1,11 +1,11 @@
 const  { Router } = require("express");
-const { getUsers } = require("../../../controllers/GET/users");
+const { getAvailableUsers } = require("../../../controllers/GET/users");
 const router = Router();
 
 
 router.get("/", async (req, res) => {
     try {
-        const users = await getUsers();
+        const users = await getAvailableUsers();
         if(!users){
             res.status(500).json({status:500, message:"There was an error while trying to get the users"});
         }

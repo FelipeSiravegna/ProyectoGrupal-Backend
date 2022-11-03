@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const router = Router();
-const notBannedLists = require("./notBanned/notBaned");
-const bannedLists = require("./banned");
+const public = require("./public/notBaned");
+const admin = require("./admin");
 
-router.use ("/", bannedLists, notBannedLists);
+router.use ("/", admin, public);
 
 module.exports = router;

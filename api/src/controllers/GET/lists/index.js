@@ -7,6 +7,15 @@ const getAllLists = async()=>await List.findAll({
     },
 });
 
+const getLists = async ()=>{
+    await List.findAll({
+        where:{
+            active:true,
+            banned:null
+        }
+    })
+}
+
 const getUserListS = async(userId)=>{
     const userLists = await User.findByPk(userId, {
         attributes:["id", "username"],
@@ -19,6 +28,9 @@ const getUserListS = async(userId)=>{
             // through:{
             //     attributes:[]
             // }
+            where:{
+                active:true
+            }
         }
     });
     return userLists;
@@ -49,6 +61,7 @@ const getBannedLists = async()=>await List.findAll({
 });
 
 module.exports={
+    getLists,
     getUserListS,
     getAllLists,
     getList,

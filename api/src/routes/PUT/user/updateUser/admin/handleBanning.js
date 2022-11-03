@@ -1,12 +1,12 @@
 const { Router } = require("express");
 const router = Router();
-const { handleUserBanning } = require("../../../controllers/PUT/user");
+const { handleUserBanning } = require("../../../../../controllers/PUT/user");
 
 router.put("/", async (req, res)=>{
     try{
         const { data, action } = req.query;
         const handleBanning = await handleUserBanning(data, action);
-        res.status(handleBanning.status).json(handleBanning);
+        res.status(handleBanning.status).json(handleBanning.message);
     }
     catch(error){
         console.log(error);

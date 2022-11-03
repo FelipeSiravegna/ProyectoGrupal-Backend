@@ -1,6 +1,6 @@
 const  { Router } = require("express");
-const { getUserByPk } = require("../../../controllers/GET/users");
-const { checkNewUsername, checkNewEmail, checkNewPassword } = require("../../../controllers/PUT/user");
+const { getUserByPk } = require("../../../../controllers/GET/users");
+const { checkNewUsername, checkNewEmail, checkNewPassword } = require("../../../../controllers/PUT/user");
 const router = Router();
 
 router.put("/:userId", async (req, res) => {
@@ -8,6 +8,7 @@ router.put("/:userId", async (req, res) => {
         const { userId } = req.params;
         const { username, email, password } = req.body;
         const currentUserData = await getUserByPk(userId);
+        console.log(currentUserData);
         if(!currentUserData){
             res.status(404).json({status:404, message:"This user doesn't exist"});
             return;

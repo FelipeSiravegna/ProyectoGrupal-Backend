@@ -11,9 +11,13 @@ module.exports = (sequilize) =>{
       name: {
         type: DataTypes.STRING,
       },
+      active:{
+        type: DataTypes.BOOLEAN,
+        defaultValue:true,
+      }
     },
     {
-        timestamps: false,
-      }
-  )
+      timestamps: false,
+    }
+  );
 };

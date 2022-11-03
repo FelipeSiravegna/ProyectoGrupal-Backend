@@ -1,9 +1,9 @@
 const  { Router } = require("express");
 const router = Router();
 // const bannUser = require("./bannUser");
-const handleUserBanning = require("./admin");
-const updateUser = require("./public");
+const disableUser = require("./disableUser");
+const updateUser = require("./updateUser");
 
-router.use("/", updateUser, handleUserBanning );
+router.use("/", updateUser, disableUser );
 
 module.exports = router

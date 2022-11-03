@@ -1,7 +1,7 @@
 const { List, Movie }=require("../../../db");
-const { getList } = require("../../../controllers/GET/lists");
+const { getList, getUserListS } = require("../../../controllers/GET/lists");
 
-const validateListUpdate = (name, description)=>{
+const validateList = (name, description)=>{
     if (!name||name.length===0){
         return{status:400, message:"The name of the list is needed"};
     }
@@ -15,8 +15,24 @@ const validateListUpdate = (name, description)=>{
     } 
 }
 
+const createList = async(userId, name, description)=>{
+    const validation = validateList(name, description);
+    if(validation){
+        return {status:validation.status, message:validation.message}
+    }else{
+        const userLists = await getUserListS(userId);
+        const userListsIds = await userLists.lists.map(list=>list.name);
+        const existingUserList = await userListsIds.includes(name);
+        if(existingUserList){
+            return {status:403, message:`The user has another movie list named ${name}`}
+        }else{
+    
+        }
+    }
+}
+
 const updateList = async (listId, name, description)=>{
-    validateListUpdate(name, description);
+    validateList(name, description);
     let newListData = {};
     const updatedData = [];
     if(name){
@@ -41,7 +57,6 @@ const updateList = async (listId, name, description)=>{
 
 const validateAddMovie = (movieId, list)=>{
     //list is an array with the movie ids existing in the list where the user wants to add the movie
-
     if(list.length>1000){
         return{status:403, message:"The user reached the maximum list capacity (1000 movies)"};
     }
@@ -114,6 +129,7 @@ const manageListBanning = async(listId, action)=>{
 }
 
 module.exports={
+    createList,
     updateList,
     addMovieToList,
     deleteMovieFromList,

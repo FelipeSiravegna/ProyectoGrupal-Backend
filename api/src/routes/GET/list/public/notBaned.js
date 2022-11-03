@@ -1,10 +1,10 @@
 const { Router } = require("express");
 const router = Router();
-const { getAllLists, getList } = require("../../../../controllers/GET/lists");
+const { getLists, getList } = require("../../../../controllers/GET/lists");
 
 router.get ("/", async(req, res)=>{
     try{
-        const lists = await getAllLists();
+        const lists = await getLists();
         if(!lists){
             res.status(500).json({status:500, message:"There was a problem while trying to get the movie lists"});
         }
@@ -29,6 +29,12 @@ router.get("/list/:listId", async(req, res)=>{
             const list = await getList(listId);
             if(!list){
                 res.status(404).json({status:404, message:"This list doesn't exist"});
+            }
+            else if(!list.active||list.active===false){
+                res.status(403).json({status:403, message:"This movie list has been deleted"});
+            }
+            else if(list.banned){
+                res.status(403).json({status:403, message:"This movie list has been banned"});
             }
             else if (!list.movies){
                 res.status(500).json({status:500, message:"There was a problem while loading the movies in this list"});

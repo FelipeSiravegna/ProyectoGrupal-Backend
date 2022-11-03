@@ -1,3 +1,4 @@
+const { Sequelize } = require('sequelize');
 const server = require('./src/app');
 const { conn, User, List, Genre, Movie, Actor, Director } = require('./src/db');
 const {API_KEY} = process.env;
@@ -62,10 +63,13 @@ const findOrCreateMovies = async () => {
 }
 
 const findOrCreateUser = async () => {
-  const userExample = await User.findOrCreate({
-    where: {username:"Usuario1", email:"example@example.com", password:"passWord$2"}
+  const userExample1 = await User.findOrCreate({
+    where: {username:"Usuario1", email:"example@example.com", password:"passWord$1"}
   });
-  if(userExample[1]===true){
+  const userExample2 = await User.findOrCreate({
+    where:{username:"Usuario2", email:"example2@example.com", password:"pass2Word$"}
+  });
+  if(userExample1[1]===true){
     const movies = await Movie.findAll();
     const listExample1 = await List.findOrCreate({
       where:{
@@ -85,9 +89,9 @@ const findOrCreateUser = async () => {
         description:"A description less descriptively descriptive ",
       }
     });
-    await listExample1[0].setUser(userExample[0]);
-    await listExample2[0].setUser(userExample[0]);
-    await listExample1[0].addMovies([ movies[0], movies[1], movies[2] ]);
+    await listExample1[0].setUser(userExample1[0]);
+    await listExample2[0].setUser(userExample1[0]);
+    await listExample1[0].addMovies([movies[0], movies[1], movies[2]]);
   }
 }
 
@@ -96,8 +100,8 @@ conn.sync({ force: false }).then(() => {
   server.listen(3001, async () => {
     console.log("Levantando servidor...");
     await checkGenresInDB();
-    await findOrCreateUser();
     await findOrCreateMovies();
+    await findOrCreateUser();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });

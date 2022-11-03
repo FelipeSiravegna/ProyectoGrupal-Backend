@@ -15,7 +15,6 @@ const deleteDirector = require('./DELETE/Director');
 const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
-const deleteUser = require("./DELETE/user");
 //LISTS
 const getListS = require("./GET/list");
 const updateListData = require("./PUT/list");
@@ -33,13 +32,8 @@ router.use('/deleteMovie', deleteMovie);
 router.use('/deleteDirector', deleteDirector);
 //USERS
 router.use("/users", getUsers);
-router.use("/user", postUser, putUser, deleteUser);
+router.use("/user", postUser, putUser);
 //LISTS
 router.use("/lists", getListS, updateListData);
-const { deleteMovieFromList } = require("../controllers/PUT/list");
-router.delete("/test", async(req,res)=>{
-    await deleteMovieFromList(1, 4);
-    res.send("test done");
-});
 
 module.exports = router;

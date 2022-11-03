@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { getBannedLists } = require("../../../controllers/GET/lists");
+const { getBannedLists } = require("../../../../controllers/GET/lists");
 
 router.get ("/banned", async(req, res)=>{
     try{
