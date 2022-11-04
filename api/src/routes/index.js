@@ -18,10 +18,18 @@ const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
 const deleteUser = require("./DELETE/user");
-// REVIEW
+
+// REVIEWS
 const reviews = require('./reviewRoutes')
 const likes = require('./likeRoutes')
 //start building route trees
+
+//PAYMENTS
+const getSubscription = require("./POST/payment/mercadoPago")
+
+//LISTS
+const getListS = require("./GET/list");
+const updateListData = require("./PUT/list");
 
 //MOVIES
 router.use('/movies/popular',getMoviesPopular)
@@ -35,13 +43,21 @@ router.use('/nowPlaying', nowPlaying);
 router.use('/deleteMovie', deleteMovie);
 router.use('/deleteDirector', deleteDirector);
 router.use('/deleteActor', deleteActor);
+
 //USERS
 router.use("/users", getUsers);
 router.use("/user", postUser, putUser, deleteUser);
-//REVIEW
+router.use("/user", postUser, putUser);
+
+//REVIEWS
 router.use("/reviews", reviews)
 //LIKES
 router.use("/likes", likes)
 
+//LISTS
+router.use("/lists", getListS, updateListData);
+
+//PAYMENTS
+router.use("/subscribe",getSubscription)
 
 module.exports = router;
