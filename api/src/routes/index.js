@@ -17,6 +17,8 @@ const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
 const deleteUser = require("./DELETE/user");
 //start building route trees
+//PAYMENTS
+const getSubscription = require("./POST/payment/mercadoPago")
 
 //MOVIES
 router.use('/movies/popular',getMoviesPopular)
@@ -31,5 +33,13 @@ router.use('/deleteMovie', deleteMovie);
 //USERS
 router.use("/users", getUsers);
 router.use("/user", postUser, putUser, deleteUser);
+
+
+
+//PAYMENTS
+router.use("/subscribe",getSubscription)
+
+
+
 
 module.exports = router;

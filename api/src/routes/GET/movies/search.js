@@ -8,7 +8,7 @@ router.get('/',async (req,res)=>{
     if (page!=undefined) {page=(page-1)*10}
     try {
         const DB = await searchDB(name,actor,director,genres,page)
-        if (offset==true){
+        if ((!!offset)==true){
             const envio = {"count":DB.count,"rows":DB.rows.slice(page,page+1)}
         res.status(200).json(envio)
         }
