@@ -19,6 +19,11 @@ const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
 const deleteUser = require("./DELETE/user");
 
+// REVIEWS
+const reviews = require('./reviewRoutes')
+const likes = require('./likeRoutes')
+//start building route trees
+
 //PAYMENTS
 const getSubscription = require("./POST/payment/mercadoPago")
 
@@ -41,7 +46,13 @@ router.use('/deleteActor', deleteActor);
 
 //USERS
 router.use("/users", getUsers);
+router.use("/user", postUser, putUser, deleteUser);
 router.use("/user", postUser, putUser);
+
+//REVIEWS
+router.use("/reviews", reviews)
+//LIKES
+router.use("/likes", likes)
 
 //LISTS
 router.use("/lists", getListS, updateListData);

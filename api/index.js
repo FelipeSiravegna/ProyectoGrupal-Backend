@@ -1,6 +1,5 @@
-const { Sequelize } = require('sequelize');
 const server = require('./src/app');
-const { conn, User, List, Genre, Movie, Actor, Director } = require('./src/db');
+const { conn, User, Genre, Movie, Actor, Director } = require('./src/db');
 const {API_KEY} = process.env;
 const axios = require('axios');
 const movieList = require('./MOVIES.json');
@@ -8,8 +7,8 @@ const movieList = require('./MOVIES.json');
 const checkGenresInDB = async () => {
   const genresAPI = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`)
 
-  genresAPI.data.genres.forEach(async(genre) => {
-    await Genre.findOrCreate({
+  genresAPI.data.genres.forEach((genre) => {
+    Genre.findOrCreate({
       where: {id: genre.id, name: genre.name}
     })
   })
@@ -63,45 +62,19 @@ const findOrCreateMovies = async () => {
 }
 
 const findOrCreateUser = async () => {
-  const userExample1 = await User.findOrCreate({
-    where: {username:"Usuario1", email:"example@example.com", password:"passWord$1"}
-  });
-  const userExample2 = await User.findOrCreate({
-    where:{username:"Usuario2", email:"example2@example.com", password:"pass2Word$"}
-  });
-  if(userExample1[1]===true){
-    const movies = await Movie.findAll();
-    const listExample1 = await List.findOrCreate({
-      where:{
-        name:"A marvellous list",
-      },
-      defaults:{
-        name:"A marvellous list",
-        description:"A descriptively descriptive description",
-      }
-    });
-    const listExample2 = await List.findOrCreate({
-      where:{
-        name:"Another marvellous list",
-      },
-      defaults:{
-        name:"Another marvellous list",
-        description:"A description less descriptively descriptive ",
-      }
-    });
-    await listExample1[0].setUser(userExample1[0]);
-    await listExample2[0].setUser(userExample1[0]);
-    await listExample1[0].addMovies([movies[0], movies[1], movies[2]]);
-  }
+  User.findOrCreate({
+    where: {username:"Usuario1", email:"example@example.com", password:"passWord$2"}
+  })
 }
 
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(3001, async () => {
     console.log("Levantando servidor...");
     await checkGenresInDB();
-    await findOrCreateMovies();
     await findOrCreateUser();
+    await findOrCreateMovies();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
+
 });
