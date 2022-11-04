@@ -1,4 +1,5 @@
 const { getUserByUsername, getUserByEmail, getUserByPk } = require("../../GET/users");
+const {subscriptionMail} = require('../Mail');
 
 const checkNewUsername = async(currentUsername, newUsername)=>{
     const existingUsername = await getUserByUsername(newUsername);
@@ -169,6 +170,7 @@ const handlePremium = async(userId)=>{
             // }, 10000);
             const setAsPremium = await user.update({premium:true});
             await setAsPremium.save();
+            subscriptionMail(user.email);
             return{status:200, message:`User "${user.username} is now premium.`};
         }else{
             return{status:200, message:`User "${user.username} is already premium.`};
