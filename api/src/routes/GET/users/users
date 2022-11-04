@@ -1,7 +1,7 @@
 const  { Router } = require("express");
 const router = Router();
 const { getUserByPk } = require("../../../controllers/GET/users");
-const { getUserListS } = require("../../../controllers/GET/lists");
+const { getUserListS } = require("../../../controllers/GET/list");
 
 router.get("/user/:userId", async (req, res) => {
     try {
