@@ -83,7 +83,7 @@ const handleUserBanning = async (id, action)=>{
         }
     }else{
         if(user.banned){
-            user.banned=null;
+            user.banned=false;
             await user.save();
             return {status:200, message:`User "${user.username}" unnbanned`};
         }

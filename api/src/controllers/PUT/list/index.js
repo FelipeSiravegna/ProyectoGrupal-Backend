@@ -113,10 +113,35 @@ const manageListBanning = async(listId, action)=>{
     }
 }
 
+const handleListDeletion = async (listId, action)=>{
+    const deletingList = await List.findByPk(listId);
+    if(!banningList){
+        return{status:404, message:"This list doesn't exists or there was a problem to get it"}
+    }else{
+        if(action==="delete"){
+            if(deletingList.active){
+                const deleteList = await deletingList.update({active:false});
+                await deleteList.save();
+                return{status:200, message:`List (id: ${deletingList.id}) banned`};
+            }else{
+                return{status:403, message:`List (id: ${deletingList.id} is banned already)`};
+            }
+        }else{
+            if(!deletingList.active){
+                const deleteList = await deletingList.update({active:true});
+                await deleteList.save();
+                return{status:200, message:`Deletion of list "${deletingList.name}" prevented`};
+            }else{
+                return{status:403, message:`List "${deletingList.name}" is already active`};
+            }
+        }
+    }
+}
+
 module.exports={
     updateList,
     addMovieToList,
     deleteMovieFromList,
-    manageListBanning
-
+    manageListBanning,
+    handleListDeletion,
 }

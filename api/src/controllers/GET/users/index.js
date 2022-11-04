@@ -62,7 +62,7 @@ const getUserByPassword = async (password)=>{
 const getAvailableUsers = async()=>{
     const users = await User.findAll({
         where:{
-            banned:null,
+            banned:false,
             active:true
         }
     });

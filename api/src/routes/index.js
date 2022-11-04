@@ -28,7 +28,7 @@ const likes = require('./likeRoutes')
 const getSubscription = require("./POST/payment/mercadoPago")
 
 //LISTS
-const getListS = require("./GET/list");
+const getLists = require("./GET/list");
 const updateListData = require("./PUT/list");
 
 //MOVIES
@@ -55,7 +55,7 @@ router.use("/reviews", reviews)
 router.use("/likes", likes)
 
 //LISTS
-router.use("/lists", getListS, updateListData);
+router.use("/lists", getLists, updateListData);
 
 //PAYMENTS
 router.use("/subscribe",getSubscription)

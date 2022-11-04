@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { getBannedLists } = require("../../../controllers/GET/lists");
+const { getBannedLists } = require("../../../../controllers/GET/lists");
 
 router.get ("/banned", async(req, res)=>{
     try{
@@ -12,7 +12,7 @@ router.get ("/banned", async(req, res)=>{
             res.status(404).json({status:404, message:"There aren't banned movie lists"});
         }
         else{
-            res.status(200).json(lists);
+            res.status(200).json(bannedLists);
         }
     }catch(error){
         console.log(error)

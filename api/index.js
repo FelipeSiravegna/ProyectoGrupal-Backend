@@ -96,8 +96,8 @@ conn.sync({ force: false }).then(() => {
   server.listen(3001, async () => {
     console.log("Levantando servidor...");
     await checkGenresInDB();
-    await findOrCreateUser();
     await findOrCreateMovies();
+    await findOrCreateUser();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 

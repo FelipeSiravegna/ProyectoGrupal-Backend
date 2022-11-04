@@ -1,10 +1,10 @@
 const { Router } = require("express");
 const router = Router();
-const { getAllLists, getList } = require("../../../../controllers/GET/lists");
+const { getAvailableLists, getListAndContent } = require("../../../../controllers/GET/lists");
 
 router.get ("/", async(req, res)=>{
     try{
-        const lists = await getAllLists();
+        const lists = await getAvailableLists();
         if(!lists){
             res.status(500).json({status:500, message:"There was a problem while trying to get the movie lists"});
         }
@@ -26,7 +26,7 @@ router.get("/list/:listId", async(req, res)=>{
     try{
         const { listId } = req.params;
         if(listId){
-            const list = await getList(listId);
+            const list = await getListAndContent(listId);
             if(!list){
                 res.status(404).json({status:404, message:"This list doesn't exist"});
             }
