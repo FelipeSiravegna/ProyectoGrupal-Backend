@@ -5,7 +5,7 @@ const getBannedUsers = require("./bannedUsers");
 const router = Router();
 
 
-router.use( "/", getUsers, getUserData, getBannedUsers,  );
+router.use( "/", getUsers, getUserData, getBannedUsers);
 
 
 

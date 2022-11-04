@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { getAvailableLists, getListByPk } = require("../../../../controllers/GET/lists");
+const { getAvailableLists, getListAndContent } = require("../../../../controllers/GET/lists");
 
 router.get ("/", async(req, res)=>{
     try{
@@ -26,8 +26,7 @@ router.get("/list/:listId", async(req, res)=>{
     try{
         const { listId } = req.params;
         if(listId){
-            const list = await getListByPk(listId);
-            console.log(list);
+            const list = await getListAndContent(listId);
             if(!list){
                 res.status(404).json({status:404, message:"This list doesn't exist"});
             }

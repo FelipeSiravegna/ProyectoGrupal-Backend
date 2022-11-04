@@ -1,13 +1,13 @@
 const { Router } = require("express");
 const router = Router();
-const { manageListBanning } = require("../../../controllers/PUT/list");
+const { handleListDeletion} = require("../../../../controllers/PUT/list");
 
 
-router.put("/manageBanning/:listId", async(req, res)=>{
+router.put("/manageDeletion/:listId", async(req, res)=>{
     try{
         const {listId} = req.params;
         const {action} = req.query;
-        const bannedLists = await manageListBanning(listId, action);
+        const bannedLists = await handleListDeletion(listId, action);
         if(!bannedLists){
             res.status(500).json({status:500, message:"There was a problem while trying to get the banned lists"});
         }

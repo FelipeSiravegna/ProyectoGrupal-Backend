@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const router = Router();
 const getBannedLists = require("./banned");
-const getLists = require("./notBanned");
+const getInactiveLists = require("./inactive"); //lists set as deleted
 
-router.use("/admin", getBannedLists, getLists);
+router.use("/", getBannedLists, getInactiveLists);
 
 module.exports = router;

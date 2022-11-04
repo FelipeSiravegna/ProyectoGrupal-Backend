@@ -42,6 +42,12 @@ const getUserByEmail = async (email)=>{
     return user;
 }
 
+const getUserByUsername_Email = async(username,email)=>await User.findOne({
+    where:{
+        username,email
+    }
+});
+
 const getUserByPassword = async (password)=>{
     const user = await User.findOne({
         where:{
@@ -56,7 +62,7 @@ const getUserByPassword = async (password)=>{
 const getAvailableUsers = async()=>{
     const users = await User.findAll({
         where:{
-            banned:null,
+            banned:false,
             active:true
         }
     });
@@ -96,17 +102,18 @@ const getFreeUsers = async ()=> await User.findAll({
 
 
 module.exports={
-    getUserByPk, //info revealing only for admins
+    getUserByPk,
     getAllUserInfo, 
-    getUserById,
+    getUserById, //works wrong after any user is updated. It sucks.
     getAvailableUsers,
-    getAllActiveUsers, //admin purpuses
+    getAllActiveUsers, //admin purposes.
     getUserByUsername,
     getUserByEmail,
-    getUserByPassword, //admin purpuses
-    getBannedUsers, //admin purpuses
-    getDeletedUsers, //admin purpuses
-    getPremiumUsers,
-    getFreeUsers,
+    getUserByUsername_Email,
+    getUserByPassword, //admin purposes.
+    getBannedUsers, //admin purposes.
+    getDeletedUsers, //admin purposes.
+    getPremiumUsers, //admin purposes.
+    getFreeUsers, //admin purposes.
     
 }

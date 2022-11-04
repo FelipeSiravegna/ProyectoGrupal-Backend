@@ -83,7 +83,7 @@ const handleUserBanning = async (id, action)=>{
         }
     }else{
         if(user.banned){
-            user.banned=null;
+            user.banned=false;
             await user.save();
             return {status:200, message:`User "${user.username}" unnbanned`};
         }
@@ -104,8 +104,8 @@ const setUserAsDeleted = async(userId)=>{
             await setAsDeleted.save();
             return {status:200, message:`User "${user.username}" has been disabled.`};
         }else{
-            console.log("This user is disabled");
-            return {status:404, message:`This user "${user.username}" is disabled`};
+            console.log("This user was already disabled");
+            return {status:403, message:`The user "${user.username}" was already disabled`};
         }
     }
 }
@@ -116,13 +116,13 @@ const enableUser = async(userId)=>{
         return {status:404, message:"There was a problem while trying to get the user data for their disabling."};
     }else{
         if(!user.active){
-            console.log("user now disabled");
+            console.log("user now enabled");
             const setAsDeleted = await user.update({active:true});
             await setAsDeleted.save();
             return {status:200, message:`The user "${user.username}" has been enabled`};
         }else{
             console.log("This user is disabled");
-            return {status:404, message:`This user "${user.username}" is enabled`};
+            return {status:403, message:`The user "${user.username}" wasn't disabled`};
         }
     }
 }
@@ -137,7 +137,8 @@ const deleteUser = async(userId)=>{
         //         console.log(`user ${user.username} deleted`);
         //     },10000
         // );
-        const deletion =user.set({deletionId:userDeletion, active:false});
+        // const deletion =await user.set({deletionId:userDeletion, active:false});
+        const deletion = await user.set({ active:false });
         await deletion.save();
         return {status:200, message:`The user ${user.username} is now disabled. It will be deleted within a year.`};
     }else{
