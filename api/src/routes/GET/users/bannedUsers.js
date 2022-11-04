@@ -19,6 +19,7 @@ router.get("/banned",async (req,res)=>{
         console.log(error);
         console.log("___________________________________");
         console.log("ERROR: "+error.message);
+        res.status(500).json({status:500, message:"There was an error while trying to get the banned users"});
     }
 });
 

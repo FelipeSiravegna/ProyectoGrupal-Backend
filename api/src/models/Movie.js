@@ -42,6 +42,10 @@ module.exports = (sequelize) =>{
             },
             saves:{
                 type: DataTypes.INTEGER
+            },
+            active: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: true
             }
         },
         {
