@@ -1,58 +1,48 @@
 const { List, User, Movie } = require("../.././../db");
 
-const getAllLists = async()=>await List.findAll({
-    attributes:["id", "name", "description"],
-    through:{
-        attributes:[]
-    },
-});
+const getListByPk = async(listId)=>await List.findByPk(listId);
 
-const getLists = async ()=>{
-    await List.findAll({
-        where:{
-            active:true,
-            banned:null
-        }
-    })
-}
-
-const getUserListS = async(userId)=>{
-    const userLists = await User.findByPk(userId, {
-        attributes:["id", "username"],
-        through:{
-            attributes:[]
-        },
-        include:{
-            model:List,
-            attributes:["id", "name", "description"],
-            // through:{
-            //     attributes:[]
-            // }
-            where:{
-                active:true
-            }
-        }
-    });
-    return userLists;
-};
-
-const getList = async(listId)=>await List.findByPk(listId, {
-    attributes:["id", "name", "description"],
+const getListWithMovies = async(listId)=>await List.findByPk(listId, {
+    attributes:["id", "name", "description", "active", "banned"],
     through:{
         attributes:[]
     },
     include:{
         model:Movie,
-        attributes:["id", "name", "image"],
+        attributes:["id", "name", "image", "trailer", "active", "banned"],
         through:{
             attributes:[]
         }
     }
 });
 
-const getAllListsAllData = async()=>await List.findAll();
+const getUserLists = async(userId)=>{
+    const userLists = await User.findByPk(userId, {
+        attributes:["id", "username", "image", "active", "banned"],
+        through:{
+            attributes:[]
+        },
+        include:{
+            model:List,
+            where:{
+                active:true
+            },
+            attributes:["id", "name", "description", "active", "banned"],
+            through:{
+                attributes:[]
+            }
+        }
+    });
+    return userLists;
+};
 
-const getListAllData = async(listId)=>await List.findByPk(listId);
+// Admin purposes controllers
+const getAllDataLists = async()=>await List.findAll({
+    exclude:{
+        attributes:["password"],
+        through:{attributes:[]}
+    }
+});
 
 const getBannedLists = async()=>await List.findAll({
     where:{
@@ -60,13 +50,18 @@ const getBannedLists = async()=>await List.findAll({
     }
 });
 
+const getAvailableLists = async()=>await List.findAll({
+    where:{
+        active:true,
+        banned:null
+    }
+});
+
 module.exports={
-    getLists,
-    getUserListS,
-    getAllLists,
-    getList,
-    getAllListsAllData,
-    getListAllData,
-    getBannedLists,
-    
+    getListByPk,
+    getListWithMovies,
+    getUserLists,
+    getAllDataLists, //admin purposes
+    getBannedLists, //admin purposes
+    getAvailableLists,
 }
