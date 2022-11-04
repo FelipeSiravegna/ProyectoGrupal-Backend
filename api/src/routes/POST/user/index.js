@@ -3,7 +3,6 @@ const { getUserByEmail, getUserByUsername } = require("../../../controllers/GET/
 const { createUser, isValidUsername, isValidEmail, isValidPassword,  } = require("../../../controllers/POST/user");
 const router = Router();
 
-
 router.post("/",async( req, res )=>{
     try {
         const { username, email, password }=req.body;
@@ -37,6 +36,5 @@ router.post("/",async( req, res )=>{
         res.status(500).json({status:500, message:"There was an error while trying to create the user"});
     }
 });
-
 
 module.exports = router;

@@ -8,7 +8,6 @@ const getAllUserInfo = async(userId)=>{
             model: List,
             include: Movie
         }
-
     });
     return userData;
 }
@@ -16,7 +15,8 @@ const getAllUserInfo = async(userId)=>{
 const getUserById = async(userId)=>{
     const user = await User.findOne({
         wher:{
-            id:userId
+            id:userId,
+            active:true
         }
     });
     return user;
@@ -25,7 +25,8 @@ const getUserById = async(userId)=>{
 const getUserByUsername = async (username)=>{
     const user = await User.findOne({
         where:{
-            username:username
+            username:username,
+            active:true
         }
     });
     return user;
@@ -34,45 +35,85 @@ const getUserByUsername = async (username)=>{
 const getUserByEmail = async (email)=>{
     const user = await User.findOne({
         where:{
-            email:email
+            email:email,
+            active:true
         }
     });
     return user;
 }
+
+const getUserByUsername_Email = async(username,email)=>await User.findOne({
+    where:{
+        username,email
+    }
+});
 
 const getUserByPassword = async (password)=>{
     const user = await User.findOne({
         where:{
-            password:password
+            password:password,
+            active:true
+
         }
     });
     return user;
 }
 
-const getUsers = async()=>{
+const getAvailableUsers = async()=>{
     const users = await User.findAll({
         where:{
-            banned:null
+            banned:null,
+            active:true
         }
     });
     return users;
 }
 
+const getAllActiveUsers = async()=>await User.findAll({
+    where:{
+        active:true
+    }
+});
+
 const getBannedUsers = async ()=> await User.findAll({
     where:{
-        banned:true
+        banned:true,
+        active:true
+    }
+});
+
+const getDeletedUsers = async ()=>await User.findAll({
+    where:{
+        active:false
+    }
+});
+
+const getPremiumUsers = async ()=>await User.findAll({
+    where:{
+        premium:true
+    }
+});
+
+const getFreeUsers = async ()=> await User.findAll({
+    where:{
+        premium:false
     }
 });
 
 
 module.exports={
     getUserByPk,
-    getAllUserInfo,
-    getUserById,
-    getUsers,
+    getAllUserInfo, 
+    getUserById, //works wrong after any user is updated. It sucks.
+    getAvailableUsers,
+    getAllActiveUsers, //admin purposes.
     getUserByUsername,
     getUserByEmail,
-    getUserByPassword,
-    getBannedUsers,
+    getUserByUsername_Email,
+    getUserByPassword, //admin purposes.
+    getBannedUsers, //admin purposes.
+    getDeletedUsers, //admin purposes.
+    getPremiumUsers, //admin purposes.
+    getFreeUsers, //admin purposes.
     
 }
