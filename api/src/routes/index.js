@@ -25,6 +25,8 @@ const deleteUser = require("./DELETE/user");
 // REVIEWS
 const reviews = require('./reviewRoutes')
 const likes = require('./likeRoutes')
+const banReview = require('./PUT/BanReview');
+const deleteReview = require('./DELETE/Review');
 //start building route trees
 
 //PAYMENTS
@@ -33,6 +35,7 @@ const getSubscription = require("./POST/payment/mercadoPago")
 //LISTS
 // const getListS = require("./GET/lists");
 // const updateListData = require("./PUT/list");
+const deleteList = require('./DELETE/List');
 
 //MOVIES
 router.use('/movies/popular',getMoviesPopular)
@@ -57,12 +60,15 @@ router.use("/user", postUser, putUser);
 
 //REVIEWS
 router.use("/reviews", reviews)
+router.use('/banReview', banReview);
+router.use('/deleteReview', deleteReview);
 
 //LIKES
 router.use("/likes", likes)
 
 //LISTS
 // router.use("/lists", getListS, updateListData);
+router.use('/deleteList', deleteList);
 
 //PAYMENTS
 router.use("/subscribe",getSubscription)
