@@ -30,30 +30,35 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, List, Actor, Genre, Movies ,Director,Review } = sequelize.models;
+const { User, List, Actor, Genre, Movie ,Director,Review, Like } = sequelize.models;
 
 // Relaciones
-User.belongsToMany(List, {through: "user_list", timestamps:false});
-List.belongsToMany(User, {through: "user_list", timestamps:false});
+User.hasMany(List);
+List.belongsTo(User);
 
-Movies.belongsToMany(Genre,{through:"movie_genres",timestamps:false})
-Genre.belongsToMany(Movies,{through:"movie_genres",timestamps:false})
+Movie.belongsToMany(Genre,{through:"movie_genres",timestamps:false})
+Genre.belongsToMany(Movie,{through:"movie_genres",timestamps:false})
 
-Actor.belongsToMany(Movies,{through:"actor_on_movies",timestamps:false})
-Movies.belongsToMany(Actor,{through:"actor_on_movies",timestamps:false})
+Actor.belongsToMany(Movie,{through:"actor_on_movies",timestamps:false})
+Movie.belongsToMany(Actor,{through:"actor_on_movies",timestamps:false})
 
-Director.belongsToMany(Movies,{through:"director_movies",timestamps:false})
-Movies.hasOne(Director,{through:"director_movies",timestamps:false})
+Director.hasMany(Movie)
+Movie.belongsTo(Director)
 
-List.belongsToMany(Movies,{through:"movies_on_list",timestamps:false})
-Movies.belongsToMany(List,{through:"movies_on_list",timestamps:false})
+List.belongsToMany(Movie,{through:"movies_on_list",timestamps:false})
+Movie.belongsToMany(List,{through:"movies_on_list",timestamps:false})
 
-Review.hasOne(Movies)
-Movies.hasMany(Review)
-
+Movie.hasMany(Review)
+Review.belongsTo(Movie)
 
 User.hasMany(Review)
 Review.belongsTo(User)
+
+User.hasMany(Like)
+Like.belongsTo(User)
+
+Review.hasMany(Like)
+Like.belongsTo(Review)
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

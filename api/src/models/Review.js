@@ -13,12 +13,12 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      likes: {
-        type: DataTypes.INTEGER
-      }
-    },
-    {
-      timeStamps: false,
+      active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
     }
-  )
+  },{
+    timeStamps: false,
+  }
+)
 };
