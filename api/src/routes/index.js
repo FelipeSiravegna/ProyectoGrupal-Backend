@@ -26,6 +26,7 @@ const likes = require('./likeRoutes')
 
 //PAYMENTS
 const getSubscription = require("./POST/payment/mercadoPago")
+const responseMP = require("./POST/payment/responseMP")
 
 //LISTS
 // const getListS = require("./GET/lists");
@@ -60,5 +61,6 @@ router.use("/likes", likes)
 
 //PAYMENTS
 router.use("/subscribe",getSubscription)
+router.use("/responseMP",responseMP)
 
 module.exports = router;

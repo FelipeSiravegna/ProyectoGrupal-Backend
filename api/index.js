@@ -63,12 +63,12 @@ const findOrCreateMovies = async () => {
 
 const findOrCreateUser = async () => {
   User.findOrCreate({
-    where: {username:"Usuario1", email:"example@example.com", password:"passWord$2"}
+    where: {username:"Usuario1", email:"test_user_51507072@testuser.com", password:"passWord$2"}
   })
 }
 
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(3001, async () => {
     console.log("Levantando servidor...");
     await checkGenresInDB();

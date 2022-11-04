@@ -155,8 +155,8 @@ const cancelDeletion = async(userId, deletionId)=>{
     console.log("deletion canceled.");
 }
 
-const handlePremium = async(userId)=>{
-    const user = await getUserByPk(userId);
+const handlePremium = async(email)=>{
+    const user = await getUserByEmail(email);
     if(!user){
         return{status:404, message:"User not found."}
     }else{
