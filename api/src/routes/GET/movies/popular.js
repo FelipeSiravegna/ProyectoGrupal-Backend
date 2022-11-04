@@ -2,8 +2,6 @@ const { Router } = require("express");
 const router = Router();
 const {DB_Movies} = require('../../../controllers/GET/movies/popular.js')
 
-
-
 router.get('/',async (req,res)=>{
     let {page} = req.query
     if (page!=undefined) {page=(page-1)*10}
@@ -14,6 +12,5 @@ router.get('/',async (req,res)=>{
         res.status(404).send(error.message)
     }
 })
-
 
 module.exports= router;
