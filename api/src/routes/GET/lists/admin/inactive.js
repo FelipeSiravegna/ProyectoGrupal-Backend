@@ -4,7 +4,7 @@ const { getInactiveLists } = require("../../../../controllers/GET/lists");
 
 router.get ("/inactive", async(req, res)=>{
     try{
-        const bannedLists = await getInactiveLists();
+        const inactiveLists = await getInactiveLists();
         if(!bannedLists){
             res.status(500).json({status:500, message:"There was a problem while trying to get the inactive movie lists"});
         }
