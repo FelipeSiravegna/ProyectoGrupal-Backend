@@ -3,10 +3,18 @@ const router = Router();
 const {searchDB} = require('../../../controllers/GET/movies/search.js')
 
 router.get('/',async (req,res)=>{
-    const {name} = req.query
+    const {name,actor,director,genres,offset} = req.query
+    let {page=1} = req.query
+    if (page!=undefined) {page=(page-1)*10}
     try {
-        const DB = await searchDB(name)
-        res.status(200).json(DB)
+        const DB = await searchDB(name,actor,director,genres,page)
+        if (offset==true){
+            const envio = {"count":DB.count,"rows":DB.rows.slice(page,page+1)}
+        res.status(200).json(envio)
+        }
+        //console.log('cantidad',json(DB[0]))
+        else {const envio = {"count":DB.count,"rows":DB.rows.slice(page,page+10)}
+        res.status(200).json(envio)}
     } catch (error) {
         res.status(404).send(error.message)        
     }

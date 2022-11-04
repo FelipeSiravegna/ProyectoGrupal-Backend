@@ -13,6 +13,7 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
+
       active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
