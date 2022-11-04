@@ -28,8 +28,8 @@ const likes = require('./likeRoutes')
 const getSubscription = require("./POST/payment/mercadoPago")
 
 //LISTS
-const getListS = require("./GET/list");
-const updateListData = require("./PUT/list");
+// const getListS = require("./GET/lists");
+// const updateListData = require("./PUT/list");
 
 //MOVIES
 router.use('/movies/popular',getMoviesPopular)
@@ -56,7 +56,7 @@ router.use("/reviews", reviews)
 router.use("/likes", likes)
 
 //LISTS
-router.use("/lists", getListS, updateListData);
+// router.use("/lists", getListS, updateListData);
 
 //PAYMENTS
 router.use("/subscribe",getSubscription)
