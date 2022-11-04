@@ -13,6 +13,9 @@ const nowPlaying = require('./GET/NowPlaying/');
 const deleteMovie = require('./DELETE/Movie');
 const deleteDirector = require('./DELETE/Director');
 const deleteActor = require('./DELETE/Actor');
+const banMovie = require('./PUT/BanMovie');
+const banActor = require('./PUT/BanActor');
+const banDirector = require('./PUT/BanDirector');
 //USERS
 const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
@@ -43,6 +46,9 @@ router.use('/nowPlaying', nowPlaying);
 router.use('/deleteMovie', deleteMovie);
 router.use('/deleteDirector', deleteDirector);
 router.use('/deleteActor', deleteActor);
+router.use('/banMovie', banMovie);
+router.use('/banActor', banActor);
+router.use('/banDirector', banDirector);
 
 //USERS
 router.use("/users", getUsers);
