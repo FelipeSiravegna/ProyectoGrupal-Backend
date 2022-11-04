@@ -179,8 +179,8 @@ const handlePremium = async(userId)=>{
 }
 
 const setUserAsAdmin = async(userId, password)=>{
-    const key = "123";
-    if(password!==key){
+    console.log(HANDLE_ADMIN_PASSWORD);
+    if(password!==HANDLE_ADMIN_PASSWORD){
         return{status:400, message:`wrong password`};
     }else{
         const user = await getUserByPk(userId);
@@ -194,8 +194,7 @@ const setUserAsAdmin = async(userId, password)=>{
 };
 
 const setUserAsPublic = async(userId, password)=>{
-    const key = "123";
-    if(password!==key){
+    if(password!==HANDLE_ADMIN_PASSWORD){
         return{status:400, message:`wrong password`};
     }else{
         const user = await getUserByPk(userId);
