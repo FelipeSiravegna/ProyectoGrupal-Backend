@@ -30,6 +30,7 @@ module.exports = (sequelize) => {
         },
         banned:{
             type:DataTypes.BOOLEAN,
+            defaultValue:false
         }
     }, {
         timestamps: false,
