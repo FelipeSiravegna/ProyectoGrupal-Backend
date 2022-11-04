@@ -1,5 +1,6 @@
 const { getUserByUsername, getUserByEmail, getUserByPk } = require("../../GET/users");
 const {subscriptionMail} = require('../Mail');
+const { HANDLE_ADMIN_PASSWORD }=process.env;
 
 const checkNewUsername = async(currentUsername, newUsername)=>{
     const existingUsername = await getUserByUsername(newUsername);
