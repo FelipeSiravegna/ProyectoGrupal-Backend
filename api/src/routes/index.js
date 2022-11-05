@@ -27,6 +27,7 @@ const reviews = require('./reviewRoutes')
 const likes = require('./likeRoutes')
 const banReview = require('./PUT/BanReview');
 const deleteReview = require('./DELETE/Review');
+const updateReview = require('./PUT/UpdateReview');
 //start building route trees
 
 //PAYMENTS
@@ -63,6 +64,7 @@ router.use("/user", postUser, putUser);
 router.use("/reviews", reviews)
 router.use('/banReview', banReview);
 router.use('/deleteReview', deleteReview);
+router.use('/updateReview', updateReview);
 
 //LIKES
 router.use("/likes", likes)
