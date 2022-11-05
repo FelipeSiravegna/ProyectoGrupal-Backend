@@ -1,5 +1,6 @@
 const { getUserByUsername, getUserByEmail, getUserByPk } = require("../../GET/users");
 const {subscriptionMail} = require('../Mail');
+const { HANDLE_ADMIN_PASSWORD }=process.env;
 
 const checkNewUsername = async(currentUsername, newUsername)=>{
     const existingUsername = await getUserByUsername(newUsername);
@@ -178,6 +179,35 @@ const handlePremium = async(email)=>{
     }
 }
 
+const setUserAsAdmin = async(userId, password)=>{
+    console.log(HANDLE_ADMIN_PASSWORD);
+    if(password!==HANDLE_ADMIN_PASSWORD){
+        return{status:400, message:`wrong password`};
+    }else{
+        const user = await getUserByPk(userId);
+        if(!user.active)return{status:403, message:`This user is inactive`};
+        if(user.banned)return{status:403, message:`This user is banned`};
+        if(user.admin)return{status:403, message:`The user "${user.username}" is already administrator`};
+        const setAsAdmin = await user.update({admin:true});
+        await setAsAdmin.save();
+        return{status:200, message:`The user "${user.username}" is now an administrator`};
+    };
+};
+
+const setUserAsPublic = async(userId, password)=>{
+    if(password!==HANDLE_ADMIN_PASSWORD){
+        return{status:400, message:`wrong password`};
+    }else{
+        const user = await getUserByPk(userId);
+        if(!user.active)return{status:403, message:`This user is inactive`};
+        if(user.banned)return{status:403, message:`This user is banned`};
+        if(!user.admin)return{status:403, message:`The user "${user.username}" is already public`};
+        const setAsPublic = await user.update({admin:false});
+        await setAsPublic.save();
+        return{status:200, message:`The user "${user.username}" is now a public user`};
+    };
+};
+
 module.exports = {
     checkNewUsername,
     checkNewEmail,
@@ -188,5 +218,7 @@ module.exports = {
     deleteUser,
     cancelDeletion,
     handlePremium,
+    setUserAsAdmin,
+    setUserAsPublic,
 
 }
