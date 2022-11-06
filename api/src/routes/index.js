@@ -34,6 +34,9 @@ const updateReview = require('./PUT/UpdateReview');
 const getSubscription = require("./POST/payment/mercadoPago")
 const responseMP = require("./POST/payment/responseMP")
 
+//DIRECTORS
+const getActiveDirectors = require('./GET/Directors');
+
 //LISTS
 // const getListS = require("./GET/lists");
 // const updateListData = require("./PUT/list");
@@ -68,6 +71,9 @@ router.use('/updateReview', updateReview);
 
 //LIKES
 router.use("/likes", likes)
+
+//DIRECTORS
+router.use('/directors', getActiveDirectors);
 
 //LISTS
 // router.use("/lists", getListS, updateListData);
