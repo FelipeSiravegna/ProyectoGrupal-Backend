@@ -78,7 +78,6 @@ const getAllActiveUsers = async()=>await User.findAll({
 const getBannedUsers = async ()=> await User.findAll({
     where:{
         banned:true,
-        active:true
     }
 });
 
