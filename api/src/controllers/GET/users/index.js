@@ -69,6 +69,11 @@ const getAvailableUsers = async()=>{
     return users;
 }
 
+const getAllUsers = async () => {
+    const users = await User.findAll();
+    return users;
+}
+
 const getAllActiveUsers = async()=>await User.findAll({
     where:{
         active:true
@@ -114,5 +119,5 @@ module.exports={
     getDeletedUsers, //admin purposes.
     getPremiumUsers, //admin purposes.
     getFreeUsers, //admin purposes.
-    
+    getAllUsers
 }

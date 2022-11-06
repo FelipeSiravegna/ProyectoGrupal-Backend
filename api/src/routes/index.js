@@ -27,6 +27,7 @@ const bannedUsers = require('./GET/users/allBannedUsers');
 const deletedUsers = require('./GET/users/allDeletedUsers');
 const premiumUsers = require('./GET/users/allPremiumUsers');
 const freeUsers = require('./GET/users/allFreeUsers');
+const allUsers = require('./GET/users/allUsers');
 
 // REVIEWS
 const reviews = require('./reviewRoutes')
@@ -74,6 +75,7 @@ router.use('/bannedUsers', bannedUsers);
 router.use('/deletedUsers', deletedUsers);
 router.use('/premiumUsers', premiumUsers);
 router.use('/freeUsers', freeUsers);
+router.use('/allUsers', allUsers);
 
 //REVIEWS
 router.use("/reviews", reviews)
