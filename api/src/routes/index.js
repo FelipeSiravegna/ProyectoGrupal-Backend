@@ -21,6 +21,7 @@ const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
 const deleteUser = require("./DELETE/user");
+const availableUsers = require('./GET/users/allAvailableUsers');
 
 // REVIEWS
 const reviews = require('./reviewRoutes')
@@ -62,6 +63,7 @@ router.use('/banDirector', banDirector);
 router.use("/users", getUsers);
 router.use("/user", postUser, putUser, deleteUser);
 router.use("/user", postUser, putUser);
+router.use('/availableUsers', availableUsers);
 
 //REVIEWS
 router.use("/reviews", reviews)
