@@ -68,7 +68,7 @@ const findOrCreateUser = async () => {
 }
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(3001, async () => {
     console.log("Levantando servidor...");
     await checkGenresInDB();
