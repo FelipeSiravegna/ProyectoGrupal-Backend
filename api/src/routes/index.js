@@ -22,9 +22,8 @@ const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
 const deleteUser = require("./DELETE/user");
-<<<<<<< HEAD
+
 const userLogin = require("./MIDDLEWARES/JWT/Index")
-=======
 const availableUsers = require('./GET/users/allAvailableUsers');
 const activeUsers = require('./GET/users/allActiveUsers');
 const bannedUsers = require('./GET/users/allBannedUsers');
@@ -32,7 +31,6 @@ const deletedUsers = require('./GET/users/allDeletedUsers');
 const premiumUsers = require('./GET/users/allPremiumUsers');
 const freeUsers = require('./GET/users/allFreeUsers');
 const allUsers = require('./GET/users/allUsers');
->>>>>>> develop
 
 // REVIEWS
 const reviews = require('./reviewRoutes')
