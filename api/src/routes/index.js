@@ -33,6 +33,8 @@ const premiumUsers = require('./GET/users/allPremiumUsers');
 const freeUsers = require('./GET/users/allFreeUsers');
 const allUsers = require('./GET/users/allUsers');
 
+const makePremium = require('./PUT/user/changePremium')
+
 // REVIEWS
 const reviews = require('./reviewRoutes')
 const likes = require('./likeRoutes')
@@ -83,6 +85,7 @@ router.use('/deletedUsers', deletedUsers);
 router.use('/premiumUsers', premiumUsers);
 router.use('/freeUsers', freeUsers);
 router.use('/allUsers', allUsers);
+router.use('/premium',makePremium)
 
 //REVIEWS
 router.use("/reviews", reviews)
