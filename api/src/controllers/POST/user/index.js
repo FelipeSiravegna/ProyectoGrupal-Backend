@@ -4,10 +4,7 @@ const createUser = async(username, email, password)=>{
         User.findOrCreate({
             where:{
                 username, email, password
-            },
-            // defaults:{
-            //     username, email, password
-            // }
+            }
         });
 }
 
