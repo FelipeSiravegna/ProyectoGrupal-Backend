@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const {DB_Movies} = require('../../../controllers/GET/movies/popular.js')
+const {DB_Movies} = require('../../../controllers/GET/movies/rating')
 
 router.get('/',async (req,res)=>{
     let {page,ord} = req.query
