@@ -1,4 +1,5 @@
 const { getUserByUsername, getUserByEmail, getUserByPk } = require("../../GET/users");
+const {subscriptionMail} = require('../Mail');
 const { HANDLE_ADMIN_PASSWORD }=process.env;
 
 const checkNewUsername = async(currentUsername, newUsername)=>{
@@ -155,8 +156,8 @@ const cancelDeletion = async(userId, deletionId)=>{
     console.log("deletion canceled.");
 }
 
-const handlePremium = async(userId)=>{
-    const user = await getUserByPk(userId);
+const handlePremium = async(email)=>{
+    const user = await getUserByEmail(email);
     if(!user){
         return{status:404, message:"User not found."}
     }else{
@@ -170,6 +171,7 @@ const handlePremium = async(userId)=>{
             // }, 10000);
             const setAsPremium = await user.update({premium:true});
             await setAsPremium.save();
+            subscriptionMail(user.email);
             return{status:200, message:`User "${user.username} is now premium.`};
         }else{
             return{status:200, message:`User "${user.username} is already premium.`};

@@ -27,27 +27,31 @@ module.exports = (sequelize) =>{
             type: DataTypes.STRING
         },
 
-        length:{
-            type: DataTypes.INTEGER
+            length:{
+                type: DataTypes.INTEGER
+            },
+            rating:{
+                type: DataTypes.FLOAT
+            },
+            trailer:{
+                type: DataTypes.STRING
+            },
+            popularity: {
+                type: DataTypes.FLOAT
+            },
+            saves:{
+                type: DataTypes.INTEGER
+            },
+            active: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: true
+            },
+            banned:{
+                type:DataTypes.BOOLEAN,
+                defaultValue: false
+            }
         },
-        rating:{
-            type: DataTypes.FLOAT
-        },
-        trailer:{
-            type: DataTypes.STRING
-        },
-        popularity: {
-            type: DataTypes.FLOAT
-        },
-        saves:{
-            type: DataTypes.INTEGER
-        },
-        active: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: true
-        }
-    },
-    {
-        timestamps: false
-    });
+        {
+            timestamps: false
+        })
 };

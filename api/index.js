@@ -63,6 +63,9 @@ const findOrCreateMovies = async () => {
 }
 
 const findOrCreateUser = async () => {
+  User.findOrCreate({
+    where: {username:"Usuario1", email:"test_user_51507072@testuser.com", password:"passWord$2"}
+  })
   const userExample1 = await User.findOrCreate({
     where: {username:"Usuario1", email:"example@example.com", password:"passWord$1"}
   });
@@ -104,5 +107,4 @@ conn.sync({ force: false }).then(() => {
     await findOrCreateUser();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
-
 });

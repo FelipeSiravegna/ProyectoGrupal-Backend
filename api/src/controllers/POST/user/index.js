@@ -3,9 +3,6 @@ const { User } = require("../../../db");
 const createUser = async(username, email, password)=>{
         User.findOrCreate({
             where:{
-                username, email
-            },
-            defaults:{
                 username, email, password
             }
         });

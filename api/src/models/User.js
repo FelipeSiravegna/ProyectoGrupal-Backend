@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
             allowNull:false,
             unique:true,
             validate:{
-                len:[7, 30],
+                len:[7, 31],
                 isEmail:true
             }
         },
@@ -62,7 +62,7 @@ module.exports = (sequelize) => {
         },
         banned:{
             type:DataTypes.BOOLEAN,
-            defaultValue:false
+            defaultValue: false
         },
         active: {
             type: DataTypes.BOOLEAN,
@@ -79,4 +79,3 @@ module.exports = (sequelize) => {
         timestamps: false,
     });
 };
-

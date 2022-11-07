@@ -1,25 +1,30 @@
 const  { Router } = require("express");
 const router = Router();
+const JWT = require("jsonwebtoken")
 const { getUserByPk } = require("../../../controllers/GET/users");
-const { getUserListS } = require("../../../controllers/GET/lists");
+const { getUserListS } = require("../../../controllers/GET/list");
+const verifyToken = require("../../MIDDLEWARES/verify")
 
-router.get("/user/:userId", async (req, res) => {
-    try {
-        console.log("GET USER DATA");
-        const {userId}=req.params;
-        const user = await getUserByPk(userId);
-        if(user){
-            res.status(200).json(user);
-        }else{
-            res.status(404).json({status:404, message:"This user doesn't exist"});
-        }
-    } catch(error) {
-        console.log(error);
-        console.log("______________________");
-        console.log(error.message);
-        res.status(500).json({ status:500, message:"There was an error while trying to get the user" });
-    }
-});
+router.get("/user/",verifyToken, async (req, res) => {    
+        JWT.verify(req.token,"secretkey",async (err,authData)=>{
+            if (err){
+                res.sendStatus(403)
+            } else {
+                try {
+                    console.log("GET USER DATA");
+                    //const {userId}=req.params;
+                    const user = await getUserByPk(authData.user[0].id);
+                    if(user){
+                        res.status(200).json(user);
+                    }else{
+                        res.status(404).json({status:404, message:"This user doesn't exist"});
+                    }
+                } catch(error) {
+                    console.log(error);
+                    console.log("______________________");
+                    console.log(error.message);
+                    res.status(500).json({ status:500, message:"There was an error while trying to get the user" });
+}}})});
 
 router.get("/user/:userId/lists", async(req, res)=>{
     const { userId } = req.params;
@@ -44,5 +49,7 @@ router.get("/user/:userId/lists", async(req, res)=>{
         res.status(500).json({status:500, message:"There was a problem while loading the user data"});
     }
 });
+
+module.exports = router;
 
 module.exports = router;
