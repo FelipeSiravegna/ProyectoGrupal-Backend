@@ -13,12 +13,16 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      likes: {
-        type: DataTypes.INTEGER
+      active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+      },
+      banned:{
+        type:DataTypes.BOOLEAN,
+        defaultValue: false
       }
-    },
-    {
-      timeStamps: false,
-    }
-  )
+  },{
+    timeStamps: false,
+  }
+)
 };

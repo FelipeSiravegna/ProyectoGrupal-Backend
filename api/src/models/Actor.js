@@ -12,8 +12,16 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-    }},{
-        timestamps:false
-    }
-  );
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
+    banned:{
+      type:DataTypes.BOOLEAN,
+  }
+  },{
+      timestamps:false
+  }
+);
 };

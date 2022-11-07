@@ -1,11 +1,11 @@
 const  { Router } = require("express");
-const getUsers=require("./users");
-const getUser=require("./user");
+const getUsers=require("./users.js");
+const getUserData=require("./user.js");
 const getBannedUsers = require("./bannedUsers");
 const router = Router();
 
 
-router.use( "/", getUsers, getUser, getBannedUsers );
+router.use( "/", getUsers, getUserData, getBannedUsers);
 
 
 
