@@ -21,7 +21,7 @@ const createList = async(name, description, userId)=>{
         return validation;
     }else{
         const userID = parseInt(userId);
-        const userLists = await getUserLists(userId);
+        const userLists = await getUserListS(userId);
         // userLists contains the user data and its movie lists
         if(!userLists.id){
             return{status:404, message:`This user doesn't exist or we had a problem to load the user data`};
