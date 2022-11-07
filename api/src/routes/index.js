@@ -51,8 +51,7 @@ const responseMP = require("./POST/payment/responseMP")
 const getActiveDirectors = require('./GET/Directors');
 
 //LISTS
-// const getListS = require("./GET/lists");
-// const updateListData = require("./PUT/list");
+const postList = require("./POST/list");
 const deleteList = require('./DELETE/List');
 
 //MOVIES
@@ -100,7 +99,7 @@ router.use("/likes", likes)
 router.use('/directors', getActiveDirectors);
 
 //LISTS
-// router.use("/lists", getListS, updateListData);
+router.use("/lists", postList);
 router.use('/deleteList', deleteList);
 
 //PAYMENTS
