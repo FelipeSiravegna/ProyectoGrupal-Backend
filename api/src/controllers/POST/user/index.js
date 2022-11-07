@@ -3,11 +3,11 @@ const { User } = require("../../../db");
 const createUser = async(username, email, password)=>{
         User.findOrCreate({
             where:{
-                username, email
-            },
-            defaults:{
                 username, email, password
-            }
+            },
+            // defaults:{
+            //     username, email, password
+            // }
         });
 }
 
@@ -20,7 +20,7 @@ const noDobleSpaces = (string)=>{
       if(stringToValidate[s+1]=== " " && nextChar===stringToValidate[s]){
         cut=true;
       }
-      a++
+      s++
     }
     if(cut)return true;
   }
