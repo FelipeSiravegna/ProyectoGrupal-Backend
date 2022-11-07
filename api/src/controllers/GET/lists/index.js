@@ -67,5 +67,5 @@ module.exports={
     getListAndContent,
     getBannedLists, //admin purposes
     getInactiveLists, //admin purposes
-
+    getUserLists
 }
