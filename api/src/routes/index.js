@@ -1,6 +1,7 @@
 // Import routes
 const { Router } = require("express");
 const router = Router();
+
 //MOVIES
 const getMoviesPopular = require('./GET/movies/popular.js')
 const getAllMovies = require('./GET/movies/allMovies')
@@ -21,6 +22,8 @@ const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
 const deleteUser = require("./DELETE/user");
+
+const userLogin = require("./MIDDLEWARES/JWT/Index")
 const availableUsers = require('./GET/users/allAvailableUsers');
 const activeUsers = require('./GET/users/allActiveUsers');
 const bannedUsers = require('./GET/users/allBannedUsers');
@@ -66,6 +69,8 @@ router.use('/banActor', banActor);
 router.use('/banDirector', banDirector);
 
 //USERS
+
+router.use("/login",userLogin)
 router.use("/users", getUsers);
 router.use("/user", postUser, putUser, deleteUser);
 router.use("/user", postUser, putUser);
