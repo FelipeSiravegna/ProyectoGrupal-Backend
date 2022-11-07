@@ -4,6 +4,7 @@ const router = Router();
 
 //MOVIES
 const getMoviesPopular = require('./GET/movies/popular.js')
+const getMoviesRating = require('./GET/movies/rating')
 const getAllMovies = require('./GET/movies/allMovies')
 const searchMovies = require('./GET/movies/search')
 const getMovieDetail = require('./GET/MovieDetail/index');
@@ -54,6 +55,7 @@ const deleteList = require('./DELETE/List');
 
 //MOVIES
 router.use('/movies/popular',getMoviesPopular)
+router.use('/movies/rating',getMoviesRating)
 router.use('/movies/all',getAllMovies)
 router.use('/movies/search',searchMovies)
 router.use('/detail', getMovieDetail);
