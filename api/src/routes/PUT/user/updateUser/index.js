@@ -1,9 +1,9 @@
 const  { Router } = require("express");
 const router = Router();
 // const bannUser = require("./bannUser");
-const banningAndPremium = require("./admin/");
-const updateUser = require("./public");
+const admin = require("./admin/");
+const public = require("./public");
 
-router.use("/", updateUser, banningAndPremium );
+router.use("/", public, admin );
 
 module.exports = router

@@ -15,12 +15,11 @@ const noDobleSpaces = (string)=>{
     const stringToValidate = string.split("");
     let s = 0;
     let cut;
-    let nextChar=" ";
     while(s<stringToValidate.length&&!cut){
-      if(stringToValidate[s+1]=== " " && nextChar===stringToValidate[s]){
+      if(stringToValidate[s+1]===" " && stringToValidate[s]===" "){
         cut=true;
       }
-      a++
+      s++
     }
     if(cut)return true;
   }
