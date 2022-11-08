@@ -12,7 +12,7 @@ router.put("/manageBanning/:listId", async(req, res)=>{
             res.status(500).json({status:500, message:"There was a problem while trying to get the banned lists"});
         }
         else{
-            res.status(bannedLists.status).json(bannedLists.message);
+            res.status(bannedLists.status).json(bannedLists);
         }
     }catch(error){
         console.log(error)
