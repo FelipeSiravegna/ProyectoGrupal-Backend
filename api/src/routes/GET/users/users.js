@@ -51,5 +51,3 @@ router.get("/user/:userId/lists", async(req, res)=>{
 });
 
 module.exports = router;
-
-module.exports = router;

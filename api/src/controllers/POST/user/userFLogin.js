@@ -4,13 +4,14 @@ const {Op} = require('sequelize')
 
 const userVerify = async (identificator,pass) => {
     const user = await User.findAll({
-        where:{[Op.or]:[{username:identificator},{email:identificator}]
-                ,password:pass},
+        where:{
+            [Op.or]:[{username:identificator},{email:identificator}],
+            password:pass
+        },
         attributes:["username","id"],
-    })
-    return user
-}
+    });
+    return user;
+};
 
-
-module.exports=userVerify
+module.exports=userVerify;
 

@@ -80,11 +80,12 @@ const getAllActiveUsers = async()=>await User.findAll({
     }
 });
 
-const getBannedUsers = async ()=> await User.findAll({
+const getBannedUsers = async ()=> {return await User.findAll({
     where:{
         banned:true,
     }
 });
+}
 
 const getDeletedUsers = async ()=>await User.findAll({
     where:{

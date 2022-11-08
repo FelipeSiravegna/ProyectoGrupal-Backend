@@ -3,7 +3,7 @@ const  { Router } = require("express");
 const router = Router(); 
 const userVerify = require("../../../controllers/POST/user/userFLogin")
 
-router.post("/",async (req,res,next)=>{
+router.get("/",async (req,res,)=>{
     const {identificator,pass} = req.body
     try {
         const user = await userVerify(identificator,pass)
@@ -15,7 +15,10 @@ router.post("/",async (req,res,next)=>{
             res.status(404).json("Usuario o Contraseña incorrectos")
         }
     } catch (error) {
-        res.status(404).send(error.message)
+        console.log(error);
+        console.log("___________________");
+        console.log(error.message);
+        res.status(500).json({status:500, message:"There was a problem while trying to get the user info"});
     }
 })
 
