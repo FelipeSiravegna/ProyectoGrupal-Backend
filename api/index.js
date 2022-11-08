@@ -1,6 +1,6 @@
 const server = require('./src/app');
 const { conn, User, Genre, Movie, Actor, Director } = require('./src/db');
-const {API_KEY, PORT} = process.env;
+const { API_KEY, PORT } = process.env;
 const axios = require('axios');
 const movieList = require('./MOVIES.json');
 
@@ -9,14 +9,14 @@ const checkGenresInDB = async () => {
 
   genresAPI.data.genres.forEach((genre) => {
     Genre.findOrCreate({
-      where: {id: genre.id, name: genre.name}
+      where: { id: genre.id, name: genre.name }
     })
   })
 }
 
 const findOrCreateMovies = async () => {
   let newDirector = null;
-  for(let i = 0; i < movieList.length; i++){
+  for (let i = 0; i < movieList.length; i++) {
     let newMovie = await Movie.findOrCreate({
       where: {
         name: movieList[i].name,
@@ -38,15 +38,15 @@ const findOrCreateMovies = async () => {
         name: movieList[i].fullCast.director.name
       }
     })
-    
+
     await newDirector[0].addMovie(newMovie[0]);
 
     //RELACION ACTOR - MOVIE
-    for(let j = 0; j < movieList[i].fullCast.cast.length; j++){
+    for (let j = 0; j < movieList[i].fullCast.cast.length; j++) {
       let actorData = movieList[i].fullCast.cast[j]
       const newActor = await Actor.findOrCreate({
-        where:{
-          name: actorData.name 
+        where: {
+          name: actorData.name
         }
       })
 
@@ -54,8 +54,8 @@ const findOrCreateMovies = async () => {
     }
 
     //RELACION MOVIE - GENRE
-    const genres = await Genre.findAll({where: {id: movieList[i].genres}});
-    for(let i = 0; i < genres.length; i++){
+    const genres = await Genre.findAll({ where: { id: movieList[i].genres } });
+    for (let i = 0; i < genres.length; i++) {
       await genres[i].addMovie(newMovie[0]);
     }
   }
@@ -63,12 +63,12 @@ const findOrCreateMovies = async () => {
 
 const findOrCreateUser = async () => {
   User.findOrCreate({
-    where: {username:"Usuario1", email:"test_user_51507072@testuser.com", password:"passWord$2"}
+    where: { username: "Usuario1", email: "test_user_51507072@testuser.com", password: "passWord$2" }
   })
 }
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(PORT, async () => {
     console.log("Levantando servidor...");
     await checkGenresInDB();
