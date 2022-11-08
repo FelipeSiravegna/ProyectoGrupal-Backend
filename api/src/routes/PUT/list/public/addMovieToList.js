@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const { addMovieToList, deleteMovieFromList } = require("../../../../controllers/PUT/list");
 
-router.put ("/list/:listId/", async(req, res)=>{
+router.put ("/list/:listId", async(req, res)=>{
     try{
         const {listId}= req.params;
         const {add, remove, movieId} = req.query;

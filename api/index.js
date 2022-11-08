@@ -62,49 +62,46 @@ const findOrCreateMovies = async () => {
   }
 }
 
-// const findOrCreateUser = async () => {
-//   User.findOrCreate({
-//     where: {username:"Usuario1", email:"test_user_51507072@testuser.com", password:"passWord$2"}
-//   })
-//   const userExample1 = await User.findOrCreate({
-//     where: {username:"Usuario1", email:"example@example.com", password:"passWord$1"}
-//   });
-//   const userExample2 = await User.findOrCreate({
-//     where:{username:"Usuario2", email:"example2@example.com", password:"pass2Word$"}
-//   });
-//   if(userExample1[1]===true){
-//     const movies = await Movie.findAll();
-//     const listExample1 = await List.findOrCreate({
-//       where:{
-//         name:"A marvellous list",
-//       },
-//       defaults:{
-//         name:"A marvellous list",
-//         description:"A descriptively descriptive description",
-//       }
-//     });
-//     const listExample2 = await List.findOrCreate({
-//       where:{
-//         name:"Another marvellous list",
-//       },
-//       defaults:{
-//         name:"Another marvellous list",
-//         description:"A description less descriptively descriptive ",
-//       }
-//     });
-//     await listExample1[0].setUser(userExample1[0]);
-//     await listExample2[0].setUser(userExample1[0]);
-//     await listExample1[0].addMovies([movies[0], movies[1], movies[2]]);
-//   }
-// }
+const findOrCreateUser = async () => {
+  const userExample1 = await User.findOrCreate({
+    where:{username:"Usuario1", email:"example@example.com", password:"passWord$1"}
+  });
+  const userExample2 = await User.findOrCreate({
+    where:{username:"Usuario2", email:"example2@example.com", password:"pass2Word$"}
+  });
+  if(userExample1[1]===true){
+    const movies = await Movie.findAll();
+    const listExample1 = await List.findOrCreate({
+      where:{
+        name:"A marvellous list",
+      },
+      defaults:{
+        name:"A marvellous list",
+        description:"A descriptively descriptive description",
+      }
+    });
+    const listExample2 = await List.findOrCreate({
+      where:{
+        name:"Another marvellous list",
+      },
+      defaults:{
+        name:"Another marvellous list",
+        description:"A description less descriptively descriptive ",
+      }
+    });
+    await listExample1[0].setUser(userExample1[0]);
+    await listExample2[0].setUser(userExample1[0]);
+    await listExample1[0].addMovies([movies[0], movies[1], movies[2]]);
+  }
+}
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(3001, async () => {
     console.log("Levantando servidor...");
     await checkGenresInDB();
     await findOrCreateMovies();
-    // await findOrCreateUser();
+    await findOrCreateUser();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });

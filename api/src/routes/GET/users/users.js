@@ -2,7 +2,7 @@ const  { Router } = require("express");
 const router = Router();
 const JWT = require("jsonwebtoken")
 const { getUserByPk } = require("../../../controllers/GET/users");
-const { getUserListS } = require("../../../controllers/GET/list");
+const { getUserLists } = require("../../../controllers/GET/lists");
 const verifyToken = require("../../MIDDLEWARES/verify")
 
 router.get("/user/",verifyToken, async (req, res) => {    
@@ -29,7 +29,7 @@ router.get("/user/",verifyToken, async (req, res) => {
 router.get("/user/:userId/lists", async(req, res)=>{
     const { userId } = req.params;
     try{
-        const userLists = await getUserListS(userId);
+        const userLists = await getUserLists(userId);
         if(!userLists){
             res.status(500).json({status:500, message:"There was a problem while loading the user data"});
         }

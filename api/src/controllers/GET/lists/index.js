@@ -14,13 +14,7 @@ const getListAndContent = async(listId)=>await List.findByPk(listId, {
     }
 });
 
-const getAvailableLists = async()=>await List.findAll({
-     //used to render lists in client side search
-    where:{
-        active:true,
-        banned:false
-    }
-});
+const getListByPk = async(listPk)=>await List.findByPk(listPk);
 
 const getUserLists = async(userId)=>{
     const userLists = await User.findByPk(userId, {
@@ -30,19 +24,25 @@ const getUserLists = async(userId)=>{
         },
         include:{
             model:List,
-            where:{
-                active:true
-            },
+            // where:{
+            //     active:true
+            // },
             attributes:["id", "name", "description", "active", "banned"],
-            through:{
-                attributes:[]
-            }
+            // through:{
+            //     attributes:[]
+            // }
         }
     });
     return userLists;
 };
 
-
+const getAvailableLists = async()=>await List.findAll({
+     //used to render lists in client side search
+    where:{
+        active:true,
+        banned:false
+    }
+});
 
 const getBannedLists = async()=>await List.findAll({
     where:{
@@ -63,9 +63,11 @@ const getInactiveLists = async()=>await List.findAll({
 })
 
 module.exports={
-    getAvailableLists,
     getListAndContent,
+    getListByPk,
+    getUserLists,
+    getAvailableLists,
     getBannedLists, //admin purposes
     getInactiveLists, //admin purposes
-    getUserLists
+    
 }
