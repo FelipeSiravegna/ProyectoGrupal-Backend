@@ -104,7 +104,6 @@ const getFreeUsers = async ()=> await User.findAll({
     }
 });
 
-
 module.exports={
     getUserByPk,
     getAllUserInfo, 
