@@ -1,5 +1,5 @@
 const {List}=require("../../../db");
-const { getUserListS } = require("../../GET/lists");
+const { getUserLists } = require("../../GET/lists");
 const { getUserByPk } = require("../../../controllers/GET/users");
 
 
