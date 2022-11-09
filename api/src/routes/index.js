@@ -55,8 +55,7 @@ const getActiveDirectors = require('./GET/Directors');
 //LISTS
 // const postList = require("./POST/list");
 // const putList = require("./PUT/list");
-// const deleteList = require('./DELETE/List');
-// const getLists = require("./GET/lists");
+const getLists = require("./GET/lists");
 
 //MOVIES
 router.use('/movies/popular', getMoviesPopular)
@@ -104,8 +103,7 @@ router.use("/likes", likes)
 router.use('/directors', getActiveDirectors);
 
 //LISTS
-// router.use("/lists", postList, getLists, putList);
-// router.use('/deleteList', deleteList);
+router.use("/lists", postList, getLists, putList);
 
 //PAYMENTS
 router.use("/subscribe", getSubscription)
