@@ -49,21 +49,11 @@ const getActiveLists = async()=>await List.findAll({
 });
 
 const getBannedLists = async()=>await List.findAll({
-    where:{
-        banned:true
-    },
-    exclude:{
-        attributes:["password"]
-    }
+    where:{banned:true}
 });
 
 const getInactiveLists = async()=>await List.findAll({
-    where:{
-        active:false
-    },
-    exclude:{
-        attributes:["password"]
-    }
+    where:{active:false},
 })
 
 module.exports={
