@@ -35,6 +35,8 @@ const allUsers = require('./GET/users/allUsers');
 
 const makePremium = require('./PUT/user/changePremium')
 
+const followUnfollow = require('./PUT/Follow-Unfollow');
+
 // REVIEWS
 const reviews = require('./reviewRoutes')
 const likes = require('./likeRoutes')
@@ -51,19 +53,19 @@ const responseMP = require("./POST/payment/responseMP")
 const getActiveDirectors = require('./GET/Directors');
 
 //LISTS
-const postList = require("./POST/list");
-const putList = require("./PUT/list");
+// const postList = require("./POST/list");
+// const putList = require("./PUT/list");
 // const deleteList = require('./DELETE/List');
-const getLists = require("./GET/lists");
+// const getLists = require("./GET/lists");
 
 //MOVIES
-router.use('/movies/popular',getMoviesPopular)
-router.use('/movies/rating',getMoviesRating)
-router.use('/movies/all',getAllMovies)
-router.use('/movies/search',searchMovies)
+router.use('/movies/popular', getMoviesPopular)
+router.use('/movies/rating', getMoviesRating)
+router.use('/movies/all', getAllMovies)
+router.use('/movies/search', searchMovies)
 router.use('/detail', getMovieDetail);
 router.use('/createMovie', createMovie);
-router.use('/genres',getGenres)
+router.use('/genres', getGenres)
 router.use('/comingSoon', comingSoon);
 router.use('/nowPlaying', nowPlaying);
 router.use('/deleteMovie', deleteMovie);
@@ -75,7 +77,7 @@ router.use('/banDirector', banDirector);
 
 //USERS
 
-router.use("/login",userLogin)
+router.use("/login", userLogin)
 router.use("/users", getUsers);
 router.use("/user", postUser, putUser, deleteUser);
 router.use("/user", postUser, putUser);
@@ -86,7 +88,8 @@ router.use('/deletedUsers', deletedUsers);
 router.use('/premiumUsers', premiumUsers);
 router.use('/freeUsers', freeUsers);
 router.use('/allUsers', allUsers);
-router.use('/premium',makePremium)
+router.use('/premium', makePremium)
+router.use('/followUnfollow', followUnfollow);
 
 //REVIEWS
 router.use("/reviews", reviews)
@@ -101,11 +104,11 @@ router.use("/likes", likes)
 router.use('/directors', getActiveDirectors);
 
 //LISTS
-router.use("/lists", postList, getLists, putList);
+// router.use("/lists", postList, getLists, putList);
 // router.use('/deleteList', deleteList);
 
 //PAYMENTS
-router.use("/subscribe",getSubscription)
-router.use("/responseMP",responseMP)
+router.use("/subscribe", getSubscription)
+router.use("/responseMP", responseMP)
 
 module.exports = router;
