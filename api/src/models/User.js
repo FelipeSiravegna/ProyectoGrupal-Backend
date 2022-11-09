@@ -8,7 +8,9 @@ module.exports = (sequelize) => {
             allowNull: false,
             validate: {
                 len: [3, 20],
-                isAlphanumeric: true,
+                noSpaces:function(value){
+                    if(value.split("").includes(" "))throw new Error(`Validation noSpaces: The username can't contain spaces`);
+                }
             }
         },
         email: {
