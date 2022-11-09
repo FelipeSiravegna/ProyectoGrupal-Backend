@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const JWT = require("jsonwebtoken")
 const { getUserByPk } = require("../../../controllers/GET/users");
-// const { getUserListS } = require("../../../controllers/GET/list");
+const { getUserLists } = require("../../../controllers/GET/lists");
 const verifyToken = require("../../MIDDLEWARES/verify")
 
 router.get("/user/", verifyToken, async (req, res) => {
