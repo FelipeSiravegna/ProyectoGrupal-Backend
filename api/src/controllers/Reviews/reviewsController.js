@@ -1,11 +1,14 @@
 const { Review, Movie, User } = require("../../db");
 
 const getComments = async (req, res) => {
-  const {id} = req.query
+
+  const {movieId} = req.body
   try {
-    const review = await Review.findByPk(id,{
+
+    const review = await Review.findAll({ include: { all: true },
+
       where:{
-        active: true
+        active: true,
       }
     });
     res.json(review);
