@@ -53,8 +53,8 @@ const responseMP = require("./POST/payment/responseMP")
 const getActiveDirectors = require('./GET/Directors');
 
 //LISTS
-// const postList = require("./POST/list");
-// const putList = require("./PUT/list");
+const postList = require("./POST/list");
+const putList = require("./PUT/list");
 const getLists = require("./GET/lists");
 
 //MOVIES
