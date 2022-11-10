@@ -13,6 +13,13 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
+        userNickName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+        userImage: {
+        type: DataTypes.STRING
+      },
       active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true

@@ -1,10 +1,12 @@
 const { Review, Movie, User } = require("../../db");
 
 const getComments = async (req, res) => {
+
   const {movieId} = req.body
   try {
 
     const review = await Review.findAll({ include: { all: true },
+
       where:{
         active: true,
       }
