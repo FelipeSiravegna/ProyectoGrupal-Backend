@@ -1,10 +1,12 @@
 const { Review, Movie, User } = require("../../db");
 
 const getComments = async (req, res) => {
+  const {movieId} = req.body
   try {
+
     const review = await Review.findAll({ include: { all: true },
       where:{
-        active: true
+        active: true,
       }
     });
     res.json(review);
@@ -18,6 +20,7 @@ const postComments = async (req, res) => {
     await Review.create(req.body, {
       include: [Movie, User],
     });
+    res.json({mensaje:"done"})
   } catch (error) {
     res.status(404).json({ error: error });
   }
