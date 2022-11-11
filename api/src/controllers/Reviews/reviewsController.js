@@ -19,25 +19,24 @@ const getComments = async (req, res) => {
 
 const postComments = async (req, res) => {
   try {
-    const {user, movie}=req.query;
-    //user= the user's id who's doing the review | movie= the movie's id that the user is revewing
-    const { content } = req.body;
-    if(!(user&&movie)){
-      console.log("user and/or movie queries aren't present in the route");
-      res.status(400).json({mensaje:"Oh, no! There's missing info"});
-    }
-    else if(!content){
+    const {content, userId, movieId}=req.body;
+    if(!content){
       res.status(400).json({mensaje:"Is not possible to make an empty comment"});
     }
     else if(content.length>1000){
       res.status(400).json({mensaje:"The review is too long. (Max characters allowed: 1000)"});
+    }
+    else if(!(userId&&movieId)){
+      res.status(400).json({mensaje:"Is not possible to post the review because there's missing data"});
     }else{
-      await Review.create({content, userId:user, movieId:movie});
-      res.status(200).json({mensaje:"Review posted successfully"});
+      await Review.create(req.body, {
+        include: [Movie, User],
+      });
+      res.json({mensaje:"done"});
     }
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: "There was a problem while loading the data" });
+    console.log(error);
+    res.status(404).json({ error: error });
   }
 };
 
