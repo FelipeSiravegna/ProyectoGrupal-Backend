@@ -7,12 +7,12 @@ const getLikes = async (req, res) => {
     const { count } = await Like.findAndCountAll({
       where: {
         reviewId,
-        like: 1,
+        like: true,
       },
     });
     res.json(count);
   } catch (error) {
-    res.status(404).json;
+    res.status(404).json({error});
   }
 };
 

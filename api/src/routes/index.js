@@ -103,7 +103,7 @@ router.use("/likes", likes)
 router.use('/directors', getActiveDirectors);
 
 //LISTS
-router.use("/lists", postList, getLists, putList);
+//router.use("/lists", postList, getLists, putList);
 
 //PAYMENTS
 router.use("/subscribe", getSubscription)
