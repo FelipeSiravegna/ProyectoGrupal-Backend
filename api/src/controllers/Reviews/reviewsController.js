@@ -21,17 +21,10 @@ const postComments = async (req, res) => {
   try {
     const {user, movie}=req.query;
     //user= the user's id who's doing the review | movie= the movie's id that the user is revewing
-    const { content, userNickName, userImage } = req.body;
+    const { content } = req.body;
     if(!(user&&movie)){
       console.log("user and/or movie queries aren't present in the route");
       res.status(400).json({mensaje:"Oh, no! There's missing info"});
-    }
-    else if(!(userNickName&&userImage)){
-      console.log("userNickName & userImage are mandatory");
-      res.status(400).json({mensaje:"Oh, no! There's missing info"});
-    }
-    else if(userImage.length>10000){
-      res.status(400).json({mensaje:"The image route is too long (Max characters allowed: 10 000)"});
     }
     else if(!content){
       res.status(400).json({mensaje:"Is not possible to make an empty comment"});
