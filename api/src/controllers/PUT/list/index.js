@@ -33,7 +33,15 @@ const validateAddMovie = (movieId, list)=>{
 }
 
 const addMovieToList = async (listId, movieId)=>{
-    const list = await getListAndContent(listId);
+    const list = await await List.findByPk(listId, {
+        attributes:[ "id", "name" ],
+        through:{ attributes:[] },
+        include:{
+            model:Movie,
+            attributes:["id"],
+            through:{ attributes: [] }
+        }
+    });
     const movie = await Movie.findByPk(movieId);
     if(!list)return{status:500, message:"There was a problem to get the list data"};
     if(!movie)return{status:500, message:"There was a problem to get the movie data"};
@@ -48,7 +56,16 @@ const addMovieToList = async (listId, movieId)=>{
 }
 
 const deleteMovieFromList = async(listId, movieId)=>{
-    const beforeDeletionList = await getListByPk(listId);
+    const beforeDeletionList = await List.findByPk(listId, {
+        attributes:[ "id", "name" ],
+        through:{ attributes:[] },
+        include:{
+            model:Movie,
+            attributes:["id"],
+            through:{ attributes: [] }
+        }
+    });
+    console.log(beforeDeletionList);
     const checkIfMovieInList = beforeDeletionList.movies.map(m=>m.id).includes(parseInt(movieId));
     console.log(checkIfMovieInList)
     if(checkIfMovieInList===false){
@@ -57,7 +74,7 @@ const deleteMovieFromList = async(listId, movieId)=>{
         const list = await List.findByPk(listId);
         const movie = await Movie.findByPk(movieId);
         await list.removeMovie(movie);
-        const checkIfDeleted = await getListByPk(listId);
+        const checkIfDeleted = await getListAndContent(listId);
         if(checkIfDeleted.movies.length<beforeDeletionList.movies.length){
             return{status:200, message:`The movie "${movie.name}" was removed from the list "${list.name}"`}
         }else{
