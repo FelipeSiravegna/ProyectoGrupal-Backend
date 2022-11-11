@@ -32,7 +32,7 @@ const postComments = async (req, res) => {
     else if(content.length>1000){
       res.status(400).json({mensaje:"The review is too long. (Max characters allowed: 1000)"});
     }else{
-      await Review.create({content, userNickName, userImage, userId:user, movieId:movie});
+      await Review.create({content, userId:user, movieId:movie});
       res.status(200).json({mensaje:"Review posted successfully"});
     }
   } catch (error) {
