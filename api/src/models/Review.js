@@ -12,9 +12,10 @@ module.exports = (sequelize) => {
       content: {
         type: DataTypes.TEXT,
         allowNull: false,
-        validation: {
+        validate: {
           len: [1, 1000]
-      }
+        }
+      },
       active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
