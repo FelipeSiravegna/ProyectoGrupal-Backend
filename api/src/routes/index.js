@@ -23,6 +23,7 @@ const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
 const deleteUser = require("./DELETE/user");
+const updateAvatar = require('./PUT/user/updateAvatar');
 
 const userLogin = require("./MIDDLEWARES/JWT/Index")
 const availableUsers = require('./GET/users/allAvailableUsers');
@@ -89,6 +90,7 @@ router.use('/freeUsers', freeUsers);
 router.use('/allUsers', allUsers);
 router.use('/premium', makePremium)
 router.use('/followUnfollow', followUnfollow);
+router.use('/avatar', updateAvatar);
 
 //REVIEWS
 router.use("/reviews", reviews)
