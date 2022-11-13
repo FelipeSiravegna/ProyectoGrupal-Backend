@@ -32,7 +32,7 @@ router.get("/user/", verifyToken, async (req, res) => {
 router.get("/user/:userId/lists", async (req, res) => {
     const { userId } = req.params;
     try {
-        const userLists = await getUserListS(userId);
+        const userLists = await getUserLists(userId);
         if (!userLists) {
             res.status(500).json({ status: 500, message: "There was a problem while loading the user data" });
         }
