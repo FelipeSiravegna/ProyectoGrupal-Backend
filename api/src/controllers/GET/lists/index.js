@@ -5,13 +5,14 @@ const getListAndContent = async(listId)=>await List.findByPk(listId, {
     through:{
         attributes:[]
     },
-    include:{
-        model:Movie,
-        attributes:["id", "name", "image"],
-        through:{
-            attributes:[]
-        }
-    }
+    include:[
+        {
+            model:Movie, attributes:["id", "name", "image"],
+            include:{model:Director, attributes:["id", "name"]},
+            through:{attributes:[]}
+        },
+        {model:User, attributes:["id", "username", "image"]},
+    ]
 });
 
 const getListByPk = async(listPk)=>await List.findByPk(listPk);
