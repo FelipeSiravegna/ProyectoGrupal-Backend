@@ -46,7 +46,7 @@ const addMovieToList = async (listId, movieId)=>{
     if(!list)return{status:500, message:"There was a problem to get the list data"};
     if(!movie)return{status:500, message:"There was a problem to get the movie data"};
     const moviesIdInList = list.movies.map(movie=>movie.id)
-    const validation = validateAddMovie(movieId moviesIdInList);
+    const validation = validateAddMovie(movieId, moviesIdInList);
     if(validation){
         return{status:validation.status, message:validation.message};
     }else{
