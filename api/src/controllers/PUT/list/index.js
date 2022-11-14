@@ -46,7 +46,7 @@ const addMovieToList = async (listId, movieId)=>{
     if(!list)return{status:500, message:"There was a problem to get the list data"};
     if(!movie)return{status:500, message:"There was a problem to get the movie data"};
     const moviesIdInList = list.movies.map(movie=>movie.id)
-    const validation = validateAddMovie(parseInt(movieId), moviesIdInList);
+    const validation = validateAddMovie(movieId moviesIdInList);
     if(validation){
         return{status:validation.status, message:validation.message};
     }else{
@@ -66,7 +66,7 @@ const deleteMovieFromList = async(listId, movieId)=>{
         }
     });
     console.log(beforeDeletionList);
-    const checkIfMovieInList = beforeDeletionList.movies.map(m=>m.id).includes(parseInt(movieId));
+    const checkIfMovieInList = beforeDeletionList.movies.map(m=>m.id).includes(movieId);
     console.log(checkIfMovieInList)
     if(checkIfMovieInList===false){
         return {status:404, message:"This movie is not in the movie list"}
