@@ -34,18 +34,6 @@ const premiumUsers = require('./GET/users/allPremiumUsers');
 const freeUsers = require('./GET/users/allFreeUsers');
 const allUsers = require('./GET/users/allUsers');
 
-const makePremium = require('./PUT/user/changePremium')
-
-const followUnfollow = require('./PUT/Follow-Unfollow');
-
-const userLogin = require("./MIDDLEWARES/JWT/Index")
-const availableUsers = require('./GET/users/allAvailableUsers');
-const activeUsers = require('./GET/users/allActiveUsers');
-const bannedUsers = require('./GET/users/allBannedUsers');
-const deletedUsers = require('./GET/users/allDeletedUsers');
-const premiumUsers = require('./GET/users/allPremiumUsers');
-const freeUsers = require('./GET/users/allFreeUsers');
-const allUsers = require('./GET/users/allUsers');
 //ACTORS
 const actors =require('./GET/Actors/index')
 
