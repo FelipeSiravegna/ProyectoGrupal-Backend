@@ -23,6 +23,20 @@ const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
 const deleteUser = require("./DELETE/user");
+const updateAvatar = require('./PUT/user/updateAvatar');
+
+const userLogin = require("./MIDDLEWARES/JWT/Index")
+const availableUsers = require('./GET/users/allAvailableUsers');
+const activeUsers = require('./GET/users/allActiveUsers');
+const bannedUsers = require('./GET/users/allBannedUsers');
+const deletedUsers = require('./GET/users/allDeletedUsers');
+const premiumUsers = require('./GET/users/allPremiumUsers');
+const freeUsers = require('./GET/users/allFreeUsers');
+const allUsers = require('./GET/users/allUsers');
+
+const makePremium = require('./PUT/user/changePremium')
+
+const followUnfollow = require('./PUT/Follow-Unfollow');
 
 const userLogin = require("./MIDDLEWARES/JWT/Index")
 const availableUsers = require('./GET/users/allAvailableUsers');
@@ -55,8 +69,10 @@ const responseMP = require("./POST/payment/responseMP")
 const getActiveDirectors = require('./GET/Directors');
 
 //LISTS
-// const postList = require("./POST/list");
-// const putList = require("./PUT/list");
+
+const postList = require("./POST/list");
+const putList = require("./PUT/list");
+
 const getLists = require("./GET/lists");
 
 //MOVIES
@@ -92,6 +108,9 @@ router.use('/allUsers', allUsers);
 router.use('/premium', makePremium)
 router.use('/followUnfollow', followUnfollow);
 
+router.use('/avatar', updateAvatar);
+
+
 //REVIEWS
 router.use("/reviews", reviews)
 router.use('/banReview', banReview);
@@ -105,13 +124,16 @@ router.use("/likes", likes)
 router.use('/directors', getActiveDirectors);
 
 //LISTS
-router.use("/lists", postList, getLists, putList);
+//router.use("/lists", postList, getLists, putList);
+
 
 //PAYMENTS
 router.use("/subscribe", getSubscription)
 router.use("/responseMP", responseMP)
 
+
 //ACTORS
 router.use('/actors', actors) 
+
 
 module.exports = router;

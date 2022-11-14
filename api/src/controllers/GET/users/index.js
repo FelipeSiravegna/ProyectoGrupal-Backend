@@ -1,10 +1,10 @@
 const { User, List, Movie } = require('../../../db');
 
-const getUserByPk = async(pk)=>await User.findByPk(pk);
+const getUserByPk = async (pk) => await User.findByPk(pk);
 
-const getAllUserInfo = async(userId)=>{
-    const userData = await User.findByPk(userId,{
-        include:{
+const getAllUserInfo = async (userId) => {
+    const userData = await User.findByPk(userId, {
+        include: {
             model: List,
             include: Movie
         }
@@ -12,98 +12,102 @@ const getAllUserInfo = async(userId)=>{
     return userData;
 }
 
-const getUserById = async(userId)=>{
+const getUserById = async (userId) => {
     const user = await User.findOne({
-        wher:{
-            id:userId,
-            active:true
+        where: {
+            id: userId,
+            active: true
         }
     });
     return user;
 }
 
-const getUserByUsername = async (username)=>{
+const getUserByUsername = async (username) => {
     const user = await User.findOne({
-        where:{
-            username:username,
-            active:true
+        where: {
+            username: username,
+            active: true
         }
     });
     return user;
 }
 
-const getUserByEmail = async (email)=>{
+const getUserByEmail = async (email) => {
     const user = await User.findOne({
-        where:{
-            email:email,
-            active:true
+        where: {
+            email: email,
+            active: true
         }
     });
     return user;
 }
 
-const getUserByUsername_Email = async(username,email)=>await User.findOne({
-    where:{
-        username,email
+const getUserByUsername_Email = async (username, email) => await User.findOne({
+    where: {
+        username, email
     }
 });
 
-const getUserByPassword = async (password)=>{
+const getUserByPassword = async (password) => {
     const user = await User.findOne({
-        where:{
-            password:password,
-            active:true
+        where: {
+            password: password,
+            active: true
 
         }
     });
     return user;
 }
 
-const getAvailableUsers = async()=>{
+const getAvailableUsers = async () => {
     const users = await User.findAll({
-        where:{
-            banned:null,
-            active:true
+        where: {
+            banned: false,
+            active: true
         }
     });
     return users;
 }
 
-const getAllActiveUsers = async()=>await User.findAll({
-    where:{
-        active:true
+const getAllUsers = async () => {
+    const users = await User.findAll();
+    return users;
+}
+
+const getAllActiveUsers = async () => await User.findAll({
+    where: {
+        active: true
     }
 });
 
-const getBannedUsers = async ()=> await User.findAll({
-    where:{
-        banned:true,
-        active:true
+const getBannedUsers = async () => await User.findAll({
+    where: {
+        banned: true,
     }
 });
 
-const getDeletedUsers = async ()=>await User.findAll({
-    where:{
-        active:false
+const getDeletedUsers = async () => await User.findAll({
+    where: {
+        active: false
     }
 });
 
-const getPremiumUsers = async ()=>await User.findAll({
-    where:{
-        premium:true
+const getPremiumUsers = async () => await User.findAll({
+    where: {
+        premium: true
     }
 });
 
-const getFreeUsers = async ()=> await User.findAll({
-    where:{
-        premium:false
+const getFreeUsers = async () => await User.findAll({
+    where: {
+        premium: false
     }
 });
 
 
-module.exports={
+module.exports = {
     getUserByPk,
-    getAllUserInfo, 
+    getAllUserInfo,
     getUserById, //works wrong after any user is updated. It sucks.
     getAvailableUsers,
     getAllActiveUsers, //admin purposes.
@@ -115,5 +119,5 @@ module.exports={
     getDeletedUsers, //admin purposes.
     getPremiumUsers, //admin purposes.
     getFreeUsers, //admin purposes.
-    
+    getAllUsers
 }

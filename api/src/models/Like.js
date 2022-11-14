@@ -10,9 +10,9 @@ module.exports =(sequelize)=>{
                 primaryKey: true,
                 
             },
-
             like: {
-                type: DataTypes.INTEGER
+                type: DataTypes.BOOLEAN,
+                defaultValue: false
               },
         },
         {

@@ -6,7 +6,7 @@ const updateReview = async (reviewId, newContent) => {
     if(!review || review.banned === true || review.active === false){
         return false;
     } else {
-        await review.update({text: newContent});
+        await review.update({content: newContent});
         await review.save();
         return true;
     }

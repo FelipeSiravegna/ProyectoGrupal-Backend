@@ -3,7 +3,7 @@ const router = Router();
 const PaymentService= require("../../../controllers/POST/MercadoPago/paymentServices")
 
 
-router.get("/",async (req,res)=>{
+router.post("/",async (req,res)=>{
     const {email} = req.body
     console.log(email)
     try {

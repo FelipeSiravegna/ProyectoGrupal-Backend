@@ -1,10 +1,12 @@
 const { Review, Movie, User } = require("../../db");
 
 const getComments = async (req, res) => {
+
   const {movieId} = req.body
   try {
 
     const review = await Review.findAll({ include: { all: true },
+
       where:{
         active: true,
       }
@@ -17,11 +19,23 @@ const getComments = async (req, res) => {
 
 const postComments = async (req, res) => {
   try {
-    await Review.create(req.body, {
-      include: [Movie, User],
-    });
-    res.json({mensaje:"done"})
+    const {content, userId, movieId}=req.body;
+    if(!content){
+      res.status(400).json({mensaje:"Is not possible to make an empty comment"});
+    }
+    else if(content.length>1000){
+      res.status(400).json({mensaje:"The review is too long. (Max characters allowed: 1000)"});
+    }
+    else if(!(userId&&movieId)){
+      res.status(400).json({mensaje:"Is not possible to post the review because there's missing data"});
+    }else{
+      await Review.create(req.body, {
+        include: [Movie, User],
+      });
+      res.json({mensaje:"done"});
+    }
   } catch (error) {
+    console.log(error);
     res.status(404).json({ error: error });
   }
 };
