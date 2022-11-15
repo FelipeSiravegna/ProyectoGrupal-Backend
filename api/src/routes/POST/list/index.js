@@ -1,14 +1,31 @@
 const { Router } = require("express");
 const router = Router();
-const { createList } = require("../../../controllers/POST/list");
+const { createList, followList, unfollowList } = require("../../../controllers/POST/list");
 
 router.post("/list/:userId", async(req, res)=>{
     try{
         const { userId } = req.params;
-        const { name, description } = req.body;
-        console.log("uId:"+userId, "name: "+name, "des: "+description);
-        const newList = await createList(name, description, userId);
-        res.status(newList.status).json(newList);
+        const { action, list }=req.query;
+        //action is a string with the user's command (follow or unfollow)
+        //list is the list's id the user wants to follow or unfollow
+        if(action&&list){
+            if(action==="follow"){
+                console.log("FOLLOW LIST");
+                const followedList = await followList(userId, list);
+                res.status(followedList.status).json(followedList);
+            }
+            else if(action==="unfollow"){
+                console.log("UNFOLLOW LIST");
+                const unfollowedList = await unfollowList(userId, list);
+                res.status(unfollowedList.status).json(unfollowedList);
+            }
+        }else{
+            console.log("POST LIST")
+            const { name, description } = req.body;
+            console.log("uId:"+userId, "name: "+name, "des: "+description);
+            const newList = await createList(name, description, userId);
+            res.status(newList.status).json(newList);
+        }
     }catch(error){
         console.log(error)
         console.log("_____________________________");
