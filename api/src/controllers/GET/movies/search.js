@@ -3,7 +3,9 @@ const {Op} = require('sequelize')
 const {genresFilter} = require ('./filters/genresFilter')
 const {actorsFilter} = require ('./filters/actionFilter')
 const {directorFilter} = require ('./filters/directorsFilter')
-const searchDB = async (name="",actor=[],director="",genres=[],page=0) =>{
+const {popularityFilter} = require ('./filters/popularityFilter')
+const {ratingFilter} = require ('./filters/ratingFilter')
+const searchDB = async (name="",actor=[],director="",genres=[],page=0,popularity="",rating="") =>{
     console.log('name:',name,'actor:',actor,'director:',director,'genres:',genres,'page:',page)
     const filtredMovies = await Movie.findAndCountAll(
         { 
@@ -27,6 +29,12 @@ const searchDB = async (name="",actor=[],director="",genres=[],page=0) =>{
     if (director.length!=0) { 
         const auxDirector = directorFilter(movies,director)
         movies= {"count":auxDirector.length,"rows":auxDirector}}
+    if (popularity.length!=0) { 
+        const auxPopularity = popularityFilter(movies,popularity)
+        movies= {"count":auxPopularity.length,"rows":auxPopularity}}
+    if (rating.length!=0) { 
+        const auxRating = ratingFilter(movies,rating)
+        movies= {"count":auxRating.length,"rows":auxRating}}
 
     return movies
 }
