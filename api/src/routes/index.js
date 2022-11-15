@@ -41,6 +41,10 @@ const makePremium = require('./PUT/user/changePremium')
 
 const followUnfollow = require('./PUT/Follow-Unfollow');
 
+
+//ACTIVITY
+const activity = require('./GET/Activity');
+
 // REVIEWS
 const reviews = require('./reviewRoutes')
 const likes = require('./likeRoutes')
@@ -123,5 +127,6 @@ router.use("/responseMP", responseMP)
 //ACTORS
 router.use('/actors', actors) 
 
-
+//ACTIVITY
+router.use('/activity', activity);
 module.exports = router;
