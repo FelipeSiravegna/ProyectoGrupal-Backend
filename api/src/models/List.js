@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
     sequelize.define('list', {
         name: { 
             type: DataTypes.STRING,
-            unique:true,
+            unique:false,
             allowNull: false,
             validate:{
                 len:[0,30]

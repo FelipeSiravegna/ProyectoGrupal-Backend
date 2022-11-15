@@ -8,9 +8,6 @@ router.get ("/", async(req, res)=>{
         if(!lists){
             res.status(500).json({status:500, message:"There was a problem while trying to get the movie lists"});
         }
-        else if(!lists.length){
-            res.status(404).json({status:404, message:"There aren't any movie list"});
-        }
         else{
             res.status(200).json(lists);
         }
