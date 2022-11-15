@@ -1,6 +1,6 @@
 const {List, followed_lists}=require("../../../db");
 const { getUserLists } = require("../../GET/lists");
-const { getUserByPk } = require("../../../controllers/GET/users");
+const { getUserByPk, getListByPk } = require("../../../controllers/GET/users");
 
 
 const validateList = (name, description)=>{
@@ -29,11 +29,7 @@ const createList = async(name, description, userId)=>{
         else if(userLists.id&&!userLists.lists){
             return{status:404, message:`There was a problem to get the user movie lists`};
         }
-        else{
-            const existingLists = userLists.lists.map(list=>list.name);
-            if(existingLists.includes(name)){
-                return{status:403, message:`The user ${userLists.username} already has a list named "${name}"`};
-            }else{
+            else{
                 const user = await getUserByPk(userId);
                 const newList = await List.create({name, description});
                 await newList.setUser(user);
@@ -41,7 +37,7 @@ const createList = async(name, description, userId)=>{
             }
         }
     }
-}
+
 
 const followList = async (userId, listId)=>{
     const list = await getListByPk(listId);
