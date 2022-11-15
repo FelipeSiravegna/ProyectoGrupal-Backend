@@ -1,4 +1,4 @@
-const {List}=require("../../../db");
+const {List, followed_lists}=require("../../../db");
 const { getUserLists } = require("../../GET/lists");
 const { getUserByPk } = require("../../../controllers/GET/users");
 
@@ -43,8 +43,32 @@ const createList = async(name, description, userId)=>{
     }
 }
 
+const followList = async (userId, listId)=>{
+    const list = await getListByPk(listId);
+    const user = await getUserByPk(userId);
+    if(!list){
+        return{status:404, message:`List not found`}
+    }
+    else if(!user){
+        return{status:404, message:`There was a problem while loading the user data`}
+    }
+    await followed_lists.findOrCreate({where:{userId:user.id, listId:list.id}});
+    return {status:200, message:`Now the user "${user.username}" follows the list "${list.name}"`};
+}
+
+const unfollowList = async (userId, listId)=>{
+    const followedList = await followed_lists.findOne({where:{userId ,listId}});
+    if(!followedList){
+        return{status:404, message:`The user don't follow this list`}
+    }
+    await followedList.destroy();
+    return {status:200, message:`List unfollowed`};
+}
+
 module.exports={
     validateList,
     createList,
+    followList,
+    unfollowList,
 
 }
