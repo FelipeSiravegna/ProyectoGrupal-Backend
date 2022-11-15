@@ -3,13 +3,16 @@ const router = Router();
 const {User, List, Review, Movie} = require('../../../db');
 const {Op} = require('sequelize');
 
-router.get('/', async (req, res) => {
-    const {users} = req.body
+router.get('/:loggedUser', async (req, res) => {
+    const {loggedUser} = req.params
+    const user = await User.findByPk(loggedUser);
+    const users = user.following;
     const activity = [];
     const date = Date.now();
     const date72hs = date - 259200000
 
     try {
+        console.log(users)
         for(let i = 0; i < users.length; i++){
             //Todas las reviews que hayan sido creadas o modificadas en las últimas 72 horas
             const newReviews = await Review.findAll({
@@ -34,13 +37,13 @@ router.get('/', async (req, res) => {
                     const userName = await User.findByPk(newReviews[j].userId);
 
                     const review = {
-                        id: newReviews[i].id,
-                        content: newReviews[i].content,
-                        createdAt: newReviews[i].createdAt,
-                        updatedAt: newReviews[i].updatedAt,
+                        id: newReviews[j].id,
+                        content: newReviews[j].content,
+                        createdAt: newReviews[j].createdAt,
+                        updatedAt: newReviews[j].updatedAt,
                         movieName: movieName.name,
-                        movieId: newReviews[i].movieId,
-                        userId: newReviews[i].userId,
+                        movieId: newReviews[j].movieId,
+                        userId: newReviews[j].userId,
                         userName: userName.username,
                         type: "review"
                     }
