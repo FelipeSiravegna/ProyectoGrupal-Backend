@@ -30,12 +30,6 @@ router.get("/list/:listId", async(req, res)=>{
             if(!list){
                 res.status(404).json({status:404, message:"This list doesn't exist"});
             }
-            else if (!list.movies){
-                res.status(500).json({status:500, message:"There was a problem while loading the movies in this list"});
-            }
-            else if(!list.movies.length){
-                res.status(404).json({status:404, message:"There are no movies in this list"});
-            }
             else{
                 res.status(200).json(list);
             }

@@ -1,4 +1,4 @@
-const { List, User, Movie } = require("../../../db");
+const { List, User, Movie, Director } = require("../../../db");
 
 const getListAndContent = async(listId)=>await List.findByPk(listId, {
     attributes:["id", "name", "description"],
