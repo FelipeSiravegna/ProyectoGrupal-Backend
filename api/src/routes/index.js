@@ -41,6 +41,10 @@ const makePremium = require('./PUT/user/changePremium')
 
 const followUnfollow = require('./PUT/Follow-Unfollow');
 
+
+//ACTIVITY
+const activity = require('./GET/Activity');
+
 // REVIEWS
 const reviews = require('./reviewRoutes')
 const likes = require('./likeRoutes')
@@ -112,7 +116,7 @@ router.use("/likes", likes)
 router.use('/directors', getActiveDirectors);
 
 //LISTS
-//router.use("/lists", postList, getLists, putList);
+router.use("/lists", postList, getLists, putList);
 
 
 //PAYMENTS
@@ -123,5 +127,6 @@ router.use("/responseMP", responseMP)
 //ACTORS
 router.use('/actors', actors) 
 
-
+//ACTIVITY
+router.use('/activity', activity);
 module.exports = router;
