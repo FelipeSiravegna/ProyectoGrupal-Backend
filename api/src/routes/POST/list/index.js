@@ -21,9 +21,9 @@ router.post("/list/:userId", async(req, res)=>{
             }
         }else{
             console.log("POST LIST")
-            const { name, description } = req.body;
-            console.log("uId:"+userId, "name: "+name, "des: "+description);
-            const newList = await createList(name, description, userId);
+            const { name, description,ownerUserId} = req.body;
+            console.log("uId:"+userId, "name: "+name, "des: "+description,"ownerUserId:"+ownerUserId);
+            const newList = await createList(name, description, userId,ownerUserId);
             res.status(newList.status).json(newList);
         }
     }catch(error){
