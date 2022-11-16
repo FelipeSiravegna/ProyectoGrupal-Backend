@@ -62,11 +62,11 @@ const findOrCreateMovies = async () => {
 }
 
 const findOrCreateUser = async () => {
-  User.findOrCreate({
+  await User.findOrCreate({
     where: { username: "Usuario1", email: "test_user_51507072@testuser.com", password: "passWord$2" }
   })
 
-  User.findOrCreate({
+  await User.findOrCreate({
     where: { username: "Usuario2", email: "usuario2@testuser.com", password: "Password1@" }
   })
 }
