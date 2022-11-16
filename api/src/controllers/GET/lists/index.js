@@ -41,7 +41,11 @@ const getAvailableLists = async()=>await List.findAll({
     where:{
         active:true,
         banned:false
-    }
+    },
+    include:[
+        {
+            model:Movie, attributes:["id", "name", "image"] , through: {attributes:[]}},
+        {model:User ,as: "followedLists",attributes:["id", "username", "image"],through: {attributes:[]}}]
 });
 
 const getActiveLists = async()=>await List.findAll({
