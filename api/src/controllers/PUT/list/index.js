@@ -98,7 +98,7 @@ const manageListBanning = async(listId, action)=>{
             }
         }else{
             if(banningList.banned){
-                const bannList = await banningList.update({banned:null});
+                const bannList = await banningList.update({banned:false});
                 await bannList.save();
                 return{status:200, message:`List (id: ${banningList.id}) unbanned`}
             }else{
