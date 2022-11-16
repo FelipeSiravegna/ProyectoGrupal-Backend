@@ -51,6 +51,7 @@ const likes = require('./likeRoutes')
 const banReview = require('./PUT/BanReview');
 const deleteReview = require('./DELETE/Review');
 const updateReview = require('./PUT/UpdateReview');
+const past24hoursReviews = require('./getUserReviews');
 //start building route trees
 
 //PAYMENTS
@@ -119,6 +120,7 @@ router.use('/directors', getActiveDirectors);
 //LISTS
 router.use("/lists", postList, getLists, putList);
 router.use('/getUserLists', getListsByUser);
+router.use('/getAllReviews', past24hoursReviews);
 
 //PAYMENTS
 router.use("/subscribe", getSubscription)
