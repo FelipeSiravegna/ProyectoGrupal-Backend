@@ -15,7 +15,7 @@ const validateList = (name, description)=>{
     }
 }
 
-const createList = async(name, description, userId)=>{
+const createList = async(name, description, userId,ownerUserId)=>{
     const validation = validateList(name, description);
     if(validation){
         return validation;
@@ -31,7 +31,7 @@ const createList = async(name, description, userId)=>{
         }
             else{
                 const user = await getUserByPk(userId);
-                const newList = await List.create({name, description});
+                const newList = await List.create({name, description,ownerUserId});
                 await newList.setUser(user);
                 return{status:200, message:`The list ${name} has been created`};
             }
