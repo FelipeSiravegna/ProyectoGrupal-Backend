@@ -1,17 +1,17 @@
 const { List, User, Movie, Director } = require("../../../db");
 
 const getListAndContent = async(listId)=>await List.findByPk(listId, {
-    attributes:["id", "name", "description"],
+    attributes:["id", "name", "description", "banned", "active"],
     through:{
         attributes:[]
     },
     include:[
         {
-            model:Movie, attributes:["id", "name", "image"],
-            include:{model:Director, attributes:["id", "name"]},
+            model:Movie, attributes:["id", "name", "image", "banned", "active"],
+            include:{model:Director, attributes:["id", "name", "banned", "active"]},
             through:{attributes:[]}
         },
-        {model:User, attributes:["id", "username", "image"]},
+        {model:User, attributes:["id", "username", "image", "banned", "active"]},
     ]
 });
 
@@ -25,17 +25,16 @@ const getUserLists = async(userId)=>{
         },
         include:{
             model:List,
-            // where:{
-            //     active:true
-            // },
+            as:"lists",
             attributes:["id", "name", "description", "active", "banned"],
-            // through:{
-            //     attributes:[]
-            // }
         }
     });
     return userLists;
 };
+
+const getFollwedLists = async(userId)=>await User.findByPk(userId, {
+    include:{model:List, as:"followedLists"}
+});
 
 const getAvailableLists = async()=>await List.findAll({
      //used to render lists in client side search
@@ -65,5 +64,5 @@ module.exports={
     getActiveLists,
     getBannedLists, //admin purposes
     getInactiveLists, //admin purposes
-    
+    getFollwedLists
 }
