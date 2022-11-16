@@ -64,6 +64,7 @@ const getActiveDirectors = require('./GET/Directors');
 
 const postList = require("./POST/list");
 const putList = require("./PUT/list");
+const getListsByUser = require('./GET/lists/getListsByUser');
 
 const getLists = require("./GET/lists");
 
@@ -117,7 +118,7 @@ router.use('/directors', getActiveDirectors);
 
 //LISTS
 router.use("/lists", postList, getLists, putList);
-
+router.use('/getUserLists', getListsByUser);
 
 //PAYMENTS
 router.use("/subscribe", getSubscription)
