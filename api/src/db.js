@@ -60,8 +60,8 @@ const { User, List, Actor, Genre, Movie ,Director, Review, Like } = sequelize.mo
 User.hasMany(List);
 List.belongsTo(User);
 
-User.belongsToMany(List, {through:"followed_lists",timestamps:false});
-List.belongsToMany(User, {through:"followed_lists",timestamps:false});
+User.belongsToMany(List, {as: "followedLists", through:"followed_lists",timestamps:false});
+List.belongsToMany(User, {as: "followedLists", through:"followed_lists",timestamps:false});
 
 Movie.belongsToMany(Genre,{through:"movie_genres",timestamps:false})
 Genre.belongsToMany(Movie,{through:"movie_genres",timestamps:false})
