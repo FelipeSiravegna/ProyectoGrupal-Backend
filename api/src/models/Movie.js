@@ -41,7 +41,8 @@ module.exports = (sequelize) =>{
                 type: DataTypes.FLOAT
             },
             saves:{
-                type: DataTypes.INTEGER
+                type: DataTypes.INTEGER,
+                defaultValue: 0
             },
             active: {
                 type: DataTypes.BOOLEAN,

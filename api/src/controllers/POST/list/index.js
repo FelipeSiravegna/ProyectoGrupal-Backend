@@ -1,6 +1,6 @@
 const {List, followed_lists}=require("../../../db");
-const { getUserLists } = require("../../GET/lists");
-const { getUserByPk, getListByPk } = require("../../../controllers/GET/users");
+const { getUserLists, getListByPk } = require("../../GET/lists");
+const { getUserByPk} = require("../../../controllers/GET/users");
 
 
 const validateList = (name, description)=>{
