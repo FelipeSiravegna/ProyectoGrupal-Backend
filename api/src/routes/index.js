@@ -23,6 +23,7 @@ const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
 const deleteUser = require("./DELETE/user");
+const updateAvatar = require('./PUT/user/updateAvatar');
 
 const userLogin = require("./MIDDLEWARES/JWT/Index")
 const availableUsers = require('./GET/users/allAvailableUsers');
@@ -33,7 +34,16 @@ const premiumUsers = require('./GET/users/allPremiumUsers');
 const freeUsers = require('./GET/users/allFreeUsers');
 const allUsers = require('./GET/users/allUsers');
 
+//ACTORS
+const actors =require('./GET/Actors/index')
+
 const makePremium = require('./PUT/user/changePremium')
+
+const followUnfollow = require('./PUT/Follow-Unfollow');
+
+
+//ACTIVITY
+const activity = require('./GET/Activity');
 
 // REVIEWS
 const reviews = require('./reviewRoutes')
@@ -41,6 +51,7 @@ const likes = require('./likeRoutes')
 const banReview = require('./PUT/BanReview');
 const deleteReview = require('./DELETE/Review');
 const updateReview = require('./PUT/UpdateReview');
+const past24hoursReviews = require('./getUserReviews');
 //start building route trees
 
 //PAYMENTS
@@ -51,18 +62,21 @@ const responseMP = require("./POST/payment/responseMP")
 const getActiveDirectors = require('./GET/Directors');
 
 //LISTS
-// const getListS = require("./GET/lists");
-// const updateListData = require("./PUT/list");
-const deleteList = require('./DELETE/List');
+
+const postList = require("./POST/list");
+const putList = require("./PUT/list");
+const getListsByUser = require('./GET/lists/getListsByUser');
+
+const getLists = require("./GET/lists");
 
 //MOVIES
-router.use('/movies/popular',getMoviesPopular)
-router.use('/movies/rating',getMoviesRating)
-router.use('/movies/all',getAllMovies)
-router.use('/movies/search',searchMovies)
+router.use('/movies/popular', getMoviesPopular)
+router.use('/movies/rating', getMoviesRating)
+router.use('/movies/all', getAllMovies)
+router.use('/movies/search', searchMovies)
 router.use('/detail', getMovieDetail);
 router.use('/createMovie', createMovie);
-router.use('/genres',getGenres)
+router.use('/genres', getGenres)
 router.use('/comingSoon', comingSoon);
 router.use('/nowPlaying', nowPlaying);
 router.use('/deleteMovie', deleteMovie);
@@ -74,7 +88,7 @@ router.use('/banDirector', banDirector);
 
 //USERS
 
-router.use("/login",userLogin)
+router.use("/login", userLogin)
 router.use("/users", getUsers);
 router.use("/user", postUser, putUser, deleteUser);
 router.use("/user", postUser, putUser);
@@ -85,7 +99,11 @@ router.use('/deletedUsers', deletedUsers);
 router.use('/premiumUsers', premiumUsers);
 router.use('/freeUsers', freeUsers);
 router.use('/allUsers', allUsers);
-router.use('/premium',makePremium)
+router.use('/premium', makePremium)
+router.use('/followUnfollow', followUnfollow);
+
+router.use('/avatar', updateAvatar);
+
 
 //REVIEWS
 router.use("/reviews", reviews)
@@ -100,11 +118,18 @@ router.use("/likes", likes)
 router.use('/directors', getActiveDirectors);
 
 //LISTS
-// router.use("/lists", getListS, updateListData);
-router.use('/deleteList', deleteList);
+router.use("/lists", postList, getLists, putList);
+router.use('/getUserLists', getListsByUser);
+router.use('/getAllReviews', past24hoursReviews);
 
 //PAYMENTS
-router.use("/subscribe",getSubscription)
-router.use("/responseMP",responseMP)
+router.use("/subscribe", getSubscription)
+router.use("/responseMP", responseMP)
 
+
+//ACTORS
+router.use('/actors', actors) 
+
+//ACTIVITY
+router.use('/activity', activity);
 module.exports = router;

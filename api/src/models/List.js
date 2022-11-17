@@ -4,7 +4,6 @@ module.exports = (sequelize) => {
     sequelize.define('list', {
         name: { 
             type: DataTypes.STRING,
-            unique:true,
             allowNull: false,
             validate:{
                 len:[0,30]
@@ -36,7 +35,5 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             defaultValue: true
         }
-    }, {
-        timestamps: false,
     });
 };

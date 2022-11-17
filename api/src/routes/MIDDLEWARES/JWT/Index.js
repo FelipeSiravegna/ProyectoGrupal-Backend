@@ -7,7 +7,7 @@ router.post("/",async (req,res,next)=>{
     const {identificator,pass} = req.body
     try {
         const user = await userVerify(identificator,pass)
-        if (user){
+        if (user.length !== 0){
             JWT.sign({user:user},"secretkey",(err,token)=>{
                 res.status(200).json({token:token})
             })
