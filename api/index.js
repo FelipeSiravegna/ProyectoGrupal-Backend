@@ -1,6 +1,6 @@
 const server = require('./src/app');
 const { conn, User, Genre, Movie, Actor, Director } = require('./src/db');
-const { API_KEY } = process.env;
+const { API_KEY, PORT } = process.env;
 const axios = require('axios');
 const movieList = require('./MOVIES.json');
 
@@ -62,6 +62,7 @@ const findOrCreateMovies = async () => {
 }
 
 const findOrCreateUser = async () => {
+
   await User.findOrCreate({
     where: { username: "Usuario1", email: "test_user_51507072@testuser.com", password: "passWord$2" }
   })
@@ -72,8 +73,8 @@ const findOrCreateUser = async () => {
 }
 
 // Syncing all the models at once.
-conn.sync({ force: false}).then(() => {
-  server.listen(3001, async () => {
+conn.sync({ force: false }).then(() => {
+  server.listen(PORT, async () => {
     console.log("Levantando servidor...");
     await checkGenresInDB();
     await findOrCreateUser();
