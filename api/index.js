@@ -68,7 +68,11 @@ const findOrCreateUser = async () => {
   })
 
   await User.findOrCreate({
-    where: { username: "Usuario2", email: "usuario2@testuser.com", password: "Password1@" }
+    where: { username: "Usuario2", email: "usuario@testuser.com", password: "Password1@" }
+  })
+
+  await User.findOrCreate({
+    where: { username: "UsuarioPremium", email: "usuariopremium@testuser.com", password: "Password1@", premium: true }
   })
 }
 
