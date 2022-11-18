@@ -82,7 +82,7 @@ conn.sync({ force: false }).then(() => {
     console.log("Levantando servidor...");
     await checkGenresInDB();
     await findOrCreateUser();
-    await findOrCreateMovies();
+    // await findOrCreateMovies();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });

@@ -1,18 +1,18 @@
 const { Router } = require("express");
 const router = Router();
-const {deleteActor} = require('../../../controllers/DELETE/Actor');
+const { deleteActor } = require('../../../controllers/DELETE/Actor');
 
 router.put('/:id', async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
 
-    try{
+    try {
         const response = await deleteActor(id);
-        if(response === false){
-            res.status(404).json({error: "Actor not found"});
+        if (response === false) {
+            res.status(404).json({ error: "Actor not found" });
         } else {
             res.status(200).json("Actor deleted successfully");
         }
-    } catch (error){
+    } catch (error) {
         console.log(error.message);
     }
 })

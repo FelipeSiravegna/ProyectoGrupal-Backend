@@ -1,16 +1,16 @@
-const  { Router } = require("express");
+const { Router } = require("express");
 const router = Router();
-const {getAllUsers} = require('../../../controllers/GET/users');
+const { getAllUsers } = require('../../../controllers/GET/users');
 
 router.get('/', async (req, res) => {
-    try{    
+    try {
         const allUsers = await getAllUsers();
-        if(allUsers.length){
+        if (allUsers.length) {
             res.status(200).json(allUsers);
         } else {
-            res.status(404).json({error: "There are no users available"});
+            res.status(404).json({ error: "There are no users available" });
         }
-    } catch(error){
+    } catch (error) {
         console.log(error);
     }
 })

@@ -1,37 +1,36 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
-const fs = require('fs'); 
+const fs = require('fs');
 const path = require('path');
-const {DB_USER, DB_PASSWORD, DB_HOST, DB_NAME} = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
 let sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize({
-        database: DB_NAME,
-        dialect: "postgres",
-        host: DB_HOST,
-        port: 5432,
-        username: DB_USER,
-        password: DB_PASSWORD,
-        pool: {
-          max: 3,
-          min: 1,
-          idle: 10000,
+      database: DB_NAME,
+      dialect: "postgres",
+      host: DB_HOST,
+      port: 5432,
+      username: DB_USER,
+      password: DB_PASSWORD,
+      pool: {
+        max: 3,
+        min: 1,
+        idle: 10000,
+      },
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
         },
-        dialectOptions: {
-          ssl: {
-            require: true,
-            // Ref.: https://github.com/brianc/node-postgres/issues/2009
-            rejectUnauthorized: false,
-          },
-          keepAlive: true,
-        },
-        ssl: true,
-      })
+        keepAlive: true,
+      },
+      ssl: true,
+    })
     : new Sequelize(
-        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-        { logging: false, native: false }
-      );
+      `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+      { logging: false, native: false }
+    );
 
 const basename = path.basename(__filename);
 
@@ -53,28 +52,26 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-
-const { User, List, Actor, Genre, Movie ,Director, Review, Like } = sequelize.models;
-
+const { User, List, Actor, Genre, Movie, Director, Review, Like } = sequelize.models;
 
 // Relaciones
 User.hasMany(List);
 List.belongsTo(User);
 
-User.belongsToMany(List, {as: "followedLists", through:"followed_lists",timestamps:false});
-List.belongsToMany(User, {as: "followedLists", through:"followed_lists",timestamps:false});
+User.belongsToMany(List, { as: "followedLists", through: "followed_lists", timestamps: false });
+List.belongsToMany(User, { as: "followedLists", through: "followed_lists", timestamps: false });
 
-Movie.belongsToMany(Genre,{through:"movie_genres",timestamps:false})
-Genre.belongsToMany(Movie,{through:"movie_genres",timestamps:false})
+Movie.belongsToMany(Genre, { through: "movie_genres", timestamps: false })
+Genre.belongsToMany(Movie, { through: "movie_genres", timestamps: false })
 
-Actor.belongsToMany(Movie,{through:"actor_on_movies",timestamps:false})
-Movie.belongsToMany(Actor,{through:"actor_on_movies",timestamps:false})
+Actor.belongsToMany(Movie, { through: "actor_on_movies", timestamps: false })
+Movie.belongsToMany(Actor, { through: "actor_on_movies", timestamps: false })
 
 Director.hasMany(Movie)
 Movie.belongsTo(Director)
 
-List.belongsToMany(Movie,{through:"movies_on_list",timestamps:false})
-Movie.belongsToMany(List,{through:"movies_on_list",timestamps:false})
+List.belongsToMany(Movie, { through: "movies_on_list", timestamps: false })
+Movie.belongsToMany(List, { through: "movies_on_list", timestamps: false })
 
 Movie.hasMany(Review)
 Review.belongsTo(Movie)

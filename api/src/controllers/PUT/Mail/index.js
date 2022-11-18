@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const {EMAIL, EMAIL_PASSWORD} = process.env;
+const { EMAIL, EMAIL_PASSWORD } = process.env;
 
 const subscriptionMail = (userEmail) => {
     let mailTransporter = nodemailer.createTransport({
@@ -14,8 +14,8 @@ const subscriptionMail = (userEmail) => {
         from: EMAIL,
         to: userEmail,
         subject: "The corner movies subscription",
-        html: 
-        `<h3>🥳 Thank you for subscribing to The corner movies! 🥳</h3>
+        html:
+            `<h3>🥳 Thank you for subscribing to The corner movies! 🥳</h3>
         <p>
             You now have access to: 
             <ul>
@@ -28,12 +28,12 @@ const subscriptionMail = (userEmail) => {
     }
 
     mailTransporter.sendMail(mailContent, (error) => {
-        if(error){
+        if (error) {
             console.log(error)
         } else {
             console.log("Mail has been sent to the user");
         }
-    })    
+    })
 }
 
-module.exports = {subscriptionMail}
+module.exports = { subscriptionMail }

@@ -1,13 +1,13 @@
 const { Movie } = require('../../../db');
-const {getCredits} = require('../Credits');
+const { getCredits } = require('../Credits');
 
 const getMovieFromDB = async (movieId) => {
-  
+
   const movie = await Movie.findOne({
-    where: {id: movieId}
+    where: { id: movieId }
   });
-    
-  if(!movie){
+
+  if (!movie) {
     return undefined;
   } else {
 
@@ -15,11 +15,11 @@ const getMovieFromDB = async (movieId) => {
     const genres = await movie.getGenres();
 
     const genresInfo = genres.map((g) => {
-        const newGenre = {
-            id: g.id,
-            name: g.name
-        }
-        return newGenre;
+      const newGenre = {
+        id: g.id,
+        name: g.name
+      }
+      return newGenre;
     })
 
     const movieDetails = {

@@ -1,10 +1,10 @@
 const { getMovieFromDB } = require('../MovieDetailFromDB');
-const {getMovieFromAPI} = require('../MovieDetailFromAPI');
+const { getMovieFromAPI } = require('../MovieDetailFromAPI');
 
 const getMovieDetail = async (movieId) => {
     let movie = null;
 
-    if(movieId.includes('-')){
+    if (movieId.includes('-')) {
         const movieDetails = await getMovieFromDB(movieId);
 
         movie = movieDetails;
@@ -17,4 +17,4 @@ const getMovieDetail = async (movieId) => {
     return movie;
 }
 
-module.exports = {getMovieDetail}
+module.exports = { getMovieDetail }

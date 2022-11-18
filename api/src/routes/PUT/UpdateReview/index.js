@@ -1,19 +1,19 @@
 const { Router } = require("express");
 const router = Router();
-const {updateReview} = require('../../../controllers/PUT/UpdateReview');
+const { updateReview } = require('../../../controllers/PUT/UpdateReview');
 
 router.put('/:id', async (req, res) => {
-    const {id} = req.params;
-    const {newContent} = req.body;
+    const { id } = req.params;
+    const { newContent } = req.body;
 
-    try{
+    try {
         const response = await updateReview(id, newContent);
-        if(response === false){
-            res.status(404).json({error: "Review not found"});
+        if (response === false) {
+            res.status(404).json({ error: "Review not found" });
         } else {
             res.status(200).json("Review udpated successfully");
         }
-    } catch (error){
+    } catch (error) {
         console.log(error.message);
     }
 })

@@ -1,46 +1,46 @@
-const {DataTypes} = require ('sequelize');
+const { DataTypes } = require('sequelize');
 
-module.exports = (sequelize) =>{
+module.exports = (sequelize) => {
     sequelize.define('movie',
         {
-            id:{
+            id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 allowNull: false,
                 primaryKey: true
             },
-            name:{
+            name: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            description:{
-                type:DataTypes.TEXT,
+            description: {
+                type: DataTypes.TEXT,
                 allowNull: false
             },
-            image:{
+            image: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            language:{
+            language: {
                 type: DataTypes.STRING,
             },
-            releaseDate:{
+            releaseDate: {
                 type: DataTypes.STRING
             },
 
-            length:{
+            length: {
                 type: DataTypes.INTEGER
             },
-            rating:{
+            rating: {
                 type: DataTypes.FLOAT
             },
-            trailer:{
+            trailer: {
                 type: DataTypes.STRING
             },
             popularity: {
                 type: DataTypes.FLOAT
             },
-            saves:{
+            saves: {
                 type: DataTypes.INTEGER,
                 defaultValue: 0
             },
@@ -48,8 +48,8 @@ module.exports = (sequelize) =>{
                 type: DataTypes.BOOLEAN,
                 defaultValue: true
             },
-            banned:{
-                type:DataTypes.BOOLEAN,
+            banned: {
+                type: DataTypes.BOOLEAN,
                 defaultValue: false
             }
         },

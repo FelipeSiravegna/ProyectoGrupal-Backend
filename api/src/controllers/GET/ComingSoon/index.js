@@ -1,9 +1,9 @@
 const axios = require('axios');
-const {API_KEY} = process.env;
- 
+const { API_KEY } = process.env;
+
 const getComingSoonMovies = async () => {
     const movies = await axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`);
-    
+
     const allMovies = movies.data.results.map((movie) => {
         const newMovie = {
             name: movie.title,
@@ -17,4 +17,4 @@ const getComingSoonMovies = async () => {
     return allMovies;
 }
 
-module.exports = {getComingSoonMovies}
+module.exports = { getComingSoonMovies }

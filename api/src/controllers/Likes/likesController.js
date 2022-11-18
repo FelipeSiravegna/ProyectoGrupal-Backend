@@ -12,7 +12,7 @@ const getLikes = async (req, res) => {
     });
     res.json(count);
   } catch (error) {
-    res.status(404).json({error});
+    res.status(404).json({ error });
   }
 };
 

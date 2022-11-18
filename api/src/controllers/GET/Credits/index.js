@@ -1,12 +1,12 @@
 const movieList = require('../../../../MOVIES.json');
-const {Movie, Actor, Director} = require('../../../db');
+const { Movie, Actor, Director } = require('../../../db');
 
 const getCredits = async (movieName, movieDescription) => {
     const movie = movieList.find(
         movie => movie.name === movieName && movie.description === movieDescription
     );
 
-    if(!movie){
+    if (!movie) {
         const movie = await Movie.findOne({
             where: {
                 name: movieName,
@@ -38,7 +38,7 @@ const getCredits = async (movieName, movieDescription) => {
         return fullCast;
     } else {
         return movie.fullCast;
-    }   
+    }
 }
 
-module.exports = {getCredits};
+module.exports = { getCredits };

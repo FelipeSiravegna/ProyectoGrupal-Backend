@@ -5,6 +5,6 @@ const genresFilter = (array,genres) =>{
                 return h==true}).length == genres.length){
                     return i}})}
 
-module.exports={genresFilter}
+module.exports = { genresFilter }
 
 

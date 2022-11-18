@@ -48,4 +48,4 @@ const getCreditsFromAPI = async (movieId) => {
     }
 }
 
-module.exports = {getCreditsFromAPI};
+module.exports = { getCreditsFromAPI };

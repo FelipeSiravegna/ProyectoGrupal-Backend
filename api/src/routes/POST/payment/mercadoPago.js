@@ -1,10 +1,9 @@
 const { Router } = require("express");
 const router = Router();
-const PaymentService= require("../../../controllers/POST/MercadoPago/paymentServices")
+const PaymentService = require("../../../controllers/POST/MercadoPago/paymentServices")
 
-
-router.post("/",async (req,res)=>{
-    const {email} = req.body
+router.post("/", async (req, res) => {
+    const { email } = req.body
     console.log(email)
     try {
         const subscription = await PaymentService(email)
@@ -16,5 +15,4 @@ router.post("/",async (req,res)=>{
     }
 })
 
-
-module.exports=router
+module.exports = router
