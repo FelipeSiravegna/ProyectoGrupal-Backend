@@ -1,15 +1,15 @@
-const {Review} = require('../../../db');
+const { Review } = require('../../../db');
 
 const banReview = async (reviewId) => {
     const review = await Review.findByPk(reviewId);
 
-    if(!review || review.banned === true){
+    if (!review || review.banned === true) {
         return false;
     } else {
-        await review.update({banned: true});
+        await review.update({ banned: true });
         await review.save();
         return true;
     }
 }
 
-module.exports = {banReview}
+module.exports = { banReview }

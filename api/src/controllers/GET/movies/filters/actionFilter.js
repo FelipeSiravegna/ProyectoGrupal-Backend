@@ -5,4 +5,4 @@ const actorsFilter = (array,actorsf) =>{
                 return h==true}).length == actorsf.length){
                     return i}})}
 
-module.exports={actorsFilter}
+module.exports = { actorsFilter }

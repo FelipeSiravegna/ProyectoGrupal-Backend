@@ -1,4 +1,4 @@
-const {Director} = require('../../../db');
+const { Director } = require('../../../db');
 
 const getAvailableDirectors = async () => {
     const directors = await Director.findAll({
@@ -11,31 +11,30 @@ const getAvailableDirectors = async () => {
     return directors;
 }
 
-const getActiveDirectors = async () =>{
+const getActiveDirectors = async () => {
     const directors = await Director.findAll({
         where: { active: true }
     })
     return directors
 }
 
-const getBannedDirectors = async ()=>{
-    const  directors = await Director.findAll({
-        where:{ banned:true }
+const getBannedDirectors = async () => {
+    const directors = await Director.findAll({
+        where: { banned: true }
     });
     return directors;
 }
 
-const getInactiveDirectors = async()=>{
+const getInactiveDirectors = async () => {
     const directors = await Director.findAll({
         where: { active: false }
     });
     return directors;
 }
 
-
 module.exports = {
-    getActiveDirectors, 
-    getAvailableDirectors, 
-    getBannedDirectors, 
+    getActiveDirectors,
+    getAvailableDirectors,
+    getBannedDirectors,
     getInactiveDirectors
 }

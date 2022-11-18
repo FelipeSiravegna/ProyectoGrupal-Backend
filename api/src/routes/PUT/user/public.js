@@ -1,4 +1,4 @@
-const  { Router } = require("express");
+const { Router } = require("express");
 const { getUserByPk } = require("../../../controllers/GET/users");
 const { checkNewUsername, checkNewEmail, checkNewPassword } = require("../../../controllers/PUT/user");
 const router = Router();
@@ -8,51 +8,51 @@ router.put("/:userId", async (req, res) => {
         const { userId } = req.params;
         const { username, email, password } = req.body;
         const currentUserData = await getUserByPk(userId);
-        if(!currentUserData){
-            res.status(404).json({status:404, message:"This user doesn't exist"});
+        if (!currentUserData) {
+            res.status(404).json({ status: 404, message: "This user doesn't exist" });
             return;
         }
         const updateProps = [];
         const errors = [];
-        if(password) {
+        if (password) {
             const validatePassword = checkNewPassword(currentUserData.password, password);
-            if(!validatePassword){
+            if (!validatePassword) {
                 updateProps.push("password");
                 currentUserData.password = password;
-            }else{
+            } else {
                 errors.push(validatePassword);
             }
         }
-        if(username) {
+        if (username) {
             const validateUser = await checkNewUsername(currentUserData.username, username);
-            if(!validateUser){
+            if (!validateUser) {
                 updateProps.push("username");
                 currentUserData.username = username;
-            }else{
+            } else {
                 errors.push(validateUser);
             }
         }
-        if(email) {
+        if (email) {
             const validateEmail = await checkNewEmail(currentUserData.email, email);
-            if(!validateEmail){
+            if (!validateEmail) {
                 updateProps.push("email");
                 currentUserData.email = email;
-            }else{
+            } else {
                 errors.push(validateEmail);
             }
         }
-        console.log("errors: ",errors)
-        if(errors.length){
+        console.log("errors: ", errors)
+        if (errors.length) {
             res.status(400).json(errors);
-        }else{
+        } else {
             await currentUserData.save();
-            res.status(200).json({message:`${updateProps.join(", ")} updated`});
-        }        
-    } catch(error) {
+            res.status(200).json({ message: `${updateProps.join(", ")} updated` });
+        }
+    } catch (error) {
         console.log(error);
         console.log("______________________");
-        console.log("                ERROR: "+error.message);
-        res.status(500).json({success:false, message:"There was an error while trying to update the username."});
+        console.log("                ERROR: " + error.message);
+        res.status(500).json({ success: false, message: "There was an error while trying to update the username." });
     }
 });
 

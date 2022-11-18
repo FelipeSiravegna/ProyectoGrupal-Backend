@@ -3,4 +3,4 @@ const directorFilter = (array,directorf) =>{
         if(i.director.name==directorf){
                     return i}})}
 
-module.exports={directorFilter}
+module.exports = { directorFilter }

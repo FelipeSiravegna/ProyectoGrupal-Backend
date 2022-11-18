@@ -1,13 +1,13 @@
-const {Router} = require ('express');
+const { Router } = require('express');
 const router = Router()
-const {Review, User} = require('../db');
-const {Op} = require('sequelize');
+const { Review } = require('../db');
+const { Op } = require('sequelize');
 
 router.get('/', async (req, res) => {
     const date = Date.now();
     const date24hs = date - 86400000;
 
-    try{
+    try {
         const reviews = await Review.findAll({
             where: {
                 active: true,
@@ -18,13 +18,13 @@ router.get('/', async (req, res) => {
             }
         })
 
-        if(reviews.length > 0){
+        if (reviews.length > 0) {
             res.status(200).json(reviews);
         } else {
-            res.status(404).json({error: "No se encontraron reviews"});
+            res.status(404).json({ error: "No se encontraron reviews" });
         }
 
-    } catch(error){
+    } catch (error) {
         console.log(error);
     }
 })

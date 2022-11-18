@@ -1,15 +1,15 @@
-const {Director} = require('../../../db');
+const { Director } = require('../../../db');
 
 const banDirector = async (directorId) => {
     const director = await Director.findByPk(directorId);
 
-    if(!director || director.banned === true){
+    if (!director || director.banned === true) {
         return false;
     } else {
-        await director.update({banned: true});
+        await director.update({ banned: true });
         await director.save();
         return true;
     }
 }
 
-module.exports = {banDirector}
+module.exports = { banDirector }

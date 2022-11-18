@@ -1,5 +1,5 @@
 const axios = require('axios');
-const {API_KEY} = process.env
+const { API_KEY } = process.env
 
 const getTrailer = async (movieId, movieOriginal_language) => {
     const trailer = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=${movieOriginal_language}`);
@@ -13,4 +13,4 @@ const getTrailer = async (movieId, movieOriginal_language) => {
     return trailerURL;
 }
 
-module.exports = {getTrailer};
+module.exports = { getTrailer };

@@ -2,34 +2,34 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define('list', {
-        name: { 
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate:{
-                len:[0,30]
+            validate: {
+                len: [0, 30]
             }
         },
-        moviesIdList:{
-            type:DataTypes.ARRAY(DataTypes.INTEGER),
-            validate:{
-                isInt:true
+        moviesIdList: {
+            type: DataTypes.ARRAY(DataTypes.INTEGER),
+            validate: {
+                isInt: true
             }
         },
-        description:{
+        description: {
             type: DataTypes.STRING,
-            validate:{
-                len:[0,500]
+            validate: {
+                len: [0, 500]
             }
         },
-        ownerUserId:{
-            type:DataTypes.INTEGER,
-            validate:{
-                isInt:true
+        ownerUserId: {
+            type: DataTypes.INTEGER,
+            validate: {
+                isInt: true
             }
         },
-        banned:{
-            type:DataTypes.BOOLEAN,
-            defaultValue:false
+        banned: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         active: {
             type: DataTypes.BOOLEAN,

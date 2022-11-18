@@ -1,7 +1,6 @@
-const  { Router } = require("express");
+const { Router } = require("express");
 const router = Router();
-const {handlePremium} = require("../../../controllers/PUT/user/index")
-
+const { handlePremium } = require("../../../controllers/PUT/user/index")
 
 /* router.put("/", async (req, res)=>{
     try{
@@ -20,19 +19,18 @@ const {handlePremium} = require("../../../controllers/PUT/user/index")
 
 module.export = router */
 
-
-router.put("/",async (req,res)=>{
+router.put("/", async (req, res) => {
     const { email } = req.query;
     try {
         const makePremium = await handlePremium(email);
-        console.log("me ejecute",makePremium)
+        console.log("me ejecute", makePremium)
         res.status(201).json("user succesfull Premium/Basic ")
     } catch (error) {
         console.log(error);
         console.log("______________________");
-        console.log("                ERROR: "+error.message);
-        res.status(500).json({status:500, message:"There was an error while trying to Change Plan the user."});
+        console.log("                ERROR: " + error.message);
+        res.status(500).json({ status: 500, message: "There was an error while trying to Change Plan the user." });
     }
 })
 
-module.exports=router
+module.exports = router

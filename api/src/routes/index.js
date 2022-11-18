@@ -1,4 +1,3 @@
-// Import routes
 const { Router } = require("express");
 const router = Router();
 
@@ -18,13 +17,15 @@ const deleteActor = require('./DELETE/Actor');
 const banMovie = require('./PUT/BanMovie');
 const banActor = require('./PUT/BanActor');
 const banDirector = require('./PUT/BanDirector');
+
 //USERS
 const getUsers = require("./GET/users")
 const postUser = require('./POST/user');
 const putUser = require("./PUT/user");
 const deleteUser = require("./DELETE/user");
 const updateAvatar = require('./PUT/user/updateAvatar');
-
+const makePremium = require('./PUT/user/changePremium')
+const followUnfollow = require('./PUT/Follow-Unfollow');
 const userLogin = require("./MIDDLEWARES/JWT/Index")
 const availableUsers = require('./GET/users/allAvailableUsers');
 const activeUsers = require('./GET/users/allActiveUsers');
@@ -35,12 +36,7 @@ const freeUsers = require('./GET/users/allFreeUsers');
 const allUsers = require('./GET/users/allUsers');
 
 //ACTORS
-const actors =require('./GET/Actors/index')
-
-const makePremium = require('./PUT/user/changePremium')
-
-const followUnfollow = require('./PUT/Follow-Unfollow');
-
+const actors = require('./GET/Actors/index')
 
 //ACTIVITY
 const activity = require('./GET/Activity');
@@ -52,7 +48,6 @@ const banReview = require('./PUT/BanReview');
 const deleteReview = require('./DELETE/Review');
 const updateReview = require('./PUT/UpdateReview');
 const past24hoursReviews = require('./getUserReviews');
-//start building route trees
 
 //PAYMENTS
 const getSubscription = require("./POST/payment/mercadoPago")
@@ -62,11 +57,9 @@ const responseMP = require("./POST/payment/responseMP")
 const getActiveDirectors = require('./GET/Directors');
 
 //LISTS
-
 const postList = require("./POST/list");
 const putList = require("./PUT/list");
 const getListsByUser = require('./GET/lists/getListsByUser');
-
 const getLists = require("./GET/lists");
 
 //MOVIES
@@ -87,7 +80,6 @@ router.use('/banActor', banActor);
 router.use('/banDirector', banDirector);
 
 //USERS
-
 router.use("/login", userLogin)
 router.use("/users", getUsers);
 router.use("/user", postUser, putUser, deleteUser);
@@ -101,9 +93,7 @@ router.use('/freeUsers', freeUsers);
 router.use('/allUsers', allUsers);
 router.use('/premium', makePremium)
 router.use('/followUnfollow', followUnfollow);
-
 router.use('/avatar', updateAvatar);
-
 
 //REVIEWS
 router.use("/reviews", reviews)
@@ -126,10 +116,10 @@ router.use('/getAllReviews', past24hoursReviews);
 router.use("/subscribe", getSubscription)
 router.use("/responseMP", responseMP)
 
-
 //ACTORS
-router.use('/actors', actors) 
+router.use('/actors', actors)
 
 //ACTIVITY
 router.use('/activity', activity);
+
 module.exports = router;

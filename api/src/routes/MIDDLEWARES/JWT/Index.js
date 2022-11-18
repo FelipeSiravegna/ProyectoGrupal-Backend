@@ -1,15 +1,15 @@
 const JWT = require("jsonwebtoken")
-const  { Router } = require("express");
-const router = Router(); 
+const { Router } = require("express");
+const router = Router();
 const userVerify = require("../../../controllers/POST/user/userFLogin")
 
-router.post("/",async (req,res,next)=>{
-    const {identificator,pass} = req.body
+router.post("/", async (req, res, next) => {
+    const { identificator, pass } = req.body
     try {
-        const user = await userVerify(identificator,pass)
-        if (user.length !== 0){
-            JWT.sign({user:user},"secretkey",(err,token)=>{
-                res.status(200).json({token:token})
+        const user = await userVerify(identificator, pass)
+        if (user.length !== 0) {
+            JWT.sign({ user: user }, "secretkey", (err, token) => {
+                res.status(200).json({ token: token })
             })
         } else {
             res.status(404).json("Usuario o Contraseña incorrectos")
@@ -19,6 +19,4 @@ router.post("/",async (req,res,next)=>{
     }
 })
 
-
-module.exports=router
-
+module.exports = router

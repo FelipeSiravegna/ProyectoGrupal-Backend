@@ -20,9 +20,9 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: true
       },
-      banned:{
-        type:DataTypes.BOOLEAN,
+      banned: {
+        type: DataTypes.BOOLEAN,
         defaultValue: false
       }
-  })
+    })
 };

@@ -4,8 +4,7 @@ const { getUserByPk } = require('../../../controllers/GET/users');
 
 router.put('/follow', async (req, res) => {
     const { loggedUserId, followedUserId } = req.body;
-    console.log("LOGGED USER ID: ", loggedUserId);
-    console.log("FOLLOWED USER ID: ", followedUserId);
+
     try {
         if (loggedUserId !== followedUserId) {
             const userFollowed = await getUserByPk(followedUserId);
@@ -13,7 +12,7 @@ router.put('/follow', async (req, res) => {
 
             if (!userFollowed) {
                 res.status(404).json({ error: "User followed not found" });
-            } else if(!loggedUser){
+            } else if (!loggedUser) {
                 res.status(404).json({ error: "Logged user not found" });
             } else {
                 const newFollower = userFollowed.followers.concat(loggedUserId);
@@ -42,8 +41,7 @@ router.put('/follow', async (req, res) => {
 
 router.put('/unfollow', async (req, res) => {
     const { loggedUserId, unfollowedUserId } = req.body;
-    console.log("LOGGED USER ID: ", loggedUserId);
-    console.log("UNFOLLOWED USER ID: ", unfollowedUserId);
+
     try {
         if (loggedUserId === unfollowedUserId) {
             res.status(404).json({ error: "You can't unfollow yourself" });
@@ -71,11 +69,11 @@ router.put('/unfollow', async (req, res) => {
                 await loggedUser.save();
 
                 res.status(200).json({ message: "User unfollowed successfully!" });
-
             }
         }
     } catch (error) {
         console.log(error.message);
     }
 })
+
 module.exports = router;

@@ -3,11 +3,11 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('actor', {
-    id:{
+    id: {
       type: DataTypes.UUID,
-        allowNull: false, 
-        primaryKey: true,
-        defaultValue: DataTypes.UUIDV4
+      allowNull: false,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4
     },
     name: {
       type: DataTypes.STRING,
@@ -17,12 +17,12 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     },
-    banned:{
-      type:DataTypes.BOOLEAN,
+    banned: {
+      type: DataTypes.BOOLEAN,
       defaultValue: false
+    }
+  }, {
+    timestamps: false
   }
-  },{
-      timestamps:false
-  }
-);
+  );
 };

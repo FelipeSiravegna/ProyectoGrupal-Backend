@@ -1,6 +1,6 @@
-const { DataTypes, UUIDV4 } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
-module.exports = (sequilize) =>{
+module.exports = (sequilize) => {
   sequilize.define("genre",
     {
       id: {
@@ -13,7 +13,7 @@ module.exports = (sequilize) =>{
       },
     },
     {
-        timestamps: false,
-      }
+      timestamps: false,
+    }
   )
 };
