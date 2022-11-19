@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const { getUserByEmail, getUserByUsername } = require("../../../controllers/GET/users");
 const { createUser, isValidUsername, isValidEmail, isValidPassword, } = require("../../../controllers/POST/user");
+const {registrationMail} = require('../../../controllers/PUT/Mail');
 const router = Router();
 
 router.post("/", async (req, res) => {
@@ -27,6 +28,7 @@ router.post("/", async (req, res) => {
         }
         else {
             await createUser(username, email, password);
+            registrationMail(email);
             res.status(200).json({ status: 200, message: `User ${username} created successfully.` })
         }
     } catch (error) {
